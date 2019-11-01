@@ -7,43 +7,5 @@
     <artifactId>towerDefense</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>12</maven.compiler.release>
-        <javafx.version>12</javafx.version>
-    </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>12.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>12.0.2</version>
-        </dependency>
-    </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <release>12</release>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.3</version>
-                <configuration>
-                    <mainClass>org.openjfx.App</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     
 </project>
