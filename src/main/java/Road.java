@@ -21,11 +21,6 @@ public class Road extends AbstractTile {
     }
 
     @Override
-    public void update() {
-
-    }
-
-    @Override
     public void reset() {
 
     }

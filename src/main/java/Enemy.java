@@ -1,5 +1,5 @@
-public interface Enemy extends GameEntity {
-    void takeDamage();
-    void checkIntersectBullet();
-    void deactivate();
-}
+//public interface Enemy extends GameEntity {
+//    void takeDamage(int damage);
+////    void checkIntersectBullet();
+//    void deactivate();
+//}
