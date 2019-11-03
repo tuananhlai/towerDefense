@@ -16,6 +16,9 @@ public class Settings {
     public static final int ROAD = 1;
     public static final int TOWER = 2;
 
+    //BULLET SPEED
+    public static final int BULLET_SPEED = 50;
+
     // ENEMY HP
     public static final int NORMAL_HP = 5;
     public static final int TANKER_HP = 10;
