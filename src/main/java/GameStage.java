@@ -3,5 +3,5 @@
  * Define starting state of play field in a game stage.
  */
 public class GameStage {
-    private int frameCount;
+
 }

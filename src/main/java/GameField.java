@@ -1,32 +1,70 @@
 import javafx.scene.canvas.GraphicsContext;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Manage all GameEntity objects on play field
  */
 public class GameField {
-    ArrayList<AbstractEntity> gameEntities;
-    AbstractTile[][] map;
+    public static List<AbstractEntity> gameEntities = new ArrayList<>();
 
     // public static<E> E findIntersects(): check all elements of gameEntities and return the first gameEntity that
     // intersects with this object.
+    // TODO: Read map from txt file
     public GameField() {
-        map = new AbstractTile[10][10];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                map[i][j] = new Road(-1, Settings.TILE_HEIGHT * i, Settings.TILE_WIDTH * j, "assets/Sprites/grass_tile_1.png");
+        for (int i = 0; i < Settings.MAP_HEIGHT_IN_TILES; i++) {
+            for (int j = 0; j < Settings.MAP_WIDTH_IN_TILES; j++) {
+                gameEntities.add(new Road(-1, Settings.TILE_HEIGHT * j, Settings.TILE_WIDTH * i, "assets/Sprites/grass_tile_1.png"));
             }
         }
     }
-    public void renderMap(GraphicsContext gc) {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                map[i][j].render(gc);
+
+    /**
+     * Read map's information from txt file in mapURL and add tiles to list objects gameEntities.
+     *
+     * @param mapURL link to map's file.
+     */
+    public void readMap(String mapURL) {
+        try {
+            FileInputStream inputMap = new FileInputStream("assets/map0.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot read map");
+        }
+
+        for (int i = 0; i < Settings.MAP_HEIGHT_IN_TILES; i++) {
+            for (int j = 0; j < Settings.MAP_WIDTH_IN_TILES; j++) {
+
             }
         }
     }
+
+    /**
+     * Render all elements in list objects gameEntities
+     * @param gc
+     */
+    public void renderAll(GraphicsContext gc) {
+        for (AbstractEntity entity : gameEntities) {
+            if (entity.isActive()) {
+                entity.render(gc);
+            }
+        }
+    }
+
+    /**
+     * Run all elements in list objects gameEntities
+     */
+    public void runAll() {
+        for (AbstractEntity entity : gameEntities) {
+            if (entity.isActive()) {
+                entity.run();
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        
+
     }
 }

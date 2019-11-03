@@ -6,7 +6,9 @@ public class Settings {
     public static int TILE_WIDTH = 50;
     public static int TILE_HEIGHT = 50;
     public static int MAP_WIDTH = 1000;
+    public static int MAP_WIDTH_IN_TILES = MAP_WIDTH/TILE_WIDTH;
     public static int MAP_HEIGHT = 650;
+    public static int MAP_HEIGHT_IN_TILES = MAP_HEIGHT/TILE_HEIGHT;
 
     // TILE TYPE ID
     public static final int MOUNTAIN = 0;

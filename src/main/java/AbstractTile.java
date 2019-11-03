@@ -1,11 +1,10 @@
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import javafx.scene.canvas.GraphicsContext;
 
 public abstract class AbstractTile extends AbstractEntity {
     private int tileType;
+    protected int rowIndex; // i
+    protected int colIndex; // j
 
     public AbstractTile() {
         this(-1, -100, -100, "unknown");

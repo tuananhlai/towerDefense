@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 public abstract class AbstractEntity {
     protected Vector2D position;
     protected Image image = null;
+    protected boolean active;
 
     public AbstractEntity() {
         this(-100, -100, "unknown");
@@ -24,6 +25,13 @@ public abstract class AbstractEntity {
         this(position.x, position.y, url);
     }
 
+    /**
+     * Load image from input url, print error if file not found.
+     * Initialize position, set state to active, and add newly created objects to list objects.
+     * @param x input x-position
+     * @param y input y-position
+     * @param url object's image url
+     */
     public AbstractEntity(double x, double y, String url) {
         try {
             FileInputStream inputStream = new FileInputStream(url);
@@ -32,6 +40,8 @@ public abstract class AbstractEntity {
             System.out.println("ERROR: Cannot load image at [" + url + "]");
         }
         position = new Vector2D(x, y);
+        active = true;
+        GameField.gameEntities.add(this);
     }
 
     public void render(GraphicsContext gc) {
@@ -39,7 +49,10 @@ public abstract class AbstractEntity {
     }
 
     public abstract void run();
-    public abstract void reset();
+
+    public void reset() {
+        active = true;
+    }
 
     public Image getImage() {
         return image;
@@ -61,4 +74,10 @@ public abstract class AbstractEntity {
     public void setPosition(Vector2D position) {
         this.position = position;
     }
+
+    public boolean isActive() {
+        return active;
+    }
+
+
 }

@@ -3,17 +3,16 @@ import javafx.scene.image.Image;
 
 public abstract class AbstractEnemy extends AbstractEntity {
     protected int hp;
+    protected int defense;
     protected Vector2D velocity;
-    protected boolean active;
 
     public AbstractEnemy(double x, double y, String imageURL) {
-        this(x, y, imageURL, 0, 0, 0, false);
+        this(x, y, imageURL, 0, 0, 0);
     }
-    public AbstractEnemy(double x, double y, String url, int hp, double velocityX, double velocityY, boolean active) {
+    public AbstractEnemy(double x, double y, String url, int hp, double velocityX, double velocityY) {
         super(x, y, url);
         this.hp = hp;
         velocity = new Vector2D(velocityX, velocityY);
-        this.active = active;
     }
 
     @Override
@@ -22,7 +21,9 @@ public abstract class AbstractEnemy extends AbstractEntity {
     }
 
     public void takeDamage(int damage) {
-        hp -= damage;
+        if (damage - defense > 0) {
+            hp -= (damage - defense);
+        }
         if (hp <= 0) {
             this.deactivate();
         }
