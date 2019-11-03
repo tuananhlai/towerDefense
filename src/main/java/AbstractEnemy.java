@@ -17,7 +17,9 @@ public abstract class AbstractEnemy extends AbstractEntity {
 
     @Override
     public void render(GraphicsContext gc) {
-        gc.drawImage(image, position.x, position.y, 200, 160);
+        if(this.active){
+            gc.drawImage(image, position.x, position.y, 200, 160);
+        }
     }
 
     public void takeDamage(int damage) {

@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 public abstract class AbstractEntity {
     protected Vector2D position;
     protected Image image = null;
-    protected boolean active;
+    protected boolean active = true;
 
     public AbstractEntity() {
         this(-100, -100, "unknown");
@@ -45,7 +45,9 @@ public abstract class AbstractEntity {
     }
 
     public void render(GraphicsContext gc) {
-        gc.drawImage(image, position.x, position.y, image.getWidth(), image.getHeight());
+        if(this.active){
+            gc.drawImage(image, position.x, position.y, image.getWidth(), image.getHeight());
+        }
     }
 
     public abstract void run();
