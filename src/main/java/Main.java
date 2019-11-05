@@ -14,22 +14,21 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Canvas canvas = new Canvas(1000, 800);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        //GameField gameField = new GameField();
-        //NormalEnemy normalEnemy = new NormalEnemy();
-        //final long[] lastTime = {0};
-//        AnimationTimer timer = new AnimationTimer() {
-//            @Override
-//            public void handle(long l) {
-//                if (l - lastTime[0] >= 1000000 / 60) {
-//                    gc.clearRect(0, 0, 1000, 800);
-//                    gameField.renderAll(gc);
-//                    gameField.runAll();
-//                    lastTime[0] = l;
-//                }
-//            }
-//        };
-//        timer.start();
-        //gameField.renderAll(gc);
+        GameField gameField = new GameField();
+        NormalEnemy normalEnemy = new NormalEnemy();
+        final long[] lastTime = {0};
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                if (l - lastTime[0] >= 1000000 / 60) {
+                    gc.clearRect(0, 0, 1000, 800);
+                    gameField.renderAll(gc);
+                    gameField.runAll();
+                    lastTime[0] = l;
+                }
+            }
+        };
+        timer.start();
         Group group = new Group(canvas);
         Scene scene = new Scene(group, 1000, 800);
         primaryStage.setResizable(false);
