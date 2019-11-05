@@ -8,8 +8,6 @@ public abstract class AbstractEntity {
     protected Vector2D position;
     protected Image image = null;
     protected boolean active = true;
-    protected double width = 0;
-    protected double height = 0;
 
     public AbstractEntity() {
         this(-100, -100, "unknown");
