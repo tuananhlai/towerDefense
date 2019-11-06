@@ -9,6 +9,7 @@ public class Settings {
     public static int CANVAS_HEIGHT = 420;
     public static int WINDOW_WIDTH = 800;
     public static int WINDOW_HEIGHT = 600;
+
     // MAP CONFIGURATION
     public static int TILE_WIDTH = 70;
     public static int TILE_HEIGHT = 70;
@@ -32,5 +33,7 @@ public class Settings {
 
     // TOWER
     public static final int NORMAL_TOWER_DAMAGE = 2;
+    public static final int BULLET_WIDTH = 200;
+    public static final int BULLET_HEIGHT = 200;
 
 }

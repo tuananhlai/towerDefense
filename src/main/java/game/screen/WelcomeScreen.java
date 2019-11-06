@@ -10,10 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 public class WelcomeScreen extends Screen {
-    Button startButton;
     // TODO: Preload assets when in menu
     public WelcomeScreen() {
-        startButton = new Button("Start Game");
+        Button startButton = new Button("Start Game");
         startButton.setMaxSize(100, 40);
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

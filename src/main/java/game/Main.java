@@ -11,6 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+// FIXME: If the application return Invocation... error, please go to Run > Edit Configuration > VM Options. Input --module-path javafx-sdk-13.0.1\lib --add-modules javafx.controls,javafx.fxml
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {

@@ -87,6 +87,7 @@ public abstract class AbstractEnemy extends AbstractEntity {
         return null;
     }
 
+    @Override
     public void deactivate() {
         active = false;
         GameField.gameEntities.remove(this);

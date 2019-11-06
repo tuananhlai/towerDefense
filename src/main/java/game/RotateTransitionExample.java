@@ -33,7 +33,7 @@ public class RotateTransitionExample extends Application {
         RotateTransition transition = new RotateTransition();
         transition.setDuration(Duration.millis(1000));
         transition.setNode(imageView);
-        transition.setByAngle(360);
+        transition.setByAngle(90);
         transition.setAutoReverse(false);
         transition.play();
         Button btn = new Button("Turn by 90 degree");

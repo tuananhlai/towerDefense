@@ -6,18 +6,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-public abstract class Tower extends AbstractEntity {
-    protected int damage;
+public abstract class Tower extends AbstractTile {
     protected int fireRate;
     protected int fireRange;
+    protected Bullet bullet;
     protected Image gunImg; // super.image is game.base image.
 
     public Tower(double x, double y, String baseImageURL, String gunImageURL) {
-        super(x, y, baseImageURL);
+        super(Settings.TOWER, x, y, baseImageURL);
         this.gunImg = loadImage(gunImageURL);
     }
 
-    public AbstractEnemy getNearestEnemy() {
+    public AbstractEnemy getNearestEnemy() { // TODO: change how towers choose target
         AbstractEnemy nearestEnemy = null;
         double minDistance = Double.MAX_VALUE;
         for (AbstractEntity entity : GameField.gameEntities) {
@@ -43,7 +43,11 @@ public abstract class Tower extends AbstractEntity {
         AbstractEnemy nearestEnemy = getNearestEnemy();
         // Rotate gun to nearest enemy location
         iv2.setImage(gunImg);
-        if (nearestEnemy != null) iv2.setRotate(new Vector2D(-nearestEnemy.getPosition().x + this.position.x, -nearestEnemy.getPosition().y + this.position.y).getAngle() - 90);
+        if (nearestEnemy != null) {
+            Vector2D towerToEnemy = new Vector2D(nearestEnemy.getPosition().x - this.position.x,
+                    nearestEnemy.getPosition().y - this.position.y);
+            iv2.setRotate(towerToEnemy.getAngle() + 90); // we need to +90 degree because of the original orientation of gunImg.
+        }
         Image gun = iv2.snapshot(params, null);
 
         gc.drawImage(image, position.x, position.y, Settings.TILE_WIDTH, Settings.TILE_HEIGHT);
@@ -51,7 +55,7 @@ public abstract class Tower extends AbstractEntity {
         // original resolution.
         gc.drawImage(gun, position.x, position.y, Settings.TILE_WIDTH, Settings.TILE_HEIGHT);
 
-        // Render bullet trajectory
+        // Render bullet trajectory (center to center)
         gc.setStroke(Color.RED);
         if (nearestEnemy != null) {
             gc.strokeLine(this.position.x + 0.5 * Settings.TILE_WIDTH,
@@ -61,12 +65,8 @@ public abstract class Tower extends AbstractEntity {
         }
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public Bullet getBullet() {
+        return bullet;
     }
 
     public int getFireRate() {

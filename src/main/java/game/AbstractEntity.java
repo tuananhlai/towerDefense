@@ -30,6 +30,9 @@ public abstract class AbstractEntity {
         this(position.x, position.y, url);
     }
 
+    public AbstractEntity(double x, double y, String url) {
+        this(x, y, url, true);
+    }
     /**
      * Load image from input url, print error if file not found.
      * Initialize position, set state to active, and add newly created objects to list objects.
@@ -37,12 +40,12 @@ public abstract class AbstractEntity {
      * @param y input y-position
      * @param url object's image url
      */
-    public AbstractEntity(double x, double y, String url) {
+    public AbstractEntity(double x, double y, String url, boolean active) {
         // TODO: Avoid loading image every time the program initialize a new object
         this.image = loadImage(url);
+        this.active = active;
         position = new Vector2D(x, y);
-        active = true;
-        GameField.gameEntities.add(this);
+        if (this.active) GameField.gameEntities.add(this);
         System.out.println(this.getClass().getName() + " " + GameField.gameEntities.size());
     }
 
@@ -98,5 +101,7 @@ public abstract class AbstractEntity {
         return active;
     }
 
-
+    public void deactivate() {
+        active = false;
+    }
 }

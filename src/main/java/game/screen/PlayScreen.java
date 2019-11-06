@@ -1,9 +1,6 @@
 package game.screen;
 
-import game.GameField;
-import game.NormalEnemy;
-import game.NormalTower;
-import game.Settings;
+import game.*;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -16,14 +13,15 @@ public class PlayScreen extends Screen {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GameField gameField = new GameField();
         NormalEnemy normalEnemy = new NormalEnemy();
-        new NormalTower();
+        NormalTower nt = new NormalTower();
+//        nt.getBullet().createBullet(nt.getPosition().x, nt.getPosition().y, normalEnemy);
         new NormalTower(4 * Settings.TILE_WIDTH, 5 * Settings.TILE_HEIGHT);
         new NormalTower(7 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT);
         new AnimationTimer() {
             long lastTime = 0;
             @Override
             public void handle(long l) {
-                if (l - lastTime > 2000000000) {
+                if ((l - lastTime)/1000000000 > 10) {
                     new NormalEnemy();
                     lastTime = l;
                 }
@@ -32,7 +30,7 @@ public class PlayScreen extends Screen {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                gc.clearRect(0, 0, 1000, 800);
+                gc.clearRect(0, 0, Settings.CANVAS_WIDTH, Settings.CANVAS_HEIGHT);
                 gameField.renderAll(gc);
                 gameField.runAll();
             }
