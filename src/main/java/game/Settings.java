@@ -5,6 +5,8 @@ package game;
  */
 public class Settings {
     // WINDOW CONFIGURATION
+    public static int CANVAS_WIDTH = 700;
+    public static int CANVAS_HEIGHT = 420;
     public static int WINDOW_WIDTH = 800;
     public static int WINDOW_HEIGHT = 600;
     // MAP CONFIGURATION

@@ -46,9 +46,7 @@ public abstract class AbstractEntity {
         System.out.println(this.getClass().getName() + " " + GameField.gameEntities.size());
     }
 
-    public void render(GraphicsContext gc) {
-        gc.drawImage(image, position.x, position.y, image.getWidth(), image.getHeight());
-    }
+    public abstract void render(GraphicsContext gc);
 
     public abstract void run();
 
