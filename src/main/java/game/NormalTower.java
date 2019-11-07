@@ -1,5 +1,8 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NormalTower extends Tower{
     public NormalTower() {
         this(1 * Settings.TILE_WIDTH, 1 * Settings.TILE_HEIGHT);
@@ -10,4 +13,5 @@ public class NormalTower extends Tower{
         this.setDamage(Settings.NORMAL_TOWER_DAMAGE);
         this.setFireRange(200);
     }
+
 }

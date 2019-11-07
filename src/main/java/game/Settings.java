@@ -4,6 +4,11 @@ package game;
  * Contain static constants.
  */
 public class Settings {
+    //Store items type
+    public static final int NORMAL_TOWER_ITEM = 0;
+    public static final int SNIPER_TOWER_ITEM = 1;
+    public static final int MACHINE_GUN_TOWER_ITEM = 2;
+
     // WINDOW CONFIGURATION
     public static int WINDOW_WIDTH = 800;
     public static int WINDOW_HEIGHT = 600;
@@ -21,7 +26,7 @@ public class Settings {
     public static final int TOWER = 2;
 
     // ENEMY HP
-    public static final int NORMAL_HP = 5;
+    public static final int NORMAL_HP = 20;
     public static final int TANKER_HP = 10;
     public static final int SMALLER_HP = 2;
     public static final int BOSS_HP = 13;

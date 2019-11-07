@@ -1,7 +1,7 @@
 package game;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,8 @@ import java.util.List;
  */
 public class GameField {
     public static List<AbstractEntity> gameEntities = new ArrayList<>();
-
+    public static List<Store> storeItems = new ArrayList<>();
+    public static MouseEvent mouseEvent;
     // TODO: Add way points automatically when read map.
     public static Vector2D[] wayPoints = new Vector2D[] {
             new Vector2D(0 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT),
@@ -60,30 +61,94 @@ public class GameField {
      * @param gc
      */
     public void renderAll(GraphicsContext gc) {
-        for (AbstractEntity entity : gameEntities) {
+        int size = gameEntities.size();
+        for (int i = 0; i < size ; i++) {
+            AbstractEntity entity = gameEntities.get(i);
             if (entity.isActive()) {
                 entity.render(gc);
             }
         }
-        // render way points
-        gc.setFill(Color.BLUE);
-        for (int i = 0; i < wayPoints.length; i++) {
-            gc.fillOval(wayPoints[i].x, wayPoints[i].y, 7, 7);
+        for(Store i : storeItems){
+            i.render(gc);
         }
+        // render way points
+//        gc.setFill(Color.BLUE);
+//        for (int i = 0; i < wayPoints.length; i++) {
+//            gc.fillOval(wayPoints[i].x, wayPoints[i].y, 7, 7);
+//        }
     }
 
     /**
      * Run all elements in list objects gameEntities
      */
     public void runAll() {
-        for (int i = gameEntities.size() - 1; i >= 0 ; i--) {
+        int size = gameEntities.size();
+        for (int i = size - 1; i >= 0 ; i--) {
             AbstractEntity entity = gameEntities.get(i);
             if (entity.isActive()) {
+                if(entity instanceof CuongBullet){
+                    for(int j = 0; j < gameEntities.size() ; j++){
+                        AbstractEntity alien = gameEntities.get(j);
+                        if(alien instanceof AbstractEnemy){
+                            if(((CuongBullet) entity).isCollision(alien)){
+                                ((AbstractEnemy) alien).takeDamage(((CuongBullet) entity).getDamage());
+                                entity.deactivate();
+                                System.out.println("Yeah!! Ban trung roi");
+                            }
+                        }
+                    }
+                }
                 entity.run();
             }
         }
     }
 
+    /**
+     * delete nhung doi tuong unActive
+     */
+    public void deleteUnActiveObj(){
+        int size = gameEntities.size();
+        for(int i = 0; i < size; i++){
+            if(!gameEntities.get(i).isActive()){
+                gameEntities.remove(i);
+                i--;
+                size--;
+            }
+        }
+    }
+
+    /**
+     * check collision enemy vs bullet, then set non-active bullet if is collision
+     */
+    public void checkCollision(){
+        for(AbstractEntity alien : gameEntities){
+            if(alien.isActive()){
+                if(alien instanceof AbstractEnemy){
+                    for(AbstractEntity bullet : gameEntities){
+                        if(bullet instanceof CuongBullet){
+                            if(bullet.isActive()){
+                                if(((CuongBullet) bullet).isCollision(alien)){
+                                    bullet.setActive(false);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Add store items:
+    public void addStoreItems() {
+        storeItems.add(new Store(730, 30, Settings.NORMAL_TOWER_ITEM));
+        storeItems.add(new Store(730, 100, Settings.SNIPER_TOWER_ITEM));
+        storeItems.add(new Store(730, 170, Settings.MACHINE_GUN_TOWER_ITEM));
+    }
+    public void clickItems(MouseEvent mouseEvent){
+        for(int i = 0; i < 3; i++){
+            storeItems.get(i).click(mouseEvent);
+        }
+    }
     public static void clear() {
         gameEntities.clear();
     }

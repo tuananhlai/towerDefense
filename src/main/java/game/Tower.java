@@ -10,6 +10,7 @@ public abstract class Tower extends AbstractEntity {
     protected int damage;
     protected int fireRate;
     protected int fireRange;
+    int timeToFire = 0;
     protected Image gunImg; // super.image is game.base image.
 
     public Tower(double x, double y, String baseImageURL, String gunImageURL) {
@@ -54,10 +55,12 @@ public abstract class Tower extends AbstractEntity {
         // Render bullet trajectory
         gc.setStroke(Color.RED);
         if (nearestEnemy != null) {
-            gc.strokeLine(this.position.x + 0.5 * Settings.TILE_WIDTH,
-                    this.position.y + 0.5 * Settings.TILE_HEIGHT,
-                    nearestEnemy.getPosition().x + 0.5 * Settings.TILE_WIDTH,
-                    nearestEnemy.getPosition().y + 0.5 * Settings.TILE_HEIGHT);
+            if(timeToFire%30 == 0){
+                CuongBullet bullet = new CuongBullet(position.x + Settings.TILE_WIDTH/2, position.y + Settings.TILE_HEIGHT/2);
+                bullet.setTarget(new Vector2D(nearestEnemy.getPosition().x + Settings.TILE_WIDTH/2, nearestEnemy.getPosition().y + Settings.TILE_HEIGHT/2));
+                bullet.setDamage(5);
+            }
+            timeToFire++;
         }
     }
 

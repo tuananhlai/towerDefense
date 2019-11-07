@@ -2,6 +2,8 @@ package game;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +13,8 @@ public abstract class AbstractEntity {
     protected Vector2D position;
     protected Image image = null;
     protected boolean active;
+    protected Circle circle = new Circle();
+    protected Rectangle rect = new Rectangle();
     protected int rowIndex; // i
     protected int colIndex; // j
 
@@ -45,7 +49,10 @@ public abstract class AbstractEntity {
         GameField.gameEntities.add(this);
         System.out.println(this.getClass().getName() + " " + GameField.gameEntities.size());
     }
-
+    //add bullet to list
+    public void addBullet(CuongBullet e){
+        GameField.gameEntities.add(e);
+    }
     public void render(GraphicsContext gc) {
         gc.drawImage(image, position.x, position.y, image.getWidth(), image.getHeight());
     }
@@ -100,5 +107,12 @@ public abstract class AbstractEntity {
         return active;
     }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
+    public void deactivate() {
+        active = false;
+        GameField.gameEntities.remove(this);
+    }
 }

@@ -10,6 +10,7 @@ public abstract class AbstractEnemy extends AbstractEntity {
     protected int hp;
     protected int defense;
     protected Vector2D velocity;
+
     protected int dropReward;
     int wayPointIndex;
 
@@ -89,7 +90,7 @@ public abstract class AbstractEnemy extends AbstractEntity {
 
     public void deactivate() {
         active = false;
-        GameField.gameEntities.remove(this);
+//        GameField.gameEntities.remove(this);
     }
 
     @Override
@@ -109,6 +110,14 @@ public abstract class AbstractEnemy extends AbstractEntity {
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
     }
 
     public double getSpeed() {
