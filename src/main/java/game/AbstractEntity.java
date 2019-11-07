@@ -104,4 +104,8 @@ public abstract class AbstractEntity {
     public void deactivate() {
         active = false;
     }
+
+    public abstract double getCenterX();
+
+    public abstract double getCenterY();
 }

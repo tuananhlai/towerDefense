@@ -133,7 +133,12 @@ public abstract class AbstractEnemy extends AbstractEntity {
     }
 
     @Override
-    public String toString() {
-        return "Enemy[" + this.getClass().getName() + ", (" + this.position.x + ", " + this.position.y + ")]";
+    public double getCenterX() {
+        return position.x + Settings.ENEMY_WIDTH * 0.5;
+    }
+
+    @Override
+    public double getCenterY() {
+        return position.y + Settings.ENEMY_HEIGHT * 0.5;
     }
 }

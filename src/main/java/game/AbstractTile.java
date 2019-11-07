@@ -32,4 +32,13 @@ public abstract class AbstractTile extends AbstractEntity {
         this.tileType = tileType;
     }
 
+    @Override
+    public double getCenterX() {
+        return position.x + Settings.TILE_WIDTH * 0.5;
+    }
+
+    @Override
+    public double getCenterY() {
+        return position.y + Settings.TILE_HEIGHT * 0.5;
+    }
 }

@@ -79,4 +79,14 @@ public class Bullet extends AbstractEntity {
     public void setVelocity(Vector2D velocity) {
         this.velocity = velocity;
     }
+
+    @Override
+    public double getCenterX() {
+        return position.x + Settings.BULLET_WIDTH * 0.5;
+    }
+
+    @Override
+    public double getCenterY() {
+        return position.y + Settings.BULLET_HEIGHT * 0.5;
+    }
 }

@@ -23,6 +23,10 @@ public class Settings {
     public static final int MOUNTAIN = 1;
     public static final int TOWER = 2;
 
+    // ENEMY RESOLUTION
+    public static final int ENEMY_WIDTH = 70;
+    public static final int ENEMY_HEIGHT = 70;
+
     // ENEMY HP
     public static final int NORMAL_HP = 5;
     public static final int TANKER_HP = 10;
