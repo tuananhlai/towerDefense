@@ -16,13 +16,21 @@ public class Bullet extends AbstractEntity {
         this.velocity = new Vector2D(velocityX, velocityY);
     }
 
-    public void createBullet(double startX, double startY, AbstractEnemy target) { // for shooting
-        active = true;
-        this.position = new Vector2D(startX, startY);
-        Vector2D towerToTarget = new Vector2D(target.getPosition().x - startX, target.getPosition().y - startX);
-        velocity.setAngle(towerToTarget.getAngle()); // to preserve speed
-        this.setTarget(target);
-        GameField.gameEntities.add(this);
+    /**
+     * Create a bullet with this bullet configuration (damage, maxDistance, ...), set the velocity toward the enemies,
+     * and append the bullet to GameField.entities
+     * @param startX bullet start x-position
+     * @param startY bullet start y-position
+     */
+    public void createBullet(double startX, double startY) {
+        Bullet newBullet = this.clone();
+        if (newBullet.getTarget() != null) {
+            newBullet.active = true;
+            newBullet.setPosition(new Vector2D(startX + Settings.TILE_WIDTH * 0.5, startY + Settings.TILE_HEIGHT * 0.5));
+            Vector2D towerToTarget = new Vector2D(newBullet.getTarget().getPosition().x - startX, newBullet.getTarget().getPosition().y - startY);
+            newBullet.getVelocity().setAngle(towerToTarget.getAngle()); // to preserve speed
+            GameField.gameEntities.add(newBullet);
+        }
     }
 
     @Override
@@ -33,9 +41,27 @@ public class Bullet extends AbstractEntity {
         gc.strokeRect(position.x, position.y, Settings.BULLET_WIDTH, Settings.BULLET_HEIGHT);
     }
 
+    private double distanceTraveled = 0;
     @Override
     public void run() {
         position.add(velocity.x, velocity.y);
+        distanceTraveled += velocity.getLength();
+        if (distanceTraveled > maxDistance) {
+            this.deactivate();
+        }
+    }
+
+    @Override
+    public void deactivate() {
+        super.deactivate();
+        GameField.gameEntities.remove(this);
+    }
+
+    public Bullet clone() {
+        Bullet clone = new Bullet(this.damage, this.maxDistance, "unknown", this.velocity.x, this.velocity.y);
+        clone.setImage(this.image);
+        clone.setTarget(this.target);
+        return clone;
     }
 
     public AbstractEnemy getTarget() {

@@ -42,7 +42,7 @@ public abstract class AbstractEntity {
      */
     public AbstractEntity(double x, double y, String url, boolean active) {
         // TODO: Avoid loading image every time the program initialize a new object
-        this.image = loadImage(url);
+        if (!url.equals("unknown")) this.image = loadImage(url);
         this.active = active;
         position = new Vector2D(x, y);
         if (this.active) GameField.gameEntities.add(this);

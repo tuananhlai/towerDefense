@@ -17,10 +17,13 @@ public class GameStage {
     public static Screen currentScreen = null;
     public GameStage(Stage stage) {
         this.stage = stage;
-        currentScreen = new WelcomeScreen();
-        this.stage.setScene(currentScreen.getScene());
+        this.signNewScreen(new WelcomeScreen());
     }
 
+    /**
+     * Change current screen to input screen.
+     * @param newScreen input screen
+     */
     public static void signNewScreen(Screen newScreen) {
         if (currentScreen != null) {
             currentScreen.clear();

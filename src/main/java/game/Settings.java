@@ -33,7 +33,7 @@ public class Settings {
 
     // TOWER
     public static final int NORMAL_TOWER_DAMAGE = 2;
-    public static final int BULLET_WIDTH = 200;
-    public static final int BULLET_HEIGHT = 200;
+    public static final int BULLET_WIDTH = 20;
+    public static final int BULLET_HEIGHT = 20;
 
 }

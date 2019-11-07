@@ -8,25 +8,17 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 public class PlayScreen extends Screen {
+    private int money = 0;
+    private int health = 0;
     public PlayScreen() {
         Canvas canvas = new Canvas(Settings.CANVAS_WIDTH, Settings.CANVAS_HEIGHT);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GameField gameField = new GameField();
         NormalEnemy normalEnemy = new NormalEnemy();
         NormalTower nt = new NormalTower();
-//        nt.getBullet().createBullet(nt.getPosition().x, nt.getPosition().y, normalEnemy);
         new NormalTower(4 * Settings.TILE_WIDTH, 5 * Settings.TILE_HEIGHT);
         new NormalTower(7 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT);
-        new AnimationTimer() {
-            long lastTime = 0;
-            @Override
-            public void handle(long l) {
-                if ((l - lastTime)/1000000000 > 10) {
-                    new NormalEnemy();
-                    lastTime = l;
-                }
-            }
-        }.start();
+        new Spawner();
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
