@@ -1,10 +1,12 @@
-package game;
+package game.tower;
 
+import game.*;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public abstract class Tower extends AbstractTile {
     protected int fireRate = 0;
@@ -57,20 +59,24 @@ public abstract class Tower extends AbstractTile {
         gc.drawImage(gun, position.x, position.y, Settings.TILE_WIDTH, Settings.TILE_HEIGHT);
 
         // Render bullet trajectory (center to center)
+//        gc.setStroke(Color.RED);
+//        if (target != null) {
+//            gc.strokeLine(this.position.x + 0.5 * Settings.TILE_WIDTH,
+//                    this.position.y + 0.5 * Settings.TILE_HEIGHT,
+//                    target.getPosition().x + 0.5 * Settings.TILE_WIDTH,
+//                    target.getPosition().y + 0.5 * Settings.TILE_HEIGHT);
+//        }
+
+        //render fire range
         gc.setStroke(Color.RED);
-        if (target != null) {
-            gc.strokeLine(this.position.x + 0.5 * Settings.TILE_WIDTH,
-                    this.position.y + 0.5 * Settings.TILE_HEIGHT,
-                    target.getPosition().x + 0.5 * Settings.TILE_WIDTH,
-                    target.getPosition().y + 0.5 * Settings.TILE_HEIGHT);
-        }
+
     }
 
     private int fireRateCount = 0;
     public void fire() {
         fireRateCount++;
-        if (bullet.getTarget() != null && fireRateCount > 20) {
-            bullet.createBullet(this.position.x, this.position.y);
+        if (bullet.getTarget() != null && fireRateCount > 30) {
+            createBullet(this.position.x, this.position.y);
             fireRateCount = 0;
         }
     }
@@ -80,6 +86,25 @@ public abstract class Tower extends AbstractTile {
             bullet.setTarget(getNearestEnemy());
         } else if (isOutOfRange(bullet.getTarget())){
             bullet.setTarget(null);
+        } else if (bullet.getTarget().getHp() <= 0) { // even if the enemy is dead, we still have its reference, so we can check if its hp is below 0.
+            bullet.setTarget(null);
+        }
+    }
+
+    /**
+     * Create a bullet with this bullet configuration (damage, maxDistance, ...), set the velocity toward the enemies,
+     * and append the bullet to GameField.entities
+     * @param startX bullet start x-position
+     * @param startY bullet start y-position
+     */
+    public void createBullet(double startX, double startY) {
+        Bullet newBullet = bullet.clone();
+        if (newBullet.getTarget() != null) {
+            newBullet.activate();
+            newBullet.setPosition(new Vector2D(startX + Settings.TILE_WIDTH * 0.5, startY + Settings.TILE_HEIGHT * 0.5));
+            Vector2D towerToTarget = new Vector2D(newBullet.getTarget().getPosition().x - startX, newBullet.getTarget().getPosition().y - startY);
+            newBullet.getVelocity().setAngle(towerToTarget.getAngle()); // to preserve speed
+            GameField.gameEntities.add(newBullet);
         }
     }
 

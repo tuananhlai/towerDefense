@@ -1,5 +1,4 @@
-package game;
-
+import game.GameStage;
 import game.screen.PlayScreen;
 import game.screen.WelcomeScreen;
 import javafx.animation.AnimationTimer;

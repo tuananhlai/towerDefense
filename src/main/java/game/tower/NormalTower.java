@@ -1,4 +1,7 @@
-package game;
+package game.tower;
+
+import game.Bullet;
+import game.Settings;
 
 public class NormalTower extends Tower{
     public NormalTower() {

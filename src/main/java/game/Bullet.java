@@ -1,37 +1,23 @@
 package game;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Bullet extends AbstractEntity {
+public class Bullet extends AbstractEntity implements Collider{
     private AbstractEnemy target = null;
     private Vector2D velocity = null;
-    private double damage;
+    private int damage;
     private double maxDistance;
 
-    public Bullet(double damage, double maxDistance, String bulletImgURL, double velocityX, double velocityY) { //set up bullet
+    public Bullet(int damage, double maxDistance, String bulletImgURL, double velocityX, double velocityY) { //set up bullet
         super(0, 0, bulletImgURL, false); // set active = false to prevent the super constructor from adding this to gameEntities
         this.damage = damage;
         this.maxDistance = maxDistance;
         this.velocity = new Vector2D(velocityX, velocityY);
     }
 
-    /**
-     * Create a bullet with this bullet configuration (damage, maxDistance, ...), set the velocity toward the enemies,
-     * and append the bullet to GameField.entities
-     * @param startX bullet start x-position
-     * @param startY bullet start y-position
-     */
-    public void createBullet(double startX, double startY) {
-        Bullet newBullet = this.clone();
-        if (newBullet.getTarget() != null) {
-            newBullet.active = true;
-            newBullet.setPosition(new Vector2D(startX + Settings.TILE_WIDTH * 0.5, startY + Settings.TILE_HEIGHT * 0.5));
-            Vector2D towerToTarget = new Vector2D(newBullet.getTarget().getPosition().x - startX, newBullet.getTarget().getPosition().y - startY);
-            newBullet.getVelocity().setAngle(towerToTarget.getAngle()); // to preserve speed
-            GameField.gameEntities.add(newBullet);
-        }
-    }
+
 
     @Override
     public void render(GraphicsContext gc) {
@@ -48,6 +34,11 @@ public class Bullet extends AbstractEntity {
         distanceTraveled += velocity.getLength();
         if (distanceTraveled > maxDistance) {
             this.deactivate();
+            return;
+        }
+        if (checkEnemies() != null ) {
+            checkEnemies().takeDamage(this.damage);
+            this.deactivate();
         }
     }
 
@@ -57,11 +48,36 @@ public class Bullet extends AbstractEntity {
         GameField.gameEntities.remove(this);
     }
 
+    public void activate() {
+        active = true;
+    }
+
     public Bullet clone() {
         Bullet clone = new Bullet(this.damage, this.maxDistance, "unknown", this.velocity.x, this.velocity.y);
         clone.setImage(this.image);
         clone.setTarget(this.target);
         return clone;
+    }
+
+    public AbstractEnemy checkEnemies() {
+        for (AbstractEntity entity : GameField.gameEntities) {
+            if (entity instanceof AbstractEnemy) {
+                if ((this.intersects((AbstractEnemy) entity))) {
+                    return (AbstractEnemy) entity;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Rectangle2D getBoundary() {
+        return new Rectangle2D(this.position.x, this.position.y, Settings.BULLET_WIDTH, Settings.BULLET_HEIGHT);
+    }
+
+    @Override
+    public boolean intersects(Collider other) {
+        return this.getBoundary().intersects(other.getBoundary());
     }
 
     public AbstractEnemy getTarget() {
@@ -78,5 +94,9 @@ public class Bullet extends AbstractEntity {
 
     public void setVelocity(Vector2D velocity) {
         this.velocity = velocity;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 }
