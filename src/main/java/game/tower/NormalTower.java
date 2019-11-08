@@ -11,6 +11,6 @@ public class NormalTower extends Tower{
     public NormalTower(double x, double y) {
         super(x, y, "assets/towers/towerDefense_tile180.png", "assets/towers/towerDefense_tile250.png");
         this.setFireRange(200);
-        this.bullet = new Bullet(Settings.NORMAL_TOWER_DAMAGE, this.fireRange, "assets/Retina/towerDefense_tile275.png", 10, 0);
+        this.bullet = new Bullet(Settings.NORMAL_TOWER_DAMAGE, this.fireRange, "assets/Retina/towerDefense_tile275.png", 20, 0);
     }
 }

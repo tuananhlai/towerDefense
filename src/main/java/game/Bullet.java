@@ -17,8 +17,6 @@ public class Bullet extends AbstractEntity implements Collider{
         this.velocity = new Vector2D(velocityX, velocityY);
     }
 
-
-
     @Override
     public void render(GraphicsContext gc) {
         gc.drawImage(image, position.x, position.y, Settings.BULLET_WIDTH, Settings.BULLET_HEIGHT);

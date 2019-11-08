@@ -30,6 +30,13 @@ public class Settings {
     public static final int BOSS_HP = 13;
 
     //ENEMY VELOCITY
+    public static final int NORMAL_VELOCITY = 2;
+    public static final int TANKER_VELOCITY = 2;
+    public static final int SMALLER_VELOCITY = 2;
+    public static final int BOSS_VELOCITY = 2;
+
+    public static final int NORMAL_ENEMY_DEFENSE = 0;
+
 
     // TOWER
     public static final int NORMAL_TOWER_DAMAGE = 1;

@@ -138,6 +138,14 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider{
         return active;
     }
 
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
     @Override
     public String toString() {
         return "Enemy[" + this.getClass().getName() + ", (" + this.position.x + ", " + this.position.y + ")]";
