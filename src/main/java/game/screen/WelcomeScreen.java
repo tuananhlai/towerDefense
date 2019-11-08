@@ -7,22 +7,36 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class WelcomeScreen extends Screen {
     // TODO: Preload assets when in menu
     public WelcomeScreen() {
         Button startButton = new Button("Start Game");
         startButton.setMaxSize(100, 40);
+        startButton.setPrefSize(400, 400);
+        startButton.setLayoutX(300);
+        startButton.setLayoutY(300);
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 GameStage.signNewScreen(new PlayScreen());
             }
         });
-        Group group = new Group(startButton);
-        group.setLayoutX(300);
-        group.setLayoutY(300);
+        Image backgroundImg = null;
+        try {
+            backgroundImg = new Image(new FileInputStream("assets/welcome_background.jpg"));
+        } catch (FileNotFoundException e) {
+
+        }
+        ImageView background = new ImageView(backgroundImg);
+        Group group = new Group(background);
+        group.getChildren().add(startButton);
         scene = new Scene(group, Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
         scene.setFill(Color.RED);
     }

@@ -28,16 +28,23 @@ public class Settings {
     public static final int ENEMY_HEIGHT = 70;
 
     // ENEMY HP
-    public static final int NORMAL_HP = 5;
+    public static final int NORMAL_HP = 10;
     public static final int TANKER_HP = 10;
     public static final int SMALLER_HP = 2;
     public static final int BOSS_HP = 13;
 
     //ENEMY VELOCITY
+    public static final int NORMAL_VELOCITY = 2;
+    public static final int TANKER_VELOCITY = 2;
+    public static final int SMALLER_VELOCITY = 2;
+    public static final int BOSS_VELOCITY = 2;
+
+    public static final int NORMAL_ENEMY_DEFENSE = 0;
+
 
     // TOWER
-    public static final int NORMAL_TOWER_DAMAGE = 2;
-    public static final int BULLET_WIDTH = 20;
-    public static final int BULLET_HEIGHT = 20;
+    public static final int NORMAL_TOWER_DAMAGE = 1;
+    public static final int BULLET_WIDTH = 10;
+    public static final int BULLET_HEIGHT = 10;
 
 }

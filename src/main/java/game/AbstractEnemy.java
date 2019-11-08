@@ -1,14 +1,15 @@
 package game;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-public abstract class AbstractEnemy extends AbstractEntity {
+public abstract class AbstractEnemy extends AbstractEntity implements Collider{
     protected int hp;
-    protected int defense;
+    protected int defense = 0;
     protected Vector2D velocity;
     protected int dropReward;
     int wayPointIndex;
@@ -36,6 +37,10 @@ public abstract class AbstractEnemy extends AbstractEntity {
         // draw way point
         gc.setFill(Color.RED);
         gc.fillOval(position.x, position.y, 7, 7);
+
+        // render hitbox
+        gc.setStroke(Color.MAGENTA);
+        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
     }
 
     /**
@@ -45,9 +50,6 @@ public abstract class AbstractEnemy extends AbstractEntity {
     public void takeDamage(int damage) {
         if (damage - defense > 0) {
             hp -= (damage - defense);
-        }
-        if (hp <= 0) {
-            this.deactivate();
         }
     }
 
@@ -95,6 +97,10 @@ public abstract class AbstractEnemy extends AbstractEntity {
 
     @Override
     public void run() {
+        if (hp <= 0) {
+            this.deactivate();
+            return;
+        }
         calculateDirection();
         position.add(velocity.x, velocity.y);
     }
@@ -130,6 +136,14 @@ public abstract class AbstractEnemy extends AbstractEntity {
 
     public boolean isActive() {
         return active;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
     }
 
     @Override
