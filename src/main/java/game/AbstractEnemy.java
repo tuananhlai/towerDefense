@@ -48,6 +48,8 @@ public abstract class AbstractEnemy extends AbstractEntity {
             hp -= (damage - defense);
         }
         if (hp <= 0) {
+            GameField.score += 1;
+            System.err.println(GameField.score);
             this.deactivate();
         }
     }
@@ -65,6 +67,7 @@ public abstract class AbstractEnemy extends AbstractEntity {
             position.set(currentWP);
             Vector2D nextWayPoint = getNextWayPoint();
             if (nextWayPoint == null) {
+                GameField.HP -= 1;
                 this.deactivate();
                 return;
             }
@@ -90,7 +93,7 @@ public abstract class AbstractEnemy extends AbstractEntity {
 
     public void deactivate() {
         active = false;
-//        GameField.gameEntities.remove(this);
+        GameField.gameEntities.remove(this);
     }
 
     @Override

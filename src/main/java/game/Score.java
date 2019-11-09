@@ -2,6 +2,7 @@ package game;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.io.FileInputStream;
@@ -11,8 +12,6 @@ import java.util.Set;
 import java.util.Stack;
 
 public class Score {
-    private int score = 0;
-    private int hp = 20;
     private Vector2D position;
     private Rectangle rect = new Rectangle();
     private Image[] scoreImages = new Image[10];
@@ -23,8 +22,24 @@ public class Score {
     }
 
     public void render(GraphicsContext gc) {
+        //draw background for score and store
+        int x = 700;
+        int y = 0;
+        int width = 100;
+        int height = 420;
+        gc.setFill(Color.GREENYELLOW);
+        gc.fillRect(x, y, width, height);
+        gc.setStroke(Color.ANTIQUEWHITE);
+        gc.setLineWidth(5);
+        gc.strokeLine(x, y, x + width, y);
+        gc.strokeLine(x, y, x, y + height);
+        gc.strokeLine(x + width, y, x + width, y + height);
+        gc.strokeLine(x, y + height, x + width, y + height);
+        //print hp
+        gc.setFill(Color.RED);
+        gc.fillRect(x + 15, y + 350, GameField.HP*4 , 20);
         //print score
-        String scoreStr = Integer.toString(score);
+        String scoreStr = Integer.toString(GameField.score);
         try{
             scoreImages[0] = new Image(new FileInputStream("assets/Retina/dollarSign.png"));
         }
@@ -42,13 +57,5 @@ public class Score {
                 System.err.println(e.toString());
             }
         }
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getScore() {
-        return score;
     }
 }

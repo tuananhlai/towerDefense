@@ -15,28 +15,31 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Canvas canvas = new Canvas(800, 600);
+        Canvas canvas = new Canvas(800, 420);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GameField gameField = new GameField();
-        Score score = new Score(20, 420);
-        score.setScore(290);
+        Score score = new Score(710, 20);
 
 
         gameField.addStoreItems();
         NormalEnemy normalEnemy = new NormalEnemy();
         canvas.setOnMouseMoved(event -> {
             GameField.mouseEvent = event;
+            gameField.hoverTowers(event);
+            gameField.hoverItems(event);
         });
         canvas.setOnMousePressed(gameField::clickItems);
-        new NormalTower();
-        new NormalTower(4 * Settings.TILE_WIDTH, 5 * Settings.TILE_HEIGHT);
-        new NormalTower(7 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT);
+        canvas.setOnMouseClicked(gameField::clickTowers);
+//        new NormalTower();
+//        new NormalTower(4 * Settings.TILE_WIDTH, 5 * Settings.TILE_HEIGHT);
+//        new NormalTower(7 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT);
         new AnimationTimer() {
             long lastTime = 0;
             @Override
             public void handle(long l) {
-                if (l - lastTime > 1000000000) {
-                    new NormalEnemy();
+                if (((l - lastTime))/2 - 1000000000 > 0) {
+                    long time = l;
+                    new TankerEnemy();
                     lastTime = l;
                 }
             }
@@ -47,14 +50,13 @@ public class Main extends Application {
                 gc.clearRect(0, 0, 800, 600);
 //                gameField.deleteUnActiveObj();
                 score.render(gc);
-                score.setScore(score.getScore() + 1);
                 gameField.renderAll(gc);
                 gameField.runAll();
             }
         };
         timer.start();
         StackPane group = new StackPane(canvas);
-        Scene scene = new Scene(group, 800, 600);
+        Scene scene = new Scene(group, 800, 420);
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();

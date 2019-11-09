@@ -24,11 +24,11 @@ public class CuongBullet extends AbstractEntity {
     @Override
     public void run() {
         if(circle.getCenterX() > Settings.MAP_WIDTH || circle.getCenterX() < 0 || circle.getCenterY() > Settings.MAP_HEIGHT || circle.getCenterY() < 0){
-            setActive(false);
+            deactivate();
             return;
         }
         if(distanceToTarget - a < 0){
-            setActive(false);
+            deactivate();
             return;
         }
 
