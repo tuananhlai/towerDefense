@@ -7,7 +7,7 @@ import javafx.geometry.Rectangle2D;
  */
 public class NormalEnemy extends AbstractEnemy {
     public NormalEnemy() {
-        this(0, 2 * 70);
+        this(0, 2 * Settings.TILE_HEIGHT);
     }
 
     public NormalEnemy(double x, double y) {
@@ -17,7 +17,6 @@ public class NormalEnemy extends AbstractEnemy {
         this.setDefense(Settings.NORMAL_ENEMY_DEFENSE);
     }
 
-    // TODO: Every class use only 1 image, so there is no need to input url every time
     @Override
     public Rectangle2D getBoundary() {
         return new Rectangle2D(this.position.x + 25, this.position.y + 25, 20, 20);
@@ -25,9 +24,6 @@ public class NormalEnemy extends AbstractEnemy {
 
     @Override
     public boolean intersects(Collider other) {
-        if (other instanceof NormalEnemy) {
-            return this.getBoundary().intersects(other.getBoundary());
-        }
-        return false;
+        return this.getBoundary().intersects(other.getBoundary());
     }
 }

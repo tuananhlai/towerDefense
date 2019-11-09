@@ -1,7 +1,10 @@
 package game;
 
 import javafx.geometry.Rectangle2D;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 public class Bullet extends AbstractEntity implements Collider{
@@ -17,12 +20,23 @@ public class Bullet extends AbstractEntity implements Collider{
         this.velocity = new Vector2D(velocityX, velocityY);
     }
 
+    SnapshotParameters params = new SnapshotParameters();
+    ImageView bulletView = new ImageView();
+    boolean isOnce = true;
     @Override
     public void render(GraphicsContext gc) {
-        gc.drawImage(image, position.x, position.y, Settings.BULLET_WIDTH, Settings.BULLET_HEIGHT);
-
-        gc.setStroke(Color.MAGENTA);
-        gc.strokeRect(position.x, position.y, Settings.BULLET_WIDTH, Settings.BULLET_HEIGHT);
+        params.setFill(Color.TRANSPARENT);
+        bulletView.setImage(image);
+        if (isOnce) {
+            Vector2D towerToEnemy = new Vector2D(target.getPosition().x - this.position.x,
+                    target.getPosition().y - this.position.y);
+            bulletView.setRotate(towerToEnemy.getAngle() - 90); // we need to +90 degree because of the original orientation of gunImg.
+            isOnce = false;
+        }
+        Image bullet = bulletView.snapshot(params, null);
+        gc.drawImage(bullet, position.x, position.y, bullet.getWidth(), bullet.getHeight());
+//        gc.setStroke(Color.MAGENTA);
+//        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
     }
 
     private double distanceTraveled = 0;
@@ -69,8 +83,8 @@ public class Bullet extends AbstractEntity implements Collider{
     }
 
     @Override
-    public Rectangle2D getBoundary() {
-        return new Rectangle2D(this.position.x, this.position.y, Settings.BULLET_WIDTH, Settings.BULLET_HEIGHT);
+    public Rectangle2D getBoundary() { // FIXME: Improve hitbox
+        return new Rectangle2D(this.position.x, this.position.y, image.getWidth(), image.getHeight());
     }
 
     @Override
@@ -96,5 +110,15 @@ public class Bullet extends AbstractEntity implements Collider{
 
     public int getDamage() {
         return damage;
+    }
+
+    @Override
+    public double getCenterX() {
+        return 0;
+    }
+
+    @Override
+    public double getCenterY() {
+        return 0;
     }
 }

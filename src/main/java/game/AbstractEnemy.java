@@ -26,14 +26,16 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider{
     SnapshotParameters params = new SnapshotParameters();
     ImageView rotateView = new ImageView();
     @Override
-    public void render(GraphicsContext gc) { // TODO: rotate when turn.
+    public void render(GraphicsContext gc) {
         params.setFill(Color.TRANSPARENT);
 
         rotateView.setImage(image);
         rotateView.setRotate(this.velocity.getAngle());
         Image img = rotateView.snapshot(params, null);
 
-        gc.drawImage(img, position.x, position.y, 70, 60);
+        gc.drawImage(img, position.x, position.y, Settings.ENEMY_WIDTH, Settings.ENEMY_HEIGHT);
+        gc.setStroke(Color.RED);
+        gc.strokeRect(position.x, position.y, Settings.ENEMY_WIDTH, Settings.ENEMY_HEIGHT);
         // draw way point
         gc.setFill(Color.RED);
         gc.fillOval(position.x, position.y, 7, 7);

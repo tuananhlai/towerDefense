@@ -52,7 +52,6 @@ public class GameField {
                 }
             }
         }
-        // TODO: Create way points array here
     }
 
     /**
