@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Store extends AbstractEntity {
@@ -92,28 +93,38 @@ public class Store extends AbstractEntity {
                     button.getY() > Settings.TILE_HEIGHT / 2 && button.getY() < 420 - Settings.TILE_HEIGHT / 2) {
                 if (holdItem && button.getButton() == MouseButton.PRIMARY) {
                     int x = (int) (GameField.mouseEvent.getX()) / Settings.TILE_WIDTH;
+                    int preX = x;
                     x *= Settings.TILE_WIDTH;
                     int y = (int) (GameField.mouseEvent.getY()) / Settings.TILE_HEIGHT;
+                    int preY = y;
                     y *= Settings.TILE_HEIGHT;
-                    switch (type) {//set active true tai luc dat xuong da click 1 lan^^
-                        case Settings.NORMAL_TOWER_ITEM: {
-                            new NormalTower(x, y).setClicked(true);
-                            break;
+                    //xem co trung k, neu trung thi k cho dat thap tai do
+                    HashMap<Integer, Integer> tempHashMap = new HashMap<>();
+                    tempHashMap.put(preX, preY);
+                    if(GameField.towerPosition.get(tempHashMap) == null){
+                        System.err.println("add to [" + preX + ", " + preY + "]");
+                        //add tower to map
+                        GameField.towerPosition.put(tempHashMap, true);
+                        switch (type) {//set active true tai luc dat xuong da click 1 lan^^
+                            case Settings.NORMAL_TOWER_ITEM: {
+                                new NormalTower(x, y).setClicked(true);
+                                break;
+                            }
+                            case Settings.SNIPER_TOWER_ITEM: {
+                                new SniperTower(x, y).setClicked(true);
+                                break;
+                            }
+                            case Settings.MACHINE_GUN_TOWER_ITEM: {
+                                new MachineGunTower(x, y).setClicked(true);
+                                break;
+                            }
+                            default: {
+                                break;
+                            }
                         }
-                        case Settings.SNIPER_TOWER_ITEM: {
-                            new SniperTower(x, y).setClicked(true);
-                            break;
-                        }
-                        case Settings.MACHINE_GUN_TOWER_ITEM: {
-                            new MachineGunTower(x, y).setClicked(true);
-                            break;
-                        }
-                        default: {
-                            break;
-                        }
-                    }
-                    GameField.score -= this.price;
+                        GameField.score -= this.price;
 //                    System.err.println(GameField.score);
+                    }
                     holdItem = false;
                 }
             }

@@ -6,9 +6,7 @@ import javafx.scene.input.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Manage all GameEntity objects on play field
@@ -20,6 +18,7 @@ public class GameField {
     public static int score = 100;
     public static int HP = 20;
     public static int id;
+    public static Map<Map<Integer, Integer>, Boolean> towerPosition = new HashMap<>();
     // TODO: Add way points automatically when read map.
     public static Vector2D[] wayPoints = new Vector2D[] {
             new Vector2D(0 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT),
@@ -67,6 +66,10 @@ public class GameField {
                 for (int j = 0; j < Settings.MAP_WIDTH_IN_TILES; j++) {
                     if (myArray[i][j] == Settings.ROAD) {
                         new Road(Settings.TILE_HEIGHT * j, Settings.TILE_WIDTH * i);
+                        HashMap<Integer, Integer> tempHashMap = new HashMap<>();
+                        tempHashMap.put(j, i);
+                        towerPosition.put(tempHashMap, true);
+                        System.err.println("[" + j + ", " + i + "]");
                     }
                     else {
                         new Mountain(Settings.TILE_HEIGHT * j, Settings.TILE_WIDTH * i);
