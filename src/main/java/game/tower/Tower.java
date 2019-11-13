@@ -5,8 +5,10 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 public abstract class Tower extends AbstractTile {
     protected int fireRate = 0;
@@ -16,14 +18,16 @@ public abstract class Tower extends AbstractTile {
 
     public Tower(double x, double y, String baseImageURL, String gunImageURL) {
         super(Settings.TOWER, x, y, baseImageURL);
-        this.gunImg = loadImage(gunImageURL);
+        this.gunImg = Settings.loadImage(gunImageURL);
     }
 
     public AbstractEnemy getNearestEnemy() {
         AbstractEnemy nearestEnemy = null;
         double minDistance = Double.MAX_VALUE;
         for (AbstractEntity entity : GameField.gameEntities) {
-            double distanceToEnemy = this.position.distanceTo(entity.getPosition());
+            Vector2D towerCenterPos = new Vector2D(position.x + Settings.TILE_WIDTH * 0.5, position.y + Settings.TILE_HEIGHT * 0.5);
+            Vector2D entityCenterPos = new Vector2D(entity.getPosition().x + Settings.ENEMY_WIDTH * 0.5, entity.getPosition().y + Settings.ENEMY_HEIGHT * 0.5);
+            double distanceToEnemy = towerCenterPos.distanceTo(entityCenterPos);
             if (entity instanceof AbstractEnemy && entity.isActive() && distanceToEnemy < minDistance && distanceToEnemy <= fireRange) {
                 nearestEnemy = (AbstractEnemy) entity;
                 minDistance = this.position.distanceTo(entity.getPosition());
@@ -38,12 +42,12 @@ public abstract class Tower extends AbstractTile {
         fire();
     }
 
-    SnapshotParameters params = new SnapshotParameters();
-    ImageView gunView = new ImageView();
+    private SnapshotParameters params = new SnapshotParameters();
+    private ImageView gunView = new ImageView();
     @Override
     public void render(GraphicsContext gc) {
         params.setFill(Color.TRANSPARENT);
-        // Rotate gun to nearest enemy location
+        // Rotate gun barrel to nearest enemy location
         gunView.setImage(gunImg);
         AbstractEnemy target = bullet.getTarget();
         if (target != null) {
@@ -61,7 +65,7 @@ public abstract class Tower extends AbstractTile {
     private int fireRateCount = 0;
     public void fire() {
         fireRateCount++;
-        if (bullet.getTarget() != null && fireRateCount > 10) {
+        if (bullet.getTarget() != null && fireRateCount * fireRate > 60) {
             createBullet(this.position.x, this.position.y);
             fireRateCount = 0;
         }
@@ -72,13 +76,13 @@ public abstract class Tower extends AbstractTile {
             bullet.setTarget(getNearestEnemy());
         } else if (isOutOfRange(bullet.getTarget())){
             bullet.setTarget(null);
-        } else if (bullet.getTarget().getHp() <= 0) { // even if the enemy is dead, we still have its reference, so we can check if its hp is below 0.
+        } else if (!bullet.getTarget().isActive()) { // even if the enemy is dead, we still have its reference, so we can check if its hp is below 0.
             bullet.setTarget(null);
         }
     }
 
     /**
-     * Create a bullet with this bullet configuration (damage, maxDistance, ...), set the velocity toward the enemies,
+     * Create a bullet with this tower's bullet configuration (damage, maxDistance, ...), set the velocity toward the enemies,
      * and append the bullet to GameField.entities
      * @param startX bullet start x-position
      * @param startY bullet start y-position

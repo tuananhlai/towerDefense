@@ -30,7 +30,7 @@ public class WelcomeScreen extends Screen {
         });
         Image backgroundImg = null;
         try {
-            backgroundImg = new Image(new FileInputStream("assets/welcome_background.jpg"));
+            backgroundImg = new Image(new FileInputStream("assets/welcome_background_1.png"));
         } catch (FileNotFoundException e) {
 
         }
@@ -38,7 +38,6 @@ public class WelcomeScreen extends Screen {
         Group group = new Group(background);
         group.getChildren().add(startButton);
         scene = new Scene(group, Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
-        scene.setFill(Color.RED);
     }
 
     @Override

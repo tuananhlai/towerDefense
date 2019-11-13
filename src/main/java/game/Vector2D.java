@@ -1,6 +1,6 @@
 package game;
 
-public class Vector2D { // TODO: make it extends Point2D if needed
+public class Vector2D {
     public double x;
     public double y;
     public static int UP = -90; // the y coordinate is reversed in window.
@@ -34,19 +34,25 @@ public class Vector2D { // TODO: make it extends Point2D if needed
     public void set(Vector2D other) {
         this.set(other.x, other.y);
     }
+
     public Vector2D clone() {
-//        Vector2D newVec = new Vector2D(this.x, this.y);
-//        return newVec;
         return new Vector2D(this.x, this.y);
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
     public double getLength() {
-        //return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
         return Math.hypot(this.x, this.y);
     }
 
     public void setLength(double length) {
-        double ratio = 0; //initialize variable
+        double ratio = 0;
         if (getLength() != 0 && length >= 0)
         {
             ratio = length/getLength();
@@ -57,15 +63,10 @@ public class Vector2D { // TODO: make it extends Point2D if needed
     }
 
     public double distanceTo(Vector2D other) {
-        //return Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2));
         return Math.hypot(this.x - other.x, this.y - other.y); //calculate hypotenuse
     }
 
     public double getAngle() {
-//        if (this.x != 0) {
-//            return Math.atan(this.y/this.x);
-//        }
-//        else return Math.PI/2;
         return Math.toDegrees(Math.atan2(this.y, this.x)); //more efficient
     }
     public void setAngle(double angle) {
@@ -73,6 +74,26 @@ public class Vector2D { // TODO: make it extends Point2D if needed
         double length = getLength();
         this.x = length*Math.cos(angle);
         this.y = length*Math.sin(angle);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Vector2D) {
+            return this.getX() == ((Vector2D) obj).getX() && this.getY() == ((Vector2D) obj).getY();
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) x;
+        result = 31 * result + (int) y;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + this.x + ", " + this.y + ")";
     }
 
     public static void main(String[] args) {

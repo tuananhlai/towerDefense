@@ -1,4 +1,4 @@
-package game;
+package game.test;
 
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
@@ -21,10 +21,13 @@ import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 
 public class RotateTransitionExample extends Application {
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws FileNotFoundException {
         Canvas canvas = new Canvas(1000, 800);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         SnapshotParameters snapshotParameters = new SnapshotParameters();
@@ -36,7 +39,8 @@ public class RotateTransitionExample extends Application {
         transition.setByAngle(90);
         transition.setAutoReverse(false);
         transition.play();
-        Button btn = new Button("Turn by 90 degree");
+        Image imx = new Image(new FileInputStream("assets/towers/towerDefense_tile249.png"));
+        Button btn = new Button("Turn by 90 degree", new ImageView(imx));
         btn.setLayoutX(100);
         btn.setLayoutY(100);
         btn.setOnAction(new EventHandler<ActionEvent>() {

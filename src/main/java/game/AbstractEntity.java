@@ -15,53 +15,51 @@ public abstract class AbstractEntity {
     protected int colIndex; // j
 
     public AbstractEntity() {
-        this(-100, -100, "unknown");
+        this(0, 0, null);
     }
 
     public AbstractEntity(double x, double y) {
-        this(x, y, "unknown");
+        this(x, y, null);
     }
 
-    public AbstractEntity(String url) {
-        this(-100, -100, url);
+    public AbstractEntity(String imageURL) {
+        this(0, 0, imageURL);
     }
 
-    public AbstractEntity(Vector2D position, String url) {
-        this(position.x, position.y, url);
+    public AbstractEntity(Vector2D position, String imageURL) {
+        this(position.x, position.y, imageURL);
     }
 
-    public AbstractEntity(double x, double y, String url) {
-        this(x, y, url, true);
+    public AbstractEntity(double x, double y, String imageURL) {
+        this(x, y, imageURL, true);
     }
+
     /**
      * Load image from input url, print error if file not found.
      * Initialize position, set state to active, and add newly created objects to list objects.
      * @param x input x-position
      * @param y input y-position
-     * @param url object's image url
+     * @param imageURL object's image url
      */
-    public AbstractEntity(double x, double y, String url, boolean active) {
-        // TODO: Avoid loading image every time the program initialize a new object
-        if (!url.equals("unknown")) this.image = loadImage(url);
+    public AbstractEntity(double x, double y, String imageURL, boolean active) {
+        if (imageURL != null) this.image = Settings.loadImage(imageURL);
         this.active = active;
         position = new Vector2D(x, y);
         if (this.active) GameField.gameEntities.add(this);
-        System.out.println(this.getClass().getName() + " " + GameField.gameEntities.size());
+//        System.out.println(this.getClass().getName() + " " + GameField.gameEntities.size());
+    }
+
+    public AbstractEntity(double x, double y, Image image, boolean active) {
+        this.image = image;
+        this.active = active;
+        position = new Vector2D(x, y);
+        if (this.active) GameField.gameEntities.add(this);
+//        System.out.println(this.getClass().getName() + " " + GameField.gameEntities.size());
     }
 
     public abstract void render(GraphicsContext gc);
 
     public abstract void run();
-
-//    public static <E> E findIntersects(Class <E> cls, AbstractEntity source) {
-//        for (int i = 0; i < GameField.gameEntities.size(); i++) {
-//            AbstractEntity entity = GameField.gameEntities.get(i);
-//            if (entity.active && cls.isAssignableFrom(entity.getClass()) && entity.hitBox != null && entity.hitBox.intersect(source.hitBox)) {
-//                return (E) entity;
-//            }
-//        }
-//        return null;
-//    }
 
     public void reset() {
         active = true;
@@ -73,20 +71,6 @@ public abstract class AbstractEntity {
 
     public void setImage(Image image) {
         this.image = image;
-    }
-
-    public Image loadImage(String url) {
-        Image loadedImage = null;
-        try {
-            FileInputStream inputStream = new FileInputStream(url);
-            loadedImage = new Image(inputStream);
-            inputStream.close();
-        } catch (FileNotFoundException e) {
-            System.err.println("ERROR: Cannot load image at [" + url + "]");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return loadedImage;
     }
 
     public Vector2D getPosition() {

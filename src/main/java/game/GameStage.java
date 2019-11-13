@@ -5,6 +5,7 @@ import game.screen.Screen;
 import game.screen.WelcomeScreen;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -16,8 +17,8 @@ public class GameStage {
     public static Stage stage;
     public static Screen currentScreen = null;
     public GameStage(Stage stage) {
-        this.stage = stage;
-        this.signNewScreen(new WelcomeScreen());
+        GameStage.stage = stage;
+        signNewScreen(new WelcomeScreen());
     }
 
     /**

@@ -6,15 +6,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import org.w3c.dom.events.EventTarget;
 
-public class Bullet extends AbstractEntity implements Collider{
+public class Bullet extends AbstractEntity implements Collider, Cloneable {
     private AbstractEnemy target = null;
     private Vector2D velocity = null;
     private int damage;
     private double maxDistance;
 
-    public Bullet(int damage, double maxDistance, String bulletImgURL, double velocityX, double velocityY) { //set up bullet
-        super(0, 0, bulletImgURL, false); // set active = false to prevent the super constructor from adding this to gameEntities
+    public Bullet(int damage, double maxDistance, Image image, double velocityX, double velocityY) { //set up bullet
+        super(0, 0, image, false); // set active = false to prevent the super constructor from adding this to gameEntities
         this.damage = damage;
         this.maxDistance = maxDistance;
         this.velocity = new Vector2D(velocityX, velocityY);
@@ -30,13 +31,15 @@ public class Bullet extends AbstractEntity implements Collider{
         if (isOnce) {
             Vector2D towerToEnemy = new Vector2D(target.getPosition().x - this.position.x,
                     target.getPosition().y - this.position.y);
-            bulletView.setRotate(towerToEnemy.getAngle() - 90); // we need to +90 degree because of the original orientation of gunImg.
+            bulletView.setRotate(towerToEnemy.getAngle() - 90); // we need to +90 degree because of the original orientation of bullet.
             isOnce = false;
         }
         Image bullet = bulletView.snapshot(params, null);
         gc.drawImage(bullet, position.x, position.y, bullet.getWidth(), bullet.getHeight());
-//        gc.setStroke(Color.MAGENTA);
-//        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
+
+        // render hitbox
+        gc.setStroke(Color.MAGENTA);
+        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
     }
 
     private double distanceTraveled = 0;
@@ -64,8 +67,9 @@ public class Bullet extends AbstractEntity implements Collider{
         active = true;
     }
 
+    @Override
     public Bullet clone() {
-        Bullet clone = new Bullet(this.damage, this.maxDistance, "unknown", this.velocity.x, this.velocity.y);
+        Bullet clone = new Bullet(this.damage, this.maxDistance, this.image, this.velocity.x, this.velocity.y);
         clone.setImage(this.image);
         clone.setTarget(this.target);
         return clone;
@@ -84,7 +88,7 @@ public class Bullet extends AbstractEntity implements Collider{
 
     @Override
     public Rectangle2D getBoundary() { // FIXME: Improve hitbox
-        return new Rectangle2D(this.position.x, this.position.y, image.getWidth(), image.getHeight());
+        return new Rectangle2D(this.position.x, this.position.y, image.getWidth(), image.getWidth());
     }
 
     @Override

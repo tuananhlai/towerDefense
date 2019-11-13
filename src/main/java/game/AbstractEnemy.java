@@ -22,6 +22,10 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider{
         this.hp = hp;
         velocity = new Vector2D(velocityX, velocityY);
     }
+    public AbstractEnemy(double x, double y, Image img) {
+        super(x, y, img, true);
+        velocity = new Vector2D();
+    }
 
     SnapshotParameters params = new SnapshotParameters();
     ImageView rotateView = new ImageView();
@@ -36,9 +40,6 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider{
         gc.drawImage(img, position.x, position.y, Settings.ENEMY_WIDTH, Settings.ENEMY_HEIGHT);
         gc.setStroke(Color.RED);
         gc.strokeRect(position.x, position.y, Settings.ENEMY_WIDTH, Settings.ENEMY_HEIGHT);
-        // draw way point
-        gc.setFill(Color.RED);
-        gc.fillOval(position.x, position.y, 7, 7);
 
         // render hitbox
         gc.setStroke(Color.MAGENTA);

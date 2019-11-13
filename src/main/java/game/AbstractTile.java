@@ -7,7 +7,7 @@ public abstract class AbstractTile extends AbstractEntity {
     private int tileType;
 
     public AbstractTile() {
-        this(-1, -100, -100, "unknown");
+        this(-1, 0, 0, null);
     }
 
     public AbstractTile(int tileType, double x, double y, String url) {

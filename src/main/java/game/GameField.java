@@ -3,16 +3,16 @@ package game;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Manage all GameEntity objects on play field
  */
 public class GameField {
     public static List<AbstractEntity> gameEntities = new ArrayList<>();
+    public static Set<Vector2D> unusablePositions = new HashSet<>();
 
-    // TODO: Add way points automatically when read map.
+    // TODO: Use algorithm.
     public static Vector2D[] wayPoints = new Vector2D[] {
             new Vector2D(0 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT),
             new Vector2D(4 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT),
@@ -41,7 +41,7 @@ public class GameField {
      * Read map's information from txt file in mapURL and add tiles to list objects gameEntities.
      * @param mapURL link to map's file.
      */
-    public void readMap(String mapURL) {     // TODO: Read map from txt file
+    public void readMap(String mapURL) {
         for (int i = 0; i < Settings.MAP_HEIGHT_IN_TILES; i++) {
             for (int j = 0; j < Settings.MAP_WIDTH_IN_TILES; j++) {
                 if (map[i][j] == Settings.ROAD) {
@@ -64,11 +64,7 @@ public class GameField {
                 entity.render(gc);
             }
         }
-        // render way points
-        gc.setFill(Color.BLUE);
-        for (int i = 0; i < wayPoints.length; i++) {
-            gc.fillOval(wayPoints[i].x, wayPoints[i].y, 7, 7);
-        }
+
     }
 
     /**
@@ -85,6 +81,8 @@ public class GameField {
 
     public static void clear() {
         gameEntities.clear();
+        unusablePositions.clear();
+
     }
 
     public static void main(String[] args) {
