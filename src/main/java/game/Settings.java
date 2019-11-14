@@ -42,12 +42,14 @@ public class Settings {
 
     //ENEMY VELOCITY
     public static final int NORMAL_VELOCITY = 2;
-    public static final int TANKER_VELOCITY = 2;
-    public static final int SMALLER_VELOCITY = 2;
-    public static final int BOSS_VELOCITY = 2;
+    public static final int TANKER_VELOCITY = 1;
+    public static final int SMALLER_VELOCITY = 3;
+    public static final int BOSS_VELOCITY = 1;
 
     public static final int NORMAL_ENEMY_DEFENSE = 0;
-    public static final Image NORMAL_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile245.png");
+    public static final Image NORMAL_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile292.png");
+    public static final Image TANKER_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile268.png");
+    public static final Image SMALLER_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile245.png");
 
     // TOWER
     public static final Image NORMAL_TOWER_IMAGE = loadImage("assets/towers/item_1.png");

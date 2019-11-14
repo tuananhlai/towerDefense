@@ -30,7 +30,7 @@ public class GameField {
             new Vector2D(20 * Settings.TILE_WIDTH, 0 * Settings.TILE_HEIGHT),
     };
 
-    int[][] map = new int[][] {
+    public static int[][] map = new int[][] {
             {1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
             {1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1},
             {0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1},

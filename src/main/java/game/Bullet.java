@@ -1,12 +1,12 @@
 package game;
 
+import game.Enemy.AbstractEnemy;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import org.w3c.dom.events.EventTarget;
 
 public class Bullet extends AbstractEntity implements Collider, Cloneable {
     private AbstractEnemy target = null;

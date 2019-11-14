@@ -1,0 +1,7 @@
+2
+NormalEnemy 7
+TankerEnemy 4
+3
+NormalEnemy 3
+TankerEnemy 2
+NormalEnemy 2
