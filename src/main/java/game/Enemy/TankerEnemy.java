@@ -9,7 +9,7 @@ import javafx.geometry.Rectangle2D;
  */
 public class TankerEnemy extends AbstractEnemy {
     public TankerEnemy() {
-        this(0, 2 * Settings.TILE_HEIGHT);
+        this(0, 3 * Settings.TILE_HEIGHT);
     }
     public TankerEnemy(double x, double y) {
         super(x, y, "assets/enemies/towerDefense_tile269.png");

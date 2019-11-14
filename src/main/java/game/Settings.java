@@ -47,9 +47,9 @@ public class Settings {
     public static final int BOSS_VELOCITY = 1;
 
     public static final int NORMAL_ENEMY_DEFENSE = 0;
-    public static final Image NORMAL_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile292.png");
+    public static final Image NORMAL_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile245.png");
     public static final Image TANKER_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile268.png");
-    public static final Image SMALLER_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile245.png");
+    public static final Image SMALLER_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile292.png");
 
     // TOWER
     public static final Image NORMAL_TOWER_IMAGE = loadImage("assets/towers/item_1.png");
@@ -68,10 +68,15 @@ public class Settings {
     public static final int SNIPER_TOWER_FIRE_RATE = 2;
     public static final Image SNIPER_BULLET_IMAGE = loadImage("assets/towers/towerDefense_tile297.png", 0.0D, 20, true, false);
 
-    public static final String MACHINE_GUN_TOWER_ITEM = "2";
-    public static final int MACHINE_GUN_TOWER_DAMAGE = 1;
-    public static final int MACHINE_GUN_TOWER_RANGE = 100;
-    public static final int MACHINE_GUN_TOWER_PRICE = 20;
+    public static final Image MACHINE_GUN_TOWER_IMAGE = loadImage("assets/towers/item_2.png");
+    public static final String MACHINE_GUN_TOWER_ITEM = "1";
+    public static final int MACHINE_GUN_TOWER_DAMAGE = 5;
+    public static final int MACHINE_GUN_TOWER_RANGE = 4 * TILE_WIDTH;;
+    public static final int MACHINE_GUN_TOWER_PRICE = 30;
+    public static final int MACHINE_GUN_TOWER_FIRE_RATE = 2;
+    public static final Image MACHINE_GUN_BULLET_IMAGE = loadImage("assets/towers/towerDefense_tile297.png", 0.0D, 20, true, false);
+
+
     public static final int BULLET_WIDTH = 10;
     public static final int BULLET_HEIGHT = 10;
 

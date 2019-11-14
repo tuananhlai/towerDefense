@@ -10,7 +10,7 @@ import javafx.geometry.Rectangle2D;
  */
 public class NormalEnemy extends AbstractEnemy {
     public NormalEnemy() {
-        this(0, 2 * Settings.TILE_HEIGHT);
+        this(0, 3 * Settings.TILE_HEIGHT);
     }
 
     public NormalEnemy(double x, double y) {

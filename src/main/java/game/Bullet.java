@@ -14,6 +14,9 @@ public class Bullet extends AbstractEntity implements Collider, Cloneable {
     private int damage;
     private double maxDistance;
 
+    public Bullet(int damage, double maxDistance){
+
+    }
     public Bullet(int damage, double maxDistance, Image image, double velocityX, double velocityY) { //set up bullet
         super(0, 0, image, false); // set active = false to prevent the super constructor from adding this to gameEntities
         this.damage = damage;

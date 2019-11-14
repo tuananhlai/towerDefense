@@ -1,8 +1,12 @@
 package game;
 
+import game.Enemy.AbstractEnemy;
+import game.tower.Tower;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.*;
 
 /**
@@ -46,24 +50,44 @@ public class GameField {
     };
 
     public GameField() {
-        readMap("link/to/map");
+        readMap("assets/tiles/mapdata.txt");
     }
 
     /**
      * Read map's information from txt file in mapURL and add tiles to list objects gameEntities.
      * @param mapURL link to map's file.
      */
-    public void readMap(String mapURL) {
-        for (int i = 0; i < Settings.MAP_HEIGHT_IN_TILES; i++) {
-            for (int j = 0; j < Settings.MAP_WIDTH_IN_TILES; j++) {
-                if (map[i][j] == Settings.ROAD) {
-                    new Road(Settings.TILE_HEIGHT * j, Settings.TILE_WIDTH * i);
-                }
-                else {
-                    new Mountain(Settings.TILE_HEIGHT * j, Settings.TILE_WIDTH * i);
+    public void readMap(String mapURL) {     // TODO: Read map from txt file
+        try{
+            Scanner sc = new Scanner(new BufferedReader(new FileReader(mapURL)));
+            int rows = 12;
+            int columns = 20;
+            int [][] myArray = new int[rows][columns];
+            while(sc.hasNextLine()) {
+                for (int i=0; i<myArray.length; i++) {
+                    String[] line = sc.nextLine().trim().split(" ");
+                    for (int j=0; j<line.length; j++) {
+                        myArray[i][j] = Integer.parseInt(line[j]);
+                        map[i][j] = myArray[i][j];
+                    }
                 }
             }
+            for (int i = 0; i < Settings.MAP_HEIGHT_IN_TILES; i++) {
+                for (int j = 0; j < Settings.MAP_WIDTH_IN_TILES; j++) {
+                    if (myArray[i][j] == Settings.ROAD) {
+                        new Road(Settings.TILE_HEIGHT * j, Settings.TILE_WIDTH * i);
+//                        GameManagement.towerPosition.add(new Vector2D(j, i));
+                    }
+                    else {
+                        new Mountain(Settings.TILE_HEIGHT * j, Settings.TILE_WIDTH * i);
+                    }
+                }
+            }
+        }catch (Exception e){
+            System.err.println(e.toString());
         }
+
+        // TODO: Create way points array here
     }
 
     /**
@@ -71,13 +95,63 @@ public class GameField {
      * @param gc
      */
     public void renderAll(GraphicsContext gc) {
-        for (AbstractEntity entity : gameEntities) {
+        int size = gameEntities.size();
+        for (int i = 0; i < size ; i++) {
+            AbstractEntity entity = gameEntities.get(i);
             if (entity.isActive()) {
                 entity.render(gc);
             }
         }
-
+//        renderMap(gc);
+//        renderEnemy(gc);
+//        renderBullet(gc);
+//        renderTower(gc);
     }
+
+//    public void renderMap(GraphicsContext gc){
+//        int size = gameEntities.size();
+//        for (int i = 0; i < size ; i++) {
+//            AbstractEntity entity = gameEntities.get(i);
+//            if(entity instanceof Road || entity instanceof Mountain){
+//                if (entity.isActive()) {
+//                    entity.render(gc);
+//                }
+//            }
+//        }
+//    }
+//    public void renderTower(GraphicsContext gc){
+//        int size = gameEntities.size();
+//        for (int i = 0; i < size ; i++) {
+//            AbstractEntity entity = gameEntities.get(i);
+//            if(entity instanceof Tower){
+//                if (entity.isActive()) {
+//                    entity.render(gc);
+//                }
+//            }
+//        }
+//    }
+//    public void renderEnemy(GraphicsContext gc){
+//        int size = gameEntities.size();
+//        for (int i = 0; i < size ; i++) {
+//            AbstractEntity entity = gameEntities.get(i);
+//            if(entity instanceof AbstractEnemy){
+//                if (entity.isActive()) {
+//                    entity.render(gc);
+//                }
+//            }
+//        }
+//    }
+//    public void renderBullet(GraphicsContext gc){
+//        int size = gameEntities.size();
+//        for (int i = 0; i < size ; i++) {
+//            AbstractEntity entity = gameEntities.get(i);
+//            if(entity instanceof Bullet){
+//                if (entity.isActive()) {
+//                    entity.render(gc);
+//                }
+//            }
+//        }
+//    }
 
     /**
      * Run all elements in list objects gameEntities
