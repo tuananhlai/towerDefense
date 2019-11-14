@@ -84,7 +84,7 @@ public class TowerStore{
     private void plantTower(String towerCode, double mouseX, double mouseY) {
         int rowIndex = (int) mouseY / Settings.TILE_HEIGHT;
         int colIndex = (int) mouseX / Settings.TILE_WIDTH;
-        Vector2D plantPos = new Vector2D(rowIndex, colIndex);
+        Vector2D plantPos = new Vector2D(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
         if (GameField.unusablePositions.contains(plantPos)) {
             return;
         }
