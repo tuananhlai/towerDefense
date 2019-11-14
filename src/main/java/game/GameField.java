@@ -168,7 +168,6 @@ public class GameField {
     public static void clear() {
         gameEntities.clear();
         unusablePositions.clear();
-
     }
 
     public static void main(String[] args) {

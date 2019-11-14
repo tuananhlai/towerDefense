@@ -17,6 +17,7 @@ public abstract class Tower extends AbstractTile {
     public Tower(double x, double y, String baseImageURL, String gunImageURL) {
         super(Settings.TOWER, x, y, baseImageURL);
         this.gunImg = Settings.loadImage(gunImageURL);
+        GameField.unusablePositions.add(new Vector2D(x, y));
     }
 
     public AbstractEnemy getNearestEnemy() {
