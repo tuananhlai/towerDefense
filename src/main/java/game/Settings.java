@@ -51,6 +51,7 @@ public class Settings {
 
     // TOWER
     public static final Image NORMAL_TOWER_IMAGE = loadImage("assets/towers/item_1.png");
+    public static final String NORMAL_TOWER_ITEM = "0";
     public static final int NORMAL_TOWER_DAMAGE = 1;
     public static final int NORMAL_TOWER_RANGE = (int) 2.5 * TILE_WIDTH;
     public static final int NORMAL_TOWER_PRICE = 15;
@@ -58,22 +59,20 @@ public class Settings {
     public static final Image NORMAL_BULLET_IMAGE = loadImage("assets/towers/towerDefense_tile295.png", 15, 0, true, false);
 
     public static final Image SNIPER_TOWER_IMAGE = loadImage("assets/towers/item_2.png");
+    public static final String SNIPER_TOWER_ITEM = "1";
     public static final int SNIPER_TOWER_DAMAGE = 5;
     public static final int SNIPER_TOWER_RANGE = 4 * TILE_WIDTH;;
     public static final int SNIPER_TOWER_PRICE = 30;
     public static final int SNIPER_TOWER_FIRE_RATE = 2;
     public static final Image SNIPER_BULLET_IMAGE = loadImage("assets/towers/towerDefense_tile297.png", 0.0D, 20, true, false);
 
+    public static final String MACHINE_GUN_TOWER_ITEM = "2";
     public static final int MACHINE_GUN_TOWER_DAMAGE = 1;
     public static final int MACHINE_GUN_TOWER_RANGE = 100;
     public static final int MACHINE_GUN_TOWER_PRICE = 20;
     public static final int BULLET_WIDTH = 10;
     public static final int BULLET_HEIGHT = 10;
 
-    // STORE
-    public static final int NORMAL_TOWER_ITEM = NORMAL_TOWER_PRICE;
-    public static final int MACHINE_GUN_TOWER_ITEM = MACHINE_GUN_TOWER_PRICE;
-    public static final int SNIPER_TOWER_ITEM = SNIPER_TOWER_PRICE;
 
     public static Image loadImage(String url) {
         return Settings.loadImage(url, 0.0D, 0.0D, false, false);

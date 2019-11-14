@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
  * Contain UI elements, including Game Field. Responsible for handling user input.
  */
 public class PlayScreen extends Screen {
-    public static int money = 0;
+    public static int money = 100;
     public static int health = 0;
     public static Group group; // CHÚ Ý: nếu mà tạo Rectangle để click vào tower thì dùng add Rectangle vào đây.
     private Canvas canvas;
@@ -26,13 +26,13 @@ public class PlayScreen extends Screen {
     public static double fps = 0;
     public PlayScreen() {
         canvas = new Canvas(Settings.CANVAS_WIDTH, Settings.CANVAS_HEIGHT);
-        setHandleEventCanvas();
 
         group = new Group(canvas);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GameField gameField = new GameField();
 
         new Spawner();
+
         Text fpsTxt = new Text(Double.toString(fps));
         fpsTxt.setX(10);
         fpsTxt.setY(20);
@@ -63,6 +63,7 @@ public class PlayScreen extends Screen {
 //        });
 //        group.getChildren().add(quit);
         TowerStore towerStore = new TowerStore();
+        towerStore.setBuyEvent(canvas);
         group.getChildren().add(towerStore.getStore());
         group.getChildren().add(new TowerInfoPanel());
         this.scene = new Scene(group, Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
@@ -82,57 +83,10 @@ public class PlayScreen extends Screen {
         }
     }
 
-    /**
-     * Handle event related to canvas, for example:
-     * Plant tower event. (mouse drag)
-     * ...
-     */
-    public void setHandleEventCanvas() {
-        canvas.setOnDragOver(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent dragEvent) {
-                if (dragEvent.getGestureSource() != canvas && dragEvent.getDragboard().hasString() && dragEvent.getDragboard().hasImage()) {
-                    /* allow for both copying and moving, whatever user chooses */
-                    dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-
-                dragEvent.consume();
-            }
-        });
-        canvas.setOnDragDropped(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent dragEvent) {
-                System.out.println("Drag dropped at " + dragEvent.getX() + " " + dragEvent.getY());
-
-                Dragboard db = dragEvent.getDragboard();
-                boolean isSuccess = false;
-                if (db.hasImage() && db.hasString()) {
-                    isSuccess = true;
-                    plantTower(db.getString(), dragEvent.getX(), dragEvent.getY());
-                }
-                dragEvent.setDropCompleted(isSuccess);
-                dragEvent.consume();
-            }
-        });
-    }
-
-    private void plantTower(String towerCode, double mouseX, double mouseY) {
-        int rowIndex = (int) mouseY / Settings.TILE_HEIGHT;
-        int colIndex = (int) mouseX / Settings.TILE_WIDTH;
-        Vector2D plantPos = new Vector2D(rowIndex, colIndex);
-        if (GameField.unusablePositions.contains(plantPos)) {
-            return;
+    public static void playerTakeDamage() {
+        health--;
+        if (health <= 0) {
+            GameStage.signNewScreen(new WelcomeScreen());
         }
-        switch (towerCode) {
-            case "0": {
-                new NormalTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
-                break;
-            }
-            case "1": {
-                new SniperTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
-                break;
-            }
-        }
-
     }
 }

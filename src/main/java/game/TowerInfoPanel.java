@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 
 public class TowerInfoPanel extends VBox{
     private final Font brushUp = Font.loadFont(getClass().getResourceAsStream("/iCielBrushUp.otf"), 20);
+    public static Text towerPrice, damage, fireRange, fireRate;
     public TowerInfoPanel() {
         setLayoutX(800);
         setLayoutY(0);
@@ -25,14 +26,18 @@ public class TowerInfoPanel extends VBox{
     }
 
     public void addAllTexts() {
-        Text moneyTxt = new Text(Integer.toString(PlayScreen.money));
-        moneyTxt.setFont(brushUp);
+        towerPrice = new Text("0");
+        towerPrice.setFont(brushUp);
         Text damageTxt = new Text("damage");
         damageTxt.setFont(brushUp);
         Text fireRangeTxt = new Text("fire range");
         fireRangeTxt.setFont(brushUp);
         Text fireRateTxt = new Text("fire rate");
         fireRateTxt.setFont(brushUp);
+
+        damage = new Text("0");
+        fireRange = new Text("0");
+        fireRate = new Text("0");
 
         Button pause = new Button("Pause");
         pause.setPrefSize(50, 50);
@@ -51,7 +56,8 @@ public class TowerInfoPanel extends VBox{
                 }
             }
         });
-        getChildren().addAll(moneyTxt, damageTxt, fireRangeTxt, fireRateTxt, pause);
+
+        getChildren().addAll(towerPrice, damageTxt, damage, fireRangeTxt, fireRange, fireRateTxt, fireRate, pause);
     }
 
     public void showTowerInfo() {
