@@ -67,6 +67,37 @@ public class PlayScreen extends Screen {
         group.getChildren().add(towerStore.getStore());
         group.getChildren().add(new TowerInfoPanel());
         this.scene = new Scene(group, Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
+
+//        scene.setOnKeyPressed(t->{
+//            if(t.getCode() == KeyCode.D){
+//                scene.setOnMousePressed(mouseEvent -> {
+//                    if(mouseEvent.getX() > Settings.MAP_WIDTH || mouseEvent.getY() > Settings.MAP_HEIGHT){
+//                        return;
+//                    }
+////                    try{
+////                        GameManagement.gameEntities.remove( new Road((int)(mouseEvent.getX()/Settings.TILE_WIDTH)*Settings.TILE_WIDTH,
+////                                (int)(mouseEvent.getY()/Settings.TILE_HEIGHT)*Settings.TILE_HEIGHT));
+////                    }catch (Exception e){
+////                        GameManagement.gameEntities.remove( new Mountain((int)(mouseEvent.getX()/Settings.TILE_WIDTH)*Settings.TILE_WIDTH,
+////                                (int)(mouseEvent.getY()/Settings.TILE_HEIGHT)*Settings.TILE_HEIGHT));
+////                    }
+//                    if(mouseEvent.getButton() == MouseButton.SECONDARY){
+//                        new Road((int)(mouseEvent.getX()/Settings.TILE_WIDTH)*Settings.TILE_WIDTH,
+//                                (int)(mouseEvent.getY()/Settings.TILE_HEIGHT)*Settings.TILE_HEIGHT);
+//                        GameField.map[(int)(mouseEvent.getY()/Settings.TILE_HEIGHT)][(int)(mouseEvent.getX()/Settings.TILE_WIDTH)] = 0;
+////                        GameManagement.towerPosition.add(new Vector2D((int)(mouseEvent.getX()/Settings.TILE_WIDTH),
+////                                (int)(mouseEvent.getY()/Settings.TILE_HEIGHT)));
+//                    }
+//                    else{
+//                        new Mountain((int)(mouseEvent.getX()/Settings.TILE_WIDTH)*Settings.TILE_WIDTH,
+//                                (int)(mouseEvent.getY()/Settings.TILE_HEIGHT)*Settings.TILE_HEIGHT);
+//                        GameField.map[(int)(mouseEvent.getY()/Settings.TILE_HEIGHT)][(int)(mouseEvent.getX()/Settings.TILE_WIDTH)] = 1;
+////                        GameManagement.towerPosition.remove(new Vector2D((int)(mouseEvent.getX()/Settings.TILE_WIDTH),
+////                                (int)(mouseEvent.getY()/Settings.TILE_HEIGHT)));
+//                    }
+//                });
+//            }
+//        });
     }
 
     @Override

@@ -1,5 +1,6 @@
-package game;
+package game.Enemy;
 
+import game.*;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
@@ -7,12 +8,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-public abstract class AbstractEnemy extends AbstractEntity implements Collider{
+public abstract class AbstractEnemy extends AbstractEntity implements Collider {
     protected int hp;
     protected int maxHP;
     protected int defense = 0;
     protected Vector2D velocity;
     protected int dropReward;
+    protected double v_max; //max(velocityX, velocityY)
     int wayPointIndex;
 
     public AbstractEnemy(double x, double y, String imageURL) {
@@ -71,6 +73,113 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider{
     }
 
     /**
+     * Calulate direction and set velovity
+     */
+    public void pathContinuos(){
+        //System.out.println(velocity.toString());
+        int[] dir = {0, 0};
+        int me = 2, r = 3, l = 4, u = 5, d = 6, a = 7, b = 8;
+        int x = (int)(position.x/Settings.TILE_WIDTH);
+        int y = (int)(position.y/Settings.TILE_HEIGHT);
+        if(position.x <= 0){
+            a = 1;
+        }
+        else{
+            a = GameField.map[(int)(position.y/Settings.TILE_WIDTH)][(int)((position.x - v_max)/Settings.TILE_HEIGHT)];
+        }
+        if(position.y <= 0){
+            b = 1;
+        }
+        else{
+            b = GameField.map[(int)((position.y - v_max)/Settings.TILE_WIDTH)][(int)((position.x)/Settings.TILE_HEIGHT)];
+        }
+
+        me = GameField.map[(int)(position.y/Settings.TILE_WIDTH)][(int)((position.x)/Settings.TILE_HEIGHT)];
+        if(x == Settings.MAP_WIDTH_IN_TILES - 1){
+            r = 3;
+        }else{
+            r = GameField.map[(int)(position.y/Settings.TILE_WIDTH)][(int)((position.x)/Settings.TILE_HEIGHT) + 1];
+        }
+        if(x == 0){
+            l = 4;
+        }else{
+            l = GameField.map[(int)(position.y/Settings.TILE_WIDTH)][(int)((position.x)/Settings.TILE_HEIGHT) - 1];
+        }
+        if(y == Settings.MAP_HEIGHT_IN_TILES - 1){
+            d = 6;
+        }else{
+            d = GameField.map[(int)(position.y/Settings.TILE_WIDTH) + 1][(int)((position.x)/Settings.TILE_HEIGHT)];
+        }
+        if(y == 0){
+            u = 5;
+        }else{
+            u = GameField.map[(int)((position.y)/Settings.TILE_WIDTH) - 1][(int)((position.x)/Settings.TILE_HEIGHT)];
+        }
+
+        ////
+        if(velocity.x == v_max){
+            if(me == r){
+                velocity.set(v_max, 0);
+            }
+            else if(me == u){
+                velocity.set(0, -v_max);
+            }
+            else if(me == d){
+                velocity.set(0, v_max);
+            }
+            else{
+                velocity.set(0, 0);
+            }
+        }
+        else if(velocity.x == -v_max){
+            if(a == me){
+                velocity.set(-v_max, 0);
+            }
+            else if(me == u){
+                velocity.set(0, -v_max);
+            }
+            else if(me == d){
+                velocity.set(0, v_max);
+            }
+            else{
+                velocity.set(0, 0);
+            }
+        }
+        else if(velocity.y == v_max){
+            if(me == d){
+                velocity.set(0, v_max);
+            }
+            else if(me == r){
+                velocity.set(v_max, 0);
+            }
+            else if(me == l){
+                velocity.set(-v_max, 0);
+            }
+            else{
+                velocity.set(0, 0);
+            }
+        }
+        else if(velocity.y == -v_max){
+            if(b == me){
+                velocity.set(0, -v_max);
+            }
+            else if(me == r){
+                velocity.set(v_max, 0);
+            }
+            else if(me == l){
+                velocity.set(-v_max, 0);
+            }
+            else{
+                velocity.set(0, 0);
+            }
+        }
+        else{
+            velocity.set(0, 0);
+        }
+        ///
+    }
+
+    /**
      * Calculate which direction to go to.
      */
     public void calculateDirection() {
@@ -118,7 +227,12 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider{
             this.deactivate();
             return;
         }
-        calculateDirection();
+//        calculateDirection();
+//        position.add(velocity.x, velocity.y);
+        pathContinuos();
+        if(velocity.x == 0 && velocity.y == 0){
+            deactivate();
+        }
         position.add(velocity.x, velocity.y);
     }
 
@@ -148,6 +262,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider{
     }
 
     public void setVelocity(double velocityX, double velocityY) {
+        v_max = Math.max(velocityX, velocityY);
         velocity.set(velocityX, velocityY);
     }
 

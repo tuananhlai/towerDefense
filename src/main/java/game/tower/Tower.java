@@ -1,14 +1,12 @@
 package game.tower;
 
 import game.*;
+import game.Enemy.AbstractEnemy;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 public abstract class Tower extends AbstractTile {
     protected int fireRate = 0;
