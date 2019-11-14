@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 
 public abstract class AbstractEnemy extends AbstractEntity implements Collider{
     protected int hp;
+    protected int maxHP;
     protected int defense = 0;
     protected Vector2D velocity;
     protected int dropReward;
@@ -17,9 +18,9 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider{
     public AbstractEnemy(double x, double y, String imageURL) {
         this(x, y, imageURL, 0, 0, 0);
     }
-    public AbstractEnemy(double x, double y, String url, int hp, double velocityX, double velocityY) {
+    public AbstractEnemy(double x, double y, String url, int maxHP, double velocityX, double velocityY) {
         super(x, y, url);
-        this.hp = hp;
+        this.hp = maxHP;
         velocity = new Vector2D(velocityX, velocityY);
     }
     public AbstractEnemy(double x, double y, Image img) {
@@ -38,12 +39,25 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider{
         Image img = rotateView.snapshot(params, null);
 
         gc.drawImage(img, position.x, position.y, Settings.ENEMY_WIDTH, Settings.ENEMY_HEIGHT);
-        gc.setStroke(Color.RED);
-        gc.strokeRect(position.x, position.y, Settings.ENEMY_WIDTH, Settings.ENEMY_HEIGHT);
+
+        // render image border
+//        gc.setStroke(Color.RED);
+//        gc.strokeRect(position.x, position.y, Settings.ENEMY_WIDTH, Settings.ENEMY_HEIGHT);
 
         // render hitbox
-        gc.setStroke(Color.MAGENTA);
-        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
+//        gc.setStroke(Color.MAGENTA);
+//        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
+
+        //render health bar
+        double percentHealth = hp * 1.0 / maxHP;
+        if (percentHealth < 0.2) {
+            gc.setFill(Color.RED);
+        } else if (percentHealth < 0.7) {
+            gc.setFill(Color.ORANGE);
+        } else {
+            gc.setFill(Color.LIMEGREEN);
+        }
+        gc.fillRect(this.position.x, this.position.y, 40 * percentHealth, 5);
     }
 
     /**
@@ -147,6 +161,14 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider{
 
     public void setDefense(int defense) {
         this.defense = defense;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
     }
 
     @Override

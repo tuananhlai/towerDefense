@@ -13,6 +13,7 @@ public class NormalEnemy extends AbstractEnemy {
     public NormalEnemy(double x, double y) {
         super(x, y, Settings.NORMAL_ENEMY_IMAGE);
         this.setHp(Settings.NORMAL_HP);
+        this.setMaxHP(Settings.NORMAL_HP);
         this.setVelocity(Settings.NORMAL_VELOCITY, 0);
         this.setDefense(Settings.NORMAL_ENEMY_DEFENSE);
     }

@@ -28,6 +28,9 @@ public class TowerStore{
         this.addAllItems();
     }
 
+    /**
+     * Add more tower options here.
+     */
     public void addAllItems() {
         this.addItem(new TowerStoreItem(Settings.NORMAL_TOWER_IMAGE,
                 Settings.NORMAL_TOWER_PRICE,
