@@ -4,7 +4,10 @@ package game;
  */
 
 import game.screen.PlayScreen;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -30,7 +33,25 @@ public class TowerInfoPanel extends VBox{
         fireRangeTxt.setFont(brushUp);
         Text fireRateTxt = new Text("fire rate");
         fireRateTxt.setFont(brushUp);
-        getChildren().addAll(moneyTxt, damageTxt, fireRangeTxt, fireRateTxt);
+
+        Button pause = new Button("Pause");
+        pause.setPrefSize(50, 50);
+        pause.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (PlayScreen.isPause) {
+                    PlayScreen.isPause = false;
+                    PlayScreen.timer.start();
+                    pause.setText("Pause");
+                }
+                else {
+                    PlayScreen.isPause = true;
+                    PlayScreen.timer.stop();
+                    pause.setText("Resume");
+                }
+            }
+        });
+        getChildren().addAll(moneyTxt, damageTxt, fireRangeTxt, fireRateTxt, pause);
     }
 
     public void showTowerInfo() {

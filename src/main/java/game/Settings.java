@@ -20,9 +20,9 @@ public class Settings {
     // MAP CONFIGURATION
     public static final int TILE_WIDTH = 40;
     public static final int TILE_HEIGHT = 40;
-    public static final int MAP_WIDTH = 400;
+    public static final int MAP_WIDTH = 800;
     public static final int MAP_WIDTH_IN_TILES = MAP_WIDTH/TILE_WIDTH;
-    public static final int MAP_HEIGHT = 240;
+    public static final int MAP_HEIGHT = 480;
     public static final int MAP_HEIGHT_IN_TILES = MAP_HEIGHT/TILE_HEIGHT;
 
     // TILE TYPE ID
@@ -52,14 +52,14 @@ public class Settings {
     // TOWER
     public static final Image NORMAL_TOWER_IMAGE = loadImage("assets/towers/item_1.png");
     public static final int NORMAL_TOWER_DAMAGE = 1;
-    public static final int NORMAL_TOWER_RANGE = 150;
+    public static final int NORMAL_TOWER_RANGE = (int) 2.5 * TILE_WIDTH;
     public static final int NORMAL_TOWER_PRICE = 15;
     public static final int NORMAL_TOWER_FIRE_RATE = 6;
     public static final Image NORMAL_BULLET_IMAGE = loadImage("assets/towers/towerDefense_tile295.png", 15, 0, true, false);
 
     public static final Image SNIPER_TOWER_IMAGE = loadImage("assets/towers/item_2.png");
     public static final int SNIPER_TOWER_DAMAGE = 5;
-    public static final int SNIPER_TOWER_RANGE = 250;
+    public static final int SNIPER_TOWER_RANGE = 4 * TILE_WIDTH;;
     public static final int SNIPER_TOWER_PRICE = 30;
     public static final int SNIPER_TOWER_FIRE_RATE = 2;
     public static final Image SNIPER_BULLET_IMAGE = loadImage("assets/towers/towerDefense_tile297.png", 0.0D, 20, true, false);

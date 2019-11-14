@@ -87,8 +87,11 @@ public class Bullet extends AbstractEntity implements Collider, Cloneable {
     }
 
     @Override
-    public Rectangle2D getBoundary() { // FIXME: Improve hitbox
-        return new Rectangle2D(this.position.x, this.position.y, image.getWidth(), image.getWidth());
+    public Rectangle2D getBoundary() {
+        return new Rectangle2D(this.position.x,
+                this.position.y + (image.getHeight() - image.getWidth()) / 2,
+                image.getWidth(),
+                image.getWidth());
     }
 
     @Override

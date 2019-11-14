@@ -22,6 +22,7 @@ public class PlayScreen extends Screen {
     public static Group group; // CHÚ Ý: nếu mà tạo Rectangle để click vào tower thì dùng add Rectangle vào đây.
     private Canvas canvas;
     public static AnimationTimer timer;
+    public static boolean isPause = false;
     public static double fps = 0;
     public PlayScreen() {
         canvas = new Canvas(Settings.CANVAS_WIDTH, Settings.CANVAS_HEIGHT);

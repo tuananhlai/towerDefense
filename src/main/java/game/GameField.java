@@ -21,16 +21,28 @@ public class GameField {
             new Vector2D(6 * Settings.TILE_WIDTH, 0 * Settings.TILE_HEIGHT),
             new Vector2D(8 * Settings.TILE_WIDTH, 0 * Settings.TILE_HEIGHT),
             new Vector2D(8 * Settings.TILE_WIDTH, 5 * Settings.TILE_HEIGHT),
-            new Vector2D(10 * Settings.TILE_WIDTH, 5 * Settings.TILE_HEIGHT),
+            new Vector2D(13 * Settings.TILE_WIDTH, 5 * Settings.TILE_HEIGHT),
+            new Vector2D(13 * Settings.TILE_WIDTH, 8 * Settings.TILE_HEIGHT),
+            new Vector2D(16 * Settings.TILE_WIDTH, 8 * Settings.TILE_HEIGHT),
+            new Vector2D(16 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT),
+            new Vector2D(14 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT),
+            new Vector2D(14 * Settings.TILE_WIDTH, 0 * Settings.TILE_HEIGHT),
+            new Vector2D(20 * Settings.TILE_WIDTH, 0 * Settings.TILE_HEIGHT),
     };
 
     int[][] map = new int[][] {
-            {1, 1, 1, 1, 1, 1, 0, 0, 0, 1},
-            {1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
-            {0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-            {1, 1, 1, 1, 0, 1, 0, 1, 0, 1},
-            {1, 1, 1, 1, 0, 0, 0, 1, 0, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+            {1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+            {1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1},
+            {0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1},
+            {1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1},
+            {1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     };
 
     public GameField() {
