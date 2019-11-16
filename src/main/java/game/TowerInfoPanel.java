@@ -4,6 +4,7 @@ package game;
  */
 
 import game.screen.PlayScreen;
+import game.screen.WelcomeScreen;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -22,7 +23,7 @@ public class TowerInfoPanel extends VBox{
         setLayoutY(0);
         this.setPrefSize(200, 600);
         this.setPadding(new Insets(10, 12, 10,30));
-        this.setSpacing(30);
+        this.setSpacing(15);
         this.setStyle("-fx-background-color: #99e2fc");
         addAllElements();
     }
@@ -30,6 +31,7 @@ public class TowerInfoPanel extends VBox{
     private void addAllElements() {
         addAllTexts();
         addPauseBtn();
+        addMenuButton();
     }
 
     private void addAllTexts() {
@@ -45,8 +47,6 @@ public class TowerInfoPanel extends VBox{
         damage = new Text("0");
         fireRange = new Text("0");
         fireRate = new Text("0");
-
-
 
         getChildren().addAll(towerPrice, damageTxt, damage, fireRangeTxt, fireRange, fireRateTxt, fireRate);
     }
@@ -71,6 +71,19 @@ public class TowerInfoPanel extends VBox{
         });
         this.getChildren().add(pauseBtn);
     }
+
+    private void addMenuButton() {
+        Button menuBtn = new Button("Menu");
+        menuBtn.setPrefSize(50, 50);
+        menuBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                GameStage.signNewScreen(new WelcomeScreen());
+            }
+        });
+        this.getChildren().add(menuBtn);
+    }
+
     public static void showTowerInfo(int price, int damage, int range, double fireRate) {
         TowerInfoPanel.towerPrice.setText(Integer.toString(price));
         TowerInfoPanel.damage.setText(Integer.toString(damage));

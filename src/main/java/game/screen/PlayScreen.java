@@ -91,7 +91,7 @@ public class PlayScreen extends Screen {
     public static void playerTakeDamage() {
         health--;
         if (health <= 0) {
-            GameStage.signNewScreen(new WelcomeScreen());
+            GameStage.signNewScreen(new GameOverScreen());
         }
         healthTxt.setText(Integer.toString(health));
     }
