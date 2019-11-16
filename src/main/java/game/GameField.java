@@ -15,6 +15,8 @@ import java.util.*;
 public class GameField {
     public static List<AbstractEntity> gameEntities = new ArrayList<>();
     public static Set<Vector2D> unusablePositions = new HashSet<>();
+    public static List<Vector2D> listPoint = new ArrayList<>(); //danh cho phan AI
+    public static int[][] trainning_result = new int[80][12];
 
     // TODO: Use algorithm.
     public static Vector2D[] wayPoints = new Vector2D[] {

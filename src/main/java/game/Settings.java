@@ -35,9 +35,9 @@ public class Settings {
     public static final int ENEMY_HEIGHT = TILE_HEIGHT;
 
     // ENEMY HP
-    public static final int NORMAL_HP = 30;
-    public static final int TANKER_HP = 10;
-    public static final int SMALLER_HP = 2;
+    public static final int NORMAL_HP = 50;
+    public static final int TANKER_HP = 50;
+    public static final int SMALLER_HP = 50;
     public static final int BOSS_HP = 13;
 
     //ENEMY VELOCITY
@@ -56,7 +56,7 @@ public class Settings {
     public static final String NORMAL_TOWER_ITEM = "0";
     public static final int NORMAL_TOWER_DAMAGE = 1;
     public static final int NORMAL_TOWER_RANGE = (int) 2.5 * TILE_WIDTH;
-    public static final int NORMAL_TOWER_PRICE = 15;
+    public static final int NORMAL_TOWER_PRICE = 20;
     public static final int NORMAL_TOWER_FIRE_RATE = 6;
     public static final Image NORMAL_BULLET_IMAGE = loadImage("assets/towers/towerDefense_tile295.png", 15, 0, true, false);
 
@@ -72,7 +72,7 @@ public class Settings {
     public static final String MACHINE_GUN_TOWER_ITEM = "1";
     public static final int MACHINE_GUN_TOWER_DAMAGE = 5;
     public static final int MACHINE_GUN_TOWER_RANGE = 4 * TILE_WIDTH;;
-    public static final int MACHINE_GUN_TOWER_PRICE = 30;
+    public static final int MACHINE_GUN_TOWER_PRICE = 25;
     public static final int MACHINE_GUN_TOWER_FIRE_RATE = 2;
     public static final Image MACHINE_GUN_BULLET_IMAGE = loadImage("assets/towers/towerDefense_tile297.png", 0.0D, 20, true, false);
 
