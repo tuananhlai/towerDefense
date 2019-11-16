@@ -1,17 +1,23 @@
 package game;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 public abstract class AbstractTile extends AbstractEntity {
     // TODO: I don't think we need this, we can always use instaceof to check tile type.
     private int tileType;
 
     public AbstractTile() {
-        this(-1, 0, 0, null);
+        this(-1, 0, 0, (String) null);
     }
 
     public AbstractTile(int tileType, double x, double y, String url) {
         super(x, y, url);
+        this.tileType = tileType;
+    }
+
+    public AbstractTile(int tileType, double x, double y, Image img) {
+        super(x, y, img, true);
         this.tileType = tileType;
     }
 

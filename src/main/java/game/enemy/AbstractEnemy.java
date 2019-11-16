@@ -1,7 +1,7 @@
-package game.Enemy;
+package game.enemy;
 
 import game.*;
-import javafx.geometry.Rectangle2D;
+import game.screen.PlayScreen;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 
 public abstract class AbstractEnemy extends AbstractEntity implements Collider {
     protected int hp;
+    protected int maxHP;
     protected int defense = 0;
     protected Vector2D velocity;
     protected int dropReward;
@@ -19,9 +20,9 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
     public AbstractEnemy(double x, double y, String imageURL) {
         this(x, y, imageURL, 0, 0, 0);
     }
-    public AbstractEnemy(double x, double y, String url, int hp, double velocityX, double velocityY) {
+    public AbstractEnemy(double x, double y, String url, int maxHP, double velocityX, double velocityY) {
         super(x, y, url);
-        this.hp = hp;
+        this.hp = maxHP;
         velocity = new Vector2D(velocityX, velocityY);
     }
     public AbstractEnemy(double x, double y, Image img) {
@@ -40,12 +41,25 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         Image img = rotateView.snapshot(params, null);
 
         gc.drawImage(img, position.x, position.y, Settings.ENEMY_WIDTH, Settings.ENEMY_HEIGHT);
-        gc.setStroke(Color.RED);
-        gc.strokeRect(position.x, position.y, Settings.ENEMY_WIDTH, Settings.ENEMY_HEIGHT);
+
+        // render image border
+//        gc.setStroke(Color.RED);
+//        gc.strokeRect(position.x, position.y, Settings.ENEMY_WIDTH, Settings.ENEMY_HEIGHT);
 
         // render hitbox
-        gc.setStroke(Color.MAGENTA);
-        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
+//        gc.setStroke(Color.MAGENTA);
+//        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
+
+        //render health bar
+        double percentHealth = hp * 1.0 / maxHP;
+        if (percentHealth < 0.2) {
+            gc.setFill(Color.RED);
+        } else if (percentHealth < 0.7) {
+            gc.setFill(Color.ORANGE);
+        } else {
+            gc.setFill(Color.LIMEGREEN);
+        }
+        gc.fillRect(this.position.x, this.position.y, 40 * percentHealth, 5);
     }
 
     /**
@@ -61,9 +75,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
     /**
      * Calulate direction and set velovity
      */
-    public void pathContinuos(){
-        //System.out.println(velocity.toString());
-        int[] dir = {0, 0};
+    public void findPath(){
         int me = 2, r = 3, l = 4, u = 5, d = 6, a = 7, b = 8;
         int x = (int)(position.x/Settings.TILE_WIDTH);
         int y = (int)(position.y/Settings.TILE_HEIGHT);
@@ -165,42 +177,6 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         ///
     }
 
-    /**
-     * Calculate which direction to go to.
-     */
-    public void calculateDirection() {
-        if (wayPointIndex >= GameField.wayPoints.length) {
-            return;
-        }
-
-        Vector2D currentWP = GameField.wayPoints[wayPointIndex];
-        if (this.position.distanceTo(currentWP) <= this.getSpeed()) {
-            position.set(currentWP);
-            Vector2D nextWayPoint = getNextWayPoint();
-            if (nextWayPoint == null) {
-                this.deactivate();
-                return;
-            }
-            double deltaX = nextWayPoint.x - this.position.x;
-            double deltaY = nextWayPoint.y - this.position.y;
-            if (deltaX > getSpeed()) {
-                setDirection(Vector2D.RIGHT);
-            } else if (deltaX < -getSpeed()){
-                setDirection(Vector2D.LEFT);
-            } else if (deltaY > getSpeed()) {
-                setDirection(Vector2D.DOWN);
-            } else if (deltaY <= -getSpeed()) {
-                setDirection(Vector2D.UP);
-            }
-        }
-    }
-
-    public Vector2D getNextWayPoint() {
-        if (wayPointIndex < GameField.wayPoints.length - 1)
-            return GameField.wayPoints[++wayPointIndex];
-        return null;
-    }
-
     @Override
     public void deactivate() {
         active = false;
@@ -215,9 +191,10 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         }
 //        calculateDirection();
 //        position.add(velocity.x, velocity.y);
-        pathContinuos();
+        findPath();
         if(velocity.x == 0 && velocity.y == 0){
             deactivate();
+            PlayScreen.playerTakeDamage();
         }
         position.add(velocity.x, velocity.y);
     }
@@ -262,6 +239,14 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
 
     public void setDefense(int defense) {
         this.defense = defense;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
     }
 
     @Override

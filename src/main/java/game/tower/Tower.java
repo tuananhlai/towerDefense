@@ -1,7 +1,7 @@
 package game.tower;
 
 import game.*;
-import game.Enemy.AbstractEnemy;
+import game.enemy.AbstractEnemy;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -103,11 +103,11 @@ public abstract class Tower extends AbstractTile {
         return bullet;
     }
 
-    public int getFireRate() {
+    public double getFireRate() {
         return fireRate;
     }
 
-    public void setFireRate(int fireRate) {
+    public void setFireRate(double fireRate) {
         this.fireRate = fireRate;
     }
 

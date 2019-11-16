@@ -16,11 +16,11 @@ public class TowerStoreItem extends ImageView {
     private int towerPrice;
     private int towerType;
     private int towerRange;
-    private int towerFireRate;
+    private double towerFireRate;
     private int damage;
     private Rectangle2D boundingBox;
 
-    public TowerStoreItem(Image icon, int towerPrice, int damage, int towerRange, int towerFireRate) {
+    public TowerStoreItem(Image icon, int towerPrice, int damage, int towerRange, double towerFireRate) {
         setPreserveRatio(true);
         setFitHeight(80);
         setImage(icon);
@@ -34,12 +34,14 @@ public class TowerStoreItem extends ImageView {
         setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                TowerInfoPanel.towerPrice.setText(Integer.toString(towerPrice));
-                TowerInfoPanel.damage.setText(Integer.toString(damage));
-                TowerInfoPanel.fireRange.setText(Integer.toString(towerRange));
-                TowerInfoPanel.fireRate.setText(Integer.toString(towerFireRate));
+                TowerInfoPanel.showTowerInfo(towerPrice, damage, towerRange, towerFireRate);
 
-                GameStage.stage.getScene().setCursor(Cursor.HAND);
+                if (PlayScreen.money < towerPrice) {
+                    GameStage.stage.getScene().setCursor(Cursor.CROSSHAIR);
+                }
+                else {
+                    GameStage.stage.getScene().setCursor(Cursor.HAND);
+                }
             }
         });
         setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -51,8 +53,10 @@ public class TowerStoreItem extends ImageView {
         setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                if (PlayScreen.money < towerPrice) {
+                    return;
+                }
                 Dragboard db = startDragAndDrop(TransferMode.ANY);
-
                 /* put a string and image on dragboard */
                 ClipboardContent content = new ClipboardContent();
                 content.putImage(getImage());

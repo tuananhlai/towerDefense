@@ -1,6 +1,6 @@
 package game;
 
-import game.Enemy.AbstractEnemy;
+import game.enemy.AbstractEnemy;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
@@ -41,8 +41,8 @@ public class Bullet extends AbstractEntity implements Collider, Cloneable {
         gc.drawImage(bullet, position.x, position.y, bullet.getWidth(), bullet.getHeight());
 
         // render hitbox
-        gc.setStroke(Color.MAGENTA);
-        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
+//        gc.setStroke(Color.MAGENTA);
+//        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
     }
 
     private double distanceTraveled = 0;

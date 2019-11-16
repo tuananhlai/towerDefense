@@ -1,4 +1,4 @@
-package game.Enemy;
+package game.enemy;
 
 import game.Collider;
 import game.Settings;
@@ -7,24 +7,17 @@ import javafx.geometry.Rectangle2D;
 /**
  * Normal Enemy with basic attributes.
  */
-public class TankerEnemy extends AbstractEnemy {
-    public TankerEnemy() {
+public class NormalEnemy extends AbstractEnemy {
+    public NormalEnemy() {
         this(0, 3 * Settings.TILE_HEIGHT);
     }
-    public TankerEnemy(double x, double y) {
-        super(x, y, "assets/enemies/towerDefense_tile269.png");
-        this.setHp(Settings.TANKER_HP);
-        this.setVelocity(1, 0);
-        this.setDefense(3);
-    }
-    // TODO: Every class use only 1 image, so there is no need to input url every time
-    public TankerEnemy(double x, double y, String url, int hp, double velocityX, double velocityY) {
-        super(x, y, url, hp, velocityX, velocityY);
-    }
 
-    @Override
-    public String toString() {
-        return super.toString();
+    public NormalEnemy(double x, double y) {
+        super(x, y, Settings.NORMAL_ENEMY_IMAGE);
+        this.setHp(Settings.NORMAL_HP);
+        this.setMaxHP(Settings.NORMAL_HP);
+        this.setVelocity(Settings.NORMAL_VELOCITY, 0);
+        this.setDefense(Settings.NORMAL_ENEMY_DEFENSE);
     }
 
     @Override
@@ -40,4 +33,3 @@ public class TankerEnemy extends AbstractEnemy {
         return this.getBoundary().intersects(other.getBoundary());
     }
 }
-
