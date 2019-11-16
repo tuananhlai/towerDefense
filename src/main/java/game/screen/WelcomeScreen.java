@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 
 public class WelcomeScreen extends Screen {
     // TODO: Preload assets when in menu
+    private Group group;
     public WelcomeScreen() {
         Button startButton = new Button("Start Game");
         startButton.setMaxSize(100, 40);
@@ -35,13 +36,14 @@ public class WelcomeScreen extends Screen {
 
         }
         ImageView background = new ImageView(backgroundImg);
-        Group group = new Group(background);
+        group = new Group(background);
         group.getChildren().add(startButton);
         scene = new Scene(group, Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
     }
 
     @Override
     public void clear() {
-
+        group.getChildren().clear();
+        scene = null;
     }
 }

@@ -1,7 +1,7 @@
 package game.Enemy;
 
 import game.*;
-import javafx.geometry.Rectangle2D;
+import game.screen.PlayScreen;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -75,9 +75,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
     /**
      * Calulate direction and set velovity
      */
-    public void pathContinuos(){
-        //System.out.println(velocity.toString());
-        int[] dir = {0, 0};
+    public void findPath(){
         int me = 2, r = 3, l = 4, u = 5, d = 6, a = 7, b = 8;
         int x = (int)(position.x/Settings.TILE_WIDTH);
         int y = (int)(position.y/Settings.TILE_HEIGHT);
@@ -179,42 +177,6 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         ///
     }
 
-    /**
-     * Calculate which direction to go to.
-     */
-    public void calculateDirection() {
-        if (wayPointIndex >= GameField.wayPoints.length) {
-            return;
-        }
-
-        Vector2D currentWP = GameField.wayPoints[wayPointIndex];
-        if (this.position.distanceTo(currentWP) <= this.getSpeed()) {
-            position.set(currentWP);
-            Vector2D nextWayPoint = getNextWayPoint();
-            if (nextWayPoint == null) {
-                this.deactivate();
-                return;
-            }
-            double deltaX = nextWayPoint.x - this.position.x;
-            double deltaY = nextWayPoint.y - this.position.y;
-            if (deltaX > getSpeed()) {
-                setDirection(Vector2D.RIGHT);
-            } else if (deltaX < -getSpeed()){
-                setDirection(Vector2D.LEFT);
-            } else if (deltaY > getSpeed()) {
-                setDirection(Vector2D.DOWN);
-            } else if (deltaY <= -getSpeed()) {
-                setDirection(Vector2D.UP);
-            }
-        }
-    }
-
-    public Vector2D getNextWayPoint() {
-        if (wayPointIndex < GameField.wayPoints.length - 1)
-            return GameField.wayPoints[++wayPointIndex];
-        return null;
-    }
-
     @Override
     public void deactivate() {
         active = false;
@@ -229,9 +191,10 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         }
 //        calculateDirection();
 //        position.add(velocity.x, velocity.y);
-        pathContinuos();
+        findPath();
         if(velocity.x == 0 && velocity.y == 0){
             deactivate();
+            PlayScreen.playerTakeDamage();
         }
         position.add(velocity.x, velocity.y);
     }

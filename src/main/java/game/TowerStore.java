@@ -3,13 +3,17 @@ package game;
  * Area to buy different types of tower from. Manage all towerItem objects.
  */
 
+import game.screen.PlayScreen;
 import game.tower.NormalTower;
 import game.tower.SniperTower;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,18 +64,14 @@ public class TowerStore{
             @Override
             public void handle(DragEvent dragEvent) {
                 if (dragEvent.getGestureSource() != gameField && dragEvent.getDragboard().hasString() && dragEvent.getDragboard().hasImage()) {
-                    /* allow for both copying and moving, whatever user chooses */
                     dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                 }
-
                 dragEvent.consume();
             }
         });
         gameField.setOnDragDropped(new EventHandler<DragEvent>() {
             @Override
             public void handle(DragEvent dragEvent) {
-                System.out.println("Drag dropped at " + dragEvent.getX() + " " + dragEvent.getY());
-
                 Dragboard db = dragEvent.getDragboard();
                 boolean isSuccess = false;
                 if (db.hasImage() && db.hasString()) {
@@ -94,10 +94,12 @@ public class TowerStore{
         switch (towerCode) {
             case Settings.NORMAL_TOWER_ITEM: {
                 new NormalTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
+                PlayScreen.spendMoney(Settings.NORMAL_TOWER_PRICE);
                 break;
             }
             case Settings.SNIPER_TOWER_ITEM: {
                 new SniperTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
+                PlayScreen.spendMoney(Settings.SNIPER_TOWER_PRICE);
                 break;
             }
         }

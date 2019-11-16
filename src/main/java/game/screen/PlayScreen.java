@@ -4,28 +4,37 @@ import game.tower.*;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
  * Contain UI elements, including Game Field. Responsible for handling user input.
  */
 public class PlayScreen extends Screen {
-    public static int money = 100;
-    public static int health = 0;
-    public static Group group; // CHÚ Ý: nếu mà tạo Rectangle để click vào tower thì dùng add Rectangle vào đây.
-    private Canvas canvas;
+    public static int money = Settings.PLAYER_START_MONEY;
+    public static int health = Settings.PLAYER_START_HP;
+    public static Group group;
     public static AnimationTimer timer;
     public static boolean isPause = false;
-    public static double fps = 0;
+    private static double fps = 0;
+    private static Text moneyTxt;
+    private static Text healthTxt;
+
+    private final Font brushUp = Font.loadFont(getClass().getResourceAsStream("/iCielBrushUp.otf"), 20);
+
     public PlayScreen() {
-        canvas = new Canvas(Settings.CANVAS_WIDTH, Settings.CANVAS_HEIGHT);
+        Canvas canvas = new Canvas(Settings.CANVAS_WIDTH, Settings.CANVAS_HEIGHT);
 
         group = new Group(canvas);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -52,59 +61,23 @@ public class PlayScreen extends Screen {
         };
         timer.start();
         group.getChildren().add(fpsTxt);
-//        Button quit = new Button("quit");
-//        quit.setLayoutX(0);
-//        quit.setLayoutY(480);
-//        quit.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                GameStage.signNewScreen(new WelcomeScreen());
-//            }
-//        });
-//        group.getChildren().add(quit);
         TowerStore towerStore = new TowerStore();
         towerStore.setBuyEvent(canvas);
-        group.getChildren().add(towerStore.getStore());
+        HBox bottomPanel = addBottomPanel(addPlayerInfos(), towerStore.getStore());
+        group.getChildren().add(bottomPanel);
         group.getChildren().add(new TowerInfoPanel());
         this.scene = new Scene(group, Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
-
-//        scene.setOnKeyPressed(t->{
-//            if(t.getCode() == KeyCode.D){
-//                scene.setOnMousePressed(mouseEvent -> {
-//                    if(mouseEvent.getX() > Settings.MAP_WIDTH || mouseEvent.getY() > Settings.MAP_HEIGHT){
-//                        return;
-//                    }
-////                    try{
-////                        GameManagement.gameEntities.remove( new Road((int)(mouseEvent.getX()/Settings.TILE_WIDTH)*Settings.TILE_WIDTH,
-////                                (int)(mouseEvent.getY()/Settings.TILE_HEIGHT)*Settings.TILE_HEIGHT));
-////                    }catch (Exception e){
-////                        GameManagement.gameEntities.remove( new Mountain((int)(mouseEvent.getX()/Settings.TILE_WIDTH)*Settings.TILE_WIDTH,
-////                                (int)(mouseEvent.getY()/Settings.TILE_HEIGHT)*Settings.TILE_HEIGHT));
-////                    }
-//                    if(mouseEvent.getButton() == MouseButton.SECONDARY){
-//                        new Road((int)(mouseEvent.getX()/Settings.TILE_WIDTH)*Settings.TILE_WIDTH,
-//                                (int)(mouseEvent.getY()/Settings.TILE_HEIGHT)*Settings.TILE_HEIGHT);
-//                        GameField.map[(int)(mouseEvent.getY()/Settings.TILE_HEIGHT)][(int)(mouseEvent.getX()/Settings.TILE_WIDTH)] = 0;
-////                        GameManagement.towerPosition.add(new Vector2D((int)(mouseEvent.getX()/Settings.TILE_WIDTH),
-////                                (int)(mouseEvent.getY()/Settings.TILE_HEIGHT)));
-//                    }
-//                    else{
-//                        new Mountain((int)(mouseEvent.getX()/Settings.TILE_WIDTH)*Settings.TILE_WIDTH,
-//                                (int)(mouseEvent.getY()/Settings.TILE_HEIGHT)*Settings.TILE_HEIGHT);
-//                        GameField.map[(int)(mouseEvent.getY()/Settings.TILE_HEIGHT)][(int)(mouseEvent.getX()/Settings.TILE_WIDTH)] = 1;
-////                        GameManagement.towerPosition.remove(new Vector2D((int)(mouseEvent.getX()/Settings.TILE_WIDTH),
-////                                (int)(mouseEvent.getY()/Settings.TILE_HEIGHT)));
-//                    }
-//                });
-//            }
-//        });
     }
 
     @Override
     public void clear() {
+        timer.stop();
         GameField.clear();
         group.getChildren().clear();
-        timer.stop();
+        PlayScreen.money = Settings.PLAYER_START_MONEY;
+        PlayScreen.health = Settings.PLAYER_START_HP;
+        scene = null;
+        System.gc();
     }
 
     public static void spendMoney(int price) {
@@ -112,6 +85,7 @@ public class PlayScreen extends Screen {
         if (money < 0) {
             money = 0;
         }
+        moneyTxt.setText(Integer.toString(money));
     }
 
     public static void playerTakeDamage() {
@@ -119,5 +93,35 @@ public class PlayScreen extends Screen {
         if (health <= 0) {
             GameStage.signNewScreen(new WelcomeScreen());
         }
+        healthTxt.setText(Integer.toString(health));
+    }
+
+    private HBox addBottomPanel(VBox playerInfo, HBox store) {
+        HBox bottomPanel = new HBox();
+        bottomPanel.setLayoutX(0);
+        bottomPanel.setLayoutY(480);
+        bottomPanel.setPrefSize(800, 120);
+        bottomPanel.getChildren().addAll(playerInfo, store);
+        return bottomPanel;
+    }
+
+    private VBox addPlayerInfos() {
+        VBox playerInfo = new VBox();
+        playerInfo.setPrefSize(150, 120);
+        playerInfo.setPadding(new Insets(20));
+        playerInfo.setStyle("-fx-background-image: url(\"/assets/towers/towerDefense_tile249.png\");");
+        // add money display
+        HBox moneyDisplay = new HBox();
+        moneyTxt = new Text(Integer.toString(PlayScreen.money));
+        moneyTxt.setFont(brushUp);
+        moneyDisplay.getChildren().add(moneyTxt);
+        // add player hp display
+        HBox playerHpDisplay = new HBox();
+        healthTxt = new Text(Integer.toString(PlayScreen.health));
+        healthTxt.setFont(brushUp);
+        playerHpDisplay.getChildren().add(healthTxt);
+
+        playerInfo.getChildren().addAll(moneyDisplay, playerHpDisplay);
+        return playerInfo;
     }
 }

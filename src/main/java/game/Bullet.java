@@ -41,8 +41,8 @@ public class Bullet extends AbstractEntity implements Collider, Cloneable {
         gc.drawImage(bullet, position.x, position.y, bullet.getWidth(), bullet.getHeight());
 
         // render hitbox
-        gc.setStroke(Color.MAGENTA);
-        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
+//        gc.setStroke(Color.MAGENTA);
+//        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
     }
 
     private double distanceTraveled = 0;

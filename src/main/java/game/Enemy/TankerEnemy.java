@@ -14,6 +14,7 @@ public class TankerEnemy extends AbstractEnemy {
     public TankerEnemy(double x, double y) {
         super(x, y, "assets/enemies/towerDefense_tile269.png");
         this.setHp(Settings.TANKER_HP);
+        this.setMaxHP(Settings.TANKER_HP);
         this.setVelocity(1, 0);
         this.setDefense(3);
     }

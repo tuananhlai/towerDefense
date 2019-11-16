@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 public abstract class Tower extends AbstractTile {
-    protected int fireRate = 0;
+    protected double fireRate = 0;
     protected int fireRange = 0;
     protected Bullet bullet = null;
     protected Image gunImg = null; // super.image is base image.
@@ -101,11 +101,11 @@ public abstract class Tower extends AbstractTile {
         return bullet;
     }
 
-    public int getFireRate() {
+    public double getFireRate() {
         return fireRate;
     }
 
-    public void setFireRate(int fireRate) {
+    public void setFireRate(double fireRate) {
         this.fireRate = fireRate;
     }
 

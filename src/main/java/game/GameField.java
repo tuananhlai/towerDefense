@@ -34,20 +34,7 @@ public class GameField {
             new Vector2D(20 * Settings.TILE_WIDTH, 0 * Settings.TILE_HEIGHT),
     };
 
-    public static int[][] map = new int[][] {
-            {1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
-            {1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1},
-            {0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1},
-            {1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1},
-            {1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    };
+    public static int[][] map = new int[Settings.MAP_HEIGHT_IN_TILES][Settings.MAP_WIDTH_IN_TILES];
 
     public GameField() {
         readMap("assets/tiles/mapdata.txt");
@@ -76,7 +63,6 @@ public class GameField {
                 for (int j = 0; j < Settings.MAP_WIDTH_IN_TILES; j++) {
                     if (myArray[i][j] == Settings.ROAD) {
                         new Road(Settings.TILE_HEIGHT * j, Settings.TILE_WIDTH * i);
-//                        GameManagement.towerPosition.add(new Vector2D(j, i));
                     }
                     else {
                         new Mountain(Settings.TILE_HEIGHT * j, Settings.TILE_WIDTH * i);
@@ -86,8 +72,6 @@ public class GameField {
         }catch (Exception e){
             System.err.println(e.toString());
         }
-
-        // TODO: Create way points array here
     }
 
     /**
@@ -102,66 +86,22 @@ public class GameField {
                 entity.render(gc);
             }
         }
-//        renderMap(gc);
-//        renderEnemy(gc);
-//        renderBullet(gc);
-//        renderTower(gc);
     }
-
-//    public void renderMap(GraphicsContext gc){
-//        int size = gameEntities.size();
-//        for (int i = 0; i < size ; i++) {
-//            AbstractEntity entity = gameEntities.get(i);
-//            if(entity instanceof Road || entity instanceof Mountain){
-//                if (entity.isActive()) {
-//                    entity.render(gc);
-//                }
-//            }
-//        }
-//    }
-//    public void renderTower(GraphicsContext gc){
-//        int size = gameEntities.size();
-//        for (int i = 0; i < size ; i++) {
-//            AbstractEntity entity = gameEntities.get(i);
-//            if(entity instanceof Tower){
-//                if (entity.isActive()) {
-//                    entity.render(gc);
-//                }
-//            }
-//        }
-//    }
-//    public void renderEnemy(GraphicsContext gc){
-//        int size = gameEntities.size();
-//        for (int i = 0; i < size ; i++) {
-//            AbstractEntity entity = gameEntities.get(i);
-//            if(entity instanceof AbstractEnemy){
-//                if (entity.isActive()) {
-//                    entity.render(gc);
-//                }
-//            }
-//        }
-//    }
-//    public void renderBullet(GraphicsContext gc){
-//        int size = gameEntities.size();
-//        for (int i = 0; i < size ; i++) {
-//            AbstractEntity entity = gameEntities.get(i);
-//            if(entity instanceof Bullet){
-//                if (entity.isActive()) {
-//                    entity.render(gc);
-//                }
-//            }
-//        }
-//    }
 
     /**
      * Run all elements in list objects gameEntities
      */
     public void runAll() {
         for (int i = gameEntities.size() - 1; i >= 0 ; i--) {
+            if (i >= gameEntities.size()) {
+                i = gameEntities.size() - 1;
+                if (i == -1) break;
+            }
             AbstractEntity entity = gameEntities.get(i);
             if (entity.isActive()) {
                 entity.run();
             }
+
         }
     }
 

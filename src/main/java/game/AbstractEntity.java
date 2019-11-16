@@ -46,7 +46,7 @@ public abstract class AbstractEntity {
         this.active = active;
         position = new Vector2D(x, y);
         if (this.active) GameField.gameEntities.add(this);
-//        System.out.println(this.getClass().getName() + " " + GameField.gameEntities.size());
+        System.out.println(this.getClass().getName() + " " + GameField.gameEntities.size());
     }
 
     public AbstractEntity(double x, double y, Image image, boolean active) {
@@ -54,7 +54,7 @@ public abstract class AbstractEntity {
         this.active = active;
         position = new Vector2D(x, y);
         if (this.active) GameField.gameEntities.add(this);
-//        System.out.println(this.getClass().getName() + " " + GameField.gameEntities.size());
+        System.out.println(this.getClass().getName() + " " + GameField.gameEntities.size());
     }
 
     public abstract void render(GraphicsContext gc);

@@ -13,8 +13,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class TowerInfoPanel extends VBox{
-    private final Font brushUp = Font.loadFont(getClass().getResourceAsStream("/iCielBrushUp.otf"), 20);
     public static Text towerPrice, damage, fireRange, fireRate;
+
+    private final Font brushUp = Font.loadFont(getClass().getResourceAsStream("/iCielBrushUp.otf"), 20);
+
     public TowerInfoPanel() {
         setLayoutX(800);
         setLayoutY(0);
@@ -22,10 +24,15 @@ public class TowerInfoPanel extends VBox{
         this.setPadding(new Insets(10, 12, 10,30));
         this.setSpacing(30);
         this.setStyle("-fx-background-color: #99e2fc");
-        addAllTexts();
+        addAllElements();
     }
 
-    public void addAllTexts() {
+    private void addAllElements() {
+        addAllTexts();
+        addPauseBtn();
+    }
+
+    private void addAllTexts() {
         towerPrice = new Text("0");
         towerPrice.setFont(brushUp);
         Text damageTxt = new Text("damage");
@@ -39,28 +46,35 @@ public class TowerInfoPanel extends VBox{
         fireRange = new Text("0");
         fireRate = new Text("0");
 
-        Button pause = new Button("Pause");
-        pause.setPrefSize(50, 50);
-        pause.setOnAction(new EventHandler<ActionEvent>() {
+
+
+        getChildren().addAll(towerPrice, damageTxt, damage, fireRangeTxt, fireRange, fireRateTxt, fireRate);
+    }
+
+    private void addPauseBtn() {
+        Button pauseBtn = new Button("Pause");
+        pauseBtn.setPrefSize(50, 50);
+        pauseBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if (PlayScreen.isPause) {
                     PlayScreen.isPause = false;
                     PlayScreen.timer.start();
-                    pause.setText("Pause");
+                    pauseBtn.setText("Pause");
                 }
                 else {
                     PlayScreen.isPause = true;
                     PlayScreen.timer.stop();
-                    pause.setText("Resume");
+                    pauseBtn.setText("Resume");
                 }
             }
         });
-
-        getChildren().addAll(towerPrice, damageTxt, damage, fireRangeTxt, fireRange, fireRateTxt, fireRate, pause);
+        this.getChildren().add(pauseBtn);
     }
-
-    public void showTowerInfo() {
-        this.getChildren().clear();
+    public static void showTowerInfo(int price, int damage, int range, double fireRate) {
+        TowerInfoPanel.towerPrice.setText(Integer.toString(price));
+        TowerInfoPanel.damage.setText(Integer.toString(damage));
+        TowerInfoPanel.fireRange.setText(Integer.toString(range));
+        TowerInfoPanel.fireRate.setText(Double.toString(fireRate));
     }
 }
