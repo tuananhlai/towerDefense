@@ -96,6 +96,11 @@ public class PlayScreen extends Screen {
         healthTxt.setText(Integer.toString(health));
     }
 
+    public static void rewardPlayer(int dropReward) {
+        money += dropReward;
+        moneyTxt.setText(Integer.toString(money));
+    }
+
     private HBox addBottomPanel(VBox playerInfo, HBox store) {
         HBox bottomPanel = new HBox();
         bottomPanel.setLayoutX(0);

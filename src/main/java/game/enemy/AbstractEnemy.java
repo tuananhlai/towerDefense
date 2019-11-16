@@ -15,7 +15,6 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
     protected Vector2D velocity;
     protected int dropReward;
     protected double v_max; //max(velocityX, velocityY)
-    int wayPointIndex;
 
     public AbstractEnemy(double x, double y, String imageURL) {
         this(x, y, imageURL, 0, 0, 0);
@@ -30,8 +29,8 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         velocity = new Vector2D();
     }
 
-    SnapshotParameters params = new SnapshotParameters();
-    ImageView rotateView = new ImageView();
+    private SnapshotParameters params = new SnapshotParameters();
+    private ImageView rotateView = new ImageView();
     @Override
     public void render(GraphicsContext gc) {
         params.setFill(Color.TRANSPARENT);
@@ -41,14 +40,6 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         Image img = rotateView.snapshot(params, null);
 
         gc.drawImage(img, position.x, position.y, Settings.ENEMY_WIDTH, Settings.ENEMY_HEIGHT);
-
-        // render image border
-//        gc.setStroke(Color.RED);
-//        gc.strokeRect(position.x, position.y, Settings.ENEMY_WIDTH, Settings.ENEMY_HEIGHT);
-
-        // render hitbox
-//        gc.setStroke(Color.MAGENTA);
-//        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
 
         //render health bar
         double percentHealth = hp * 1.0 / maxHP;
@@ -187,10 +178,9 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
     public void run() {
         if (hp <= 0) {
             this.deactivate();
+            PlayScreen.rewardPlayer(dropReward);
             return;
         }
-//        calculateDirection();
-//        position.add(velocity.x, velocity.y);
         findPath();
         if(velocity.x == 0 && velocity.y == 0){
             deactivate();
@@ -247,6 +237,10 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
 
     public void setMaxHP(int maxHP) {
         this.maxHP = maxHP;
+    }
+
+    public void setDropReward(int dropReward) {
+        this.dropReward = dropReward;
     }
 
     @Override

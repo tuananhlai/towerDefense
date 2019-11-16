@@ -12,20 +12,16 @@ public class TankerEnemy extends AbstractEnemy {
         this(0, 3 * Settings.TILE_HEIGHT);
     }
     public TankerEnemy(double x, double y) {
-        super(x, y, "assets/enemies/towerDefense_tile269.png");
+        super(x, y, "assets/enemies/towerDefense_tile269.png"); // TODO: use Image object instead of url
         this.setHp(Settings.TANKER_HP);
         this.setMaxHP(Settings.TANKER_HP);
-        this.setVelocity(1, 0);
-        this.setDefense(3);
-    }
-    // TODO: Every class use only 1 image, so there is no need to input url every time
-    public TankerEnemy(double x, double y, String url, int hp, double velocityX, double velocityY) {
-        super(x, y, url, hp, velocityX, velocityY);
+        this.setVelocity(Settings.TANKER_VELOCITY, 0);
+        this.setDefense(Settings.TANKER_ENEMY_DEFENSE);
+        this.setDropReward(Settings.TANKER_ENEMY_DROP);
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
+    public TankerEnemy(double x, double y, String url, int hp, double velocityX, double velocityY) {
+        super(x, y, url, hp, velocityX, velocityY);
     }
 
     @Override

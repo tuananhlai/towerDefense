@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class Settings {
 
-    public static final int PLAYER_START_MONEY = 100;
+    public static final int PLAYER_START_MONEY = 30;
     public static final int PLAYER_START_HP = 1;
     // WINDOW CONFIGURATION
     public static final int CANVAS_WIDTH = 800;
@@ -39,22 +39,26 @@ public class Settings {
     public static final int ENEMY_WIDTH = TILE_WIDTH;
     public static final int ENEMY_HEIGHT = TILE_HEIGHT;
 
-    // ENEMY HP
+    // ENEMY
     public static final int NORMAL_HP = 10;
-    public static final int TANKER_HP = 12;
-    public static final int SMALLER_HP = 2;
-    public static final int BOSS_HP = 13;
-
-    //ENEMY VELOCITY
     public static final int NORMAL_VELOCITY = 2;
-    public static final int TANKER_VELOCITY = 1;
-    public static final int SMALLER_VELOCITY = 3;
-    public static final int BOSS_VELOCITY = 1;
-
     public static final int NORMAL_ENEMY_DEFENSE = 0;
+    public static final int NORMAL_ENEMY_DROP = 3;
     public static final Image NORMAL_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile245.png");
+
+    public static final int TANKER_HP = 12;
+    public static final int TANKER_VELOCITY = 1;
+    public static final int TANKER_ENEMY_DEFENSE = 3;
+    public static final int TANKER_ENEMY_DROP = 5;
     public static final Image TANKER_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile268.png");
+
+
+    public static final int SMALLER_HP = 2;
+    public static final int SMALLER_VELOCITY = 3;
     public static final Image SMALLER_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile292.png");
+
+    public static final int BOSS_HP = 13;
+    public static final int BOSS_VELOCITY = 1;
 
     // TOWER
     public static final Image NORMAL_TOWER_IMAGE = loadImage("assets/towers/item_1.png");

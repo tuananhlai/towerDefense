@@ -18,6 +18,7 @@ public class NormalEnemy extends AbstractEnemy {
         this.setMaxHP(Settings.NORMAL_HP);
         this.setVelocity(Settings.NORMAL_VELOCITY, 0);
         this.setDefense(Settings.NORMAL_ENEMY_DEFENSE);
+        this.setDropReward(Settings.NORMAL_ENEMY_DROP);
     }
 
     @Override
