@@ -1,7 +1,7 @@
 2
-NormalEnemy 7
-TankerEnemy 4
+NormalEnemy 17
+TankerEnemy 14
 3
-NormalEnemy 3
-TankerEnemy 2
-NormalEnemy 2
+NormalEnemy 13
+TankerEnemy 12
+NormalEnemy 12

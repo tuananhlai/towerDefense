@@ -9,27 +9,29 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 public abstract class Tower extends AbstractTile {
-    protected double fireRate = 0;
-    protected int fireRange = 0;
-    protected Bullet bullet = null;
-    protected Image gunImg = null; // super.image is base image.
+    private int fireRate = 0;
+    int fireRange = 0;
+    Bullet bullet = null;
+    private Image gunImg = null; // super.image is base image.
 
-    public Tower(double x, double y, String baseImageURL, String gunImageURL) {
+    Tower(double x, double y, String baseImageURL, String gunImageURL) {
         super(Settings.TOWER, x, y, baseImageURL);
         this.gunImg = Settings.loadImage(gunImageURL);
         GameField.unusablePositions.add(new Vector2D(x, y));
     }
 
-    public AbstractEnemy getNearestEnemy() {
+    private AbstractEnemy getNearestEnemy() {
         AbstractEnemy nearestEnemy = null;
         double minDistance = Double.MAX_VALUE;
         for (AbstractEntity entity : GameField.gameEntities) {
-            Vector2D towerCenterPos = new Vector2D(position.x + Settings.TILE_WIDTH * 0.5, position.y + Settings.TILE_HEIGHT * 0.5);
-            Vector2D entityCenterPos = new Vector2D(entity.getPosition().x + Settings.ENEMY_WIDTH * 0.5, entity.getPosition().y + Settings.ENEMY_HEIGHT * 0.5);
-            double distanceToEnemy = towerCenterPos.distanceTo(entityCenterPos);
-            if (entity instanceof AbstractEnemy && entity.isActive() && distanceToEnemy < minDistance && distanceToEnemy <= fireRange) {
-                nearestEnemy = (AbstractEnemy) entity;
-                minDistance = this.position.distanceTo(entity.getPosition());
+            if(entity instanceof AbstractEnemy && entity.isActive()){
+                Vector2D towerCenterPos = new Vector2D(position.x + Settings.TILE_WIDTH * 0.5, position.y + Settings.TILE_HEIGHT * 0.5);
+                Vector2D entityCenterPos = new Vector2D(entity.getPosition().x + Settings.ENEMY_WIDTH * 0.5, entity.getPosition().y + Settings.ENEMY_HEIGHT * 0.5);
+                double distanceToEnemy = towerCenterPos.distanceTo(entityCenterPos);
+                if (distanceToEnemy <= fireRange && distanceToEnemy < minDistance) {
+                    nearestEnemy = (AbstractEnemy) entity;
+                    minDistance = this.position.distanceTo(entity.getPosition());
+                }
             }
         }
         return nearestEnemy;
@@ -70,7 +72,7 @@ public abstract class Tower extends AbstractTile {
         }
     }
 
-    public void pickTarget() {
+    private void pickTarget() {
         if (bullet.getTarget() == null) {
             bullet.setTarget(getNearestEnemy());
         } else if (isOutOfRange(bullet.getTarget())){
@@ -86,7 +88,7 @@ public abstract class Tower extends AbstractTile {
      * @param startX bullet start x-position
      * @param startY bullet start y-position
      */
-    public void createBullet(double startX, double startY) {
+    private void createBullet(double startX, double startY) {
         Bullet newBullet = bullet.clone();
         if (newBullet.getTarget() != null) {
             newBullet.activate();
@@ -106,7 +108,7 @@ public abstract class Tower extends AbstractTile {
     }
 
     public void setFireRate(double fireRate) {
-        this.fireRate = fireRate;
+        this.fireRate = (int) fireRate;
     }
 
     public int getFireRange() {

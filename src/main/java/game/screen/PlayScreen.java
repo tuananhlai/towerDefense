@@ -18,6 +18,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Contain UI elements, including Game Field. Responsible for handling user input.
  */
@@ -46,17 +48,24 @@ public class PlayScreen extends Screen {
         fpsTxt.setX(10);
         fpsTxt.setY(20);
         fpsTxt.setFill(Color.RED);
+        //AI
+        StudentRobot.findPositionsAdvantage();
+        StudentRobot.readTranningResult("data/trainning_result.txt");
         // Run program
         timer = new AnimationTimer() {
             long lastTime = 0;
             @Override
             public void handle(long l) {
+//                long a = System.nanoTime();
                 gc.clearRect(0, 0, Settings.CANVAS_WIDTH, Settings.CANVAS_HEIGHT);
                 gameField.renderAll(gc);
                 gameField.runAll();
+//                System.err.println(System.nanoTime() - a);
                 fps = 1000000000.0 / (l - lastTime);
                 fpsTxt.setText(Integer.toString((int)fps));
                 lastTime = l;
+                //AI
+//                StudentRobot.putTowerGenius(12, money);
             }
         };
         timer.start();

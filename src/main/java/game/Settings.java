@@ -65,8 +65,10 @@ public class Settings {
     public static final String NORMAL_TOWER_ITEM = "0";
     public static final int NORMAL_TOWER_DAMAGE = 2;
     public static final int NORMAL_TOWER_RANGE = (int) 2.5 * TILE_WIDTH;
-    public static final int NORMAL_TOWER_PRICE = 15;
-    public static final double NORMAL_TOWER_FIRE_RATE = 3;
+
+    public static final int NORMAL_TOWER_PRICE = 20;
+    public static final int NORMAL_TOWER_FIRE_RATE = 6;
+
     public static final Image NORMAL_BULLET_IMAGE = loadImage("assets/towers/towerDefense_tile295.png", 15, 0, true, false);
 
     public static final Image SNIPER_TOWER_IMAGE = loadImage("assets/towers/item_2.png");
@@ -81,8 +83,10 @@ public class Settings {
     public static final String MACHINE_GUN_TOWER_ITEM = "1";
     public static final int MACHINE_GUN_TOWER_DAMAGE = 5;
     public static final int MACHINE_GUN_TOWER_RANGE = 4 * TILE_WIDTH;;
-    public static final int MACHINE_GUN_TOWER_PRICE = 30;
-    public static final double MACHINE_GUN_TOWER_FIRE_RATE = 2;
+
+    public static final int MACHINE_GUN_TOWER_PRICE = 25;
+    public static final int MACHINE_GUN_TOWER_FIRE_RATE = 2;
+
     public static final Image MACHINE_GUN_BULLET_IMAGE = loadImage("assets/towers/towerDefense_tile297.png", 0.0D, 20, true, false);
 
 
