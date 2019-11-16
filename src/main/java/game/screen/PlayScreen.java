@@ -56,7 +56,7 @@ public class PlayScreen extends Screen {
                 fpsTxt.setText(Integer.toString((int)fps));
                 lastTime = l;
                 //AI
-                StudentRobot.putTowerGenius(12, money);
+//                StudentRobot.putTowerGenius(12, money);
             }
         };
         timer.start();
