@@ -108,7 +108,7 @@ public abstract class Tower extends AbstractTile {
     }
 
     public void setFireRate(double fireRate) {
-        this.fireRate = fireRate;
+        this.fireRate = (int) fireRate;
     }
 
     public int getFireRange() {
