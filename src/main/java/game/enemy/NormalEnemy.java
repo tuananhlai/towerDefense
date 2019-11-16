@@ -1,7 +1,6 @@
-package game.Enemy;
+package game.enemy;
 
 import game.Collider;
-import game.Enemy.AbstractEnemy;
 import game.Settings;
 import javafx.geometry.Rectangle2D;
 

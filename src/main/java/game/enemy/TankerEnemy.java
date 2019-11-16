@@ -1,4 +1,4 @@
-package game.Enemy;
+package game.enemy;
 
 import game.Collider;
 import game.Settings;

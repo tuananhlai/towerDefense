@@ -1,9 +1,6 @@
 package game;
 
-import game.Enemy.AbstractEnemy;
-import game.tower.Tower;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,7 +1,7 @@
 package game.tower;
 
 import game.*;
-import game.Enemy.AbstractEnemy;
+import game.enemy.AbstractEnemy;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

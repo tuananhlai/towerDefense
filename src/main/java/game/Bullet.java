@@ -1,6 +1,6 @@
 package game;
 
-import game.Enemy.AbstractEnemy;
+import game.enemy.AbstractEnemy;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;

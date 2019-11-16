@@ -3,10 +3,6 @@ package game;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 public abstract class AbstractEntity {
     protected Vector2D position;
     protected Image image = null;

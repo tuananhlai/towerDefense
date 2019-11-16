@@ -1,4 +1,4 @@
-package game.Enemy;
+package game.enemy;
 
 import game.*;
 import game.screen.PlayScreen;

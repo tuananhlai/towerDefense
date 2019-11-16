@@ -1,7 +1,7 @@
 package game;
 
-import game.Enemy.NormalEnemy;
-import game.Enemy.TankerEnemy;
+import game.enemy.NormalEnemy;
+import game.enemy.TankerEnemy;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
