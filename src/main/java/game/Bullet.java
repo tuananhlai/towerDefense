@@ -14,9 +14,6 @@ public class Bullet extends AbstractEntity implements Collider, Cloneable {
     private double damage;
     private double maxDistance;
 
-    public Bullet(int damage, double maxDistance){
-
-    }
     public Bullet(double damage, double maxDistance, Image image, double velocityX, double velocityY) { //set up bullet
         super(0, 0, image, false); // set active = false to prevent the super constructor from adding this to gameEntities
         this.damage = damage;
@@ -122,13 +119,17 @@ public class Bullet extends AbstractEntity implements Collider, Cloneable {
         return damage;
     }
 
+    public double getMaxDistance() {
+        return maxDistance;
+    }
+
     @Override
     public double getCenterX() {
-        return 0;
+        return position.x + image.getWidth() * 0.5;
     }
 
     @Override
     public double getCenterY() {
-        return 0;
+        return position.y + image.getHeight() * 0.5;
     }
 }
