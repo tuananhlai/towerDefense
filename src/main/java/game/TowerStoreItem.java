@@ -17,10 +17,10 @@ public class TowerStoreItem extends ImageView {
     private int towerType;
     private int towerRange;
     private double towerFireRate;
-    private int damage;
+    private double damage;
     private Rectangle2D boundingBox;
 
-    public TowerStoreItem(Image icon, int towerPrice, int damage, int towerRange, double towerFireRate) {
+    public TowerStoreItem(Image icon, int towerPrice, double damage, int towerRange, double towerFireRate) {
         setPreserveRatio(true);
         setFitHeight(80);
         setImage(icon);

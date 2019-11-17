@@ -9,9 +9,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 public abstract class AbstractEnemy extends AbstractEntity implements Collider {
-    protected int hp;
-    protected int maxHP;
-    protected int defense = 0;
+    protected double hp;
+    protected double maxHP;
+    protected double defense = 0;
     protected Vector2D velocity;
     protected int dropReward;
     protected double v_max; //max(velocityX, velocityY)
@@ -57,7 +57,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
      * Register damage caused by game.tower, etc.
      * @param damage damage inflicted by towers.
      */
-    public void takeDamage(int damage) {
+    public void takeDamage(double damage) {
         if (damage - defense > 0) {
             hp -= (damage - defense);
         }
@@ -194,7 +194,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         active = true;
     }
 
-    public int getHp() {
+    public double getHp() {
         return hp;
     }
 
@@ -223,7 +223,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         return active;
     }
 
-    public int getDefense() {
+    public double getDefense() {
         return defense;
     }
 
@@ -231,7 +231,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         this.defense = defense;
     }
 
-    public int getMaxHP() {
+    public double getMaxHP() {
         return maxHP;
     }
 

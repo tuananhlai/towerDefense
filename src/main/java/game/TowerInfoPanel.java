@@ -89,7 +89,7 @@ public class TowerInfoPanel extends VBox{
         this.getChildren().add(menuBtn);
     }
 
-    public static void showTowerInfo(int price, int damage, int range, double fireRate) {
+    public static void showTowerInfo(int price, double damage, int range, double fireRate) {
         TowerInfoPanel.towerPrice.setText(Integer.toString(price));
         TowerInfoPanel.damageBar.setCurrent(damage);
         TowerInfoPanel.fireRangeBar.setCurrent(range);

@@ -14,7 +14,7 @@ public class SniperTower extends Tower{
     }
 
     public SniperTower(double x, double y) {
-        super(x, y, "assets/towers/towerDefense_tile183.png", "assets/towers/towerDefense_tile249.png");
+        super(x, y, Settings.SNIPER_BASE, Settings.SNIPER_GUN);
         this.setFireRate(Settings.SNIPER_TOWER_FIRE_RATE);
         this.setFireRange(Settings.SNIPER_TOWER_RANGE);
         this.bullet = new Bullet(Settings.SNIPER_TOWER_DAMAGE, this.fireRange, Settings.SNIPER_BULLET_IMAGE, 25, 0);

@@ -44,23 +44,23 @@ public class PlayScreen extends Screen {
 
         new Spawner();
 
+        new SpreadTower();
+
         Text fpsTxt = new Text(Double.toString(fps));
         fpsTxt.setX(10);
         fpsTxt.setY(20);
         fpsTxt.setFill(Color.RED);
         //AI
-        StudentRobot.findPositionsAdvantage();
-        StudentRobot.readTranningResult("data/trainning_result.txt");
+//        StudentRobot.findPositionsAdvantage();
+//        StudentRobot.readTranningResult("data/trainning_result.txt");
         // Run program
         timer = new AnimationTimer() {
             long lastTime = 0;
             @Override
             public void handle(long l) {
-//                long a = System.nanoTime();
                 gc.clearRect(0, 0, Settings.CANVAS_WIDTH, Settings.CANVAS_HEIGHT);
                 gameField.renderAll(gc);
                 gameField.runAll();
-//                System.err.println(System.nanoTime() - a);
                 fps = 1000000000.0 / (l - lastTime);
                 fpsTxt.setText(Integer.toString((int)fps));
                 lastTime = l;

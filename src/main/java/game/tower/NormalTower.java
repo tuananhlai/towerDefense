@@ -15,7 +15,7 @@ public class NormalTower extends Tower{
     }
 
     public NormalTower(double x, double y) {
-        super(x, y, "assets/towers/towerDefense_tile180.png", "assets/towers/towerDefense_tile250.png");
+        super(x, y, Settings.NORMAL_BASE, Settings.NORMAL_GUN);
         this.setFireRate(Settings.NORMAL_TOWER_FIRE_RATE);
         this.setFireRange(Settings.NORMAL_TOWER_RANGE);
         this.bullet = new Bullet(Settings.NORMAL_TOWER_DAMAGE, this.fireRange, Settings.NORMAL_BULLET_IMAGE, 10, 0);

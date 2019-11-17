@@ -11,13 +11,13 @@ import javafx.scene.paint.Color;
 public class Bullet extends AbstractEntity implements Collider, Cloneable {
     private AbstractEnemy target = null;
     private Vector2D velocity = null;
-    private int damage;
+    private double damage;
     private double maxDistance;
 
     public Bullet(int damage, double maxDistance){
 
     }
-    public Bullet(int damage, double maxDistance, Image image, double velocityX, double velocityY) { //set up bullet
+    public Bullet(double damage, double maxDistance, Image image, double velocityX, double velocityY) { //set up bullet
         super(0, 0, image, false); // set active = false to prevent the super constructor from adding this to gameEntities
         this.damage = damage;
         this.maxDistance = maxDistance;
@@ -118,7 +118,7 @@ public class Bullet extends AbstractEntity implements Collider, Cloneable {
         this.velocity = velocity;
     }
 
-    public int getDamage() {
+    public double getDamage() {
         return damage;
     }
 

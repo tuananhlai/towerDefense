@@ -4,16 +4,15 @@ package game;
  */
 
 import game.screen.PlayScreen;
+import game.tower.MachineGunTower;
 import game.tower.NormalTower;
 import game.tower.SniperTower;
+import game.tower.SpreadTower;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +45,16 @@ public class TowerStore{
                 Settings.SNIPER_TOWER_DAMAGE,
                 Settings.SNIPER_TOWER_RANGE,
                 Settings.SNIPER_TOWER_FIRE_RATE));
+        this.addItem(new TowerStoreItem(Settings.MACHINE_GUN_TOWER_IMAGE,
+                Settings.MACHINE_GUN_TOWER_PRICE,
+                Settings.MACHINE_GUN_TOWER_DAMAGE,
+                Settings.MACHINE_GUN_TOWER_RANGE,
+                Settings.MACHINE_GUN_TOWER_FIRE_RATE));
+        this.addItem(new TowerStoreItem(Settings.SPREAD_TOWER_IMAGE,
+                Settings.SPREAD_TOWER_PRICE,
+                Settings.SPREAD_TOWER_DAMAGE,
+                Settings.SPREAD_TOWER_RANGE,
+                Settings.SPREAD_TOWER_FIRE_RATE));
     }
 
     public void addItem(TowerStoreItem newItem) {
@@ -100,6 +109,16 @@ public class TowerStore{
             case Settings.SNIPER_TOWER_ITEM: {
                 new SniperTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
                 PlayScreen.spendMoney(Settings.SNIPER_TOWER_PRICE);
+                break;
+            }
+            case Settings.MACHINE_GUN_TOWER_ITEM: {
+                new MachineGunTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
+                PlayScreen.spendMoney(Settings.MACHINE_GUN_TOWER_PRICE);
+                break;
+            }
+            case Settings.SPREAD_TOWER_ITEM: {
+                new SpreadTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
+                PlayScreen.spendMoney(Settings.SPREAD_TOWER_PRICE);
                 break;
             }
         }

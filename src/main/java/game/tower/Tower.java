@@ -9,18 +9,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 public abstract class Tower extends AbstractTile {
-    private int fireRate = 0;
-    int fireRange = 0;
-    Bullet bullet = null;
-    private Image gunImg = null; // super.image is base image.
+    protected double fireRate = 0;
+    protected int fireRange = 0;
+    protected Bullet bullet = null;
+    protected Image gunImg = null; // super.image is base image.
 
-    Tower(double x, double y, String baseImageURL, String gunImageURL) {
-        super(Settings.TOWER, x, y, baseImageURL);
-        this.gunImg = Settings.loadImage(gunImageURL);
+    public Tower(double x, double y, Image baseImg, Image gunImg) {
+        super(Settings.TOWER, x, y, baseImg);
+        this.gunImg = gunImg;
         GameField.unusablePositions.add(new Vector2D(x, y));
     }
 
-    private AbstractEnemy getNearestEnemy() {
+    protected AbstractEnemy getNearestEnemy() {
         AbstractEnemy nearestEnemy = null;
         double minDistance = Double.MAX_VALUE;
         for (AbstractEntity entity : GameField.gameEntities) {
@@ -72,7 +72,7 @@ public abstract class Tower extends AbstractTile {
         }
     }
 
-    private void pickTarget() {
+    protected void pickTarget() {
         if (bullet.getTarget() == null) {
             bullet.setTarget(getNearestEnemy());
         } else if (isOutOfRange(bullet.getTarget())){
@@ -88,7 +88,7 @@ public abstract class Tower extends AbstractTile {
      * @param startX bullet start x-position
      * @param startY bullet start y-position
      */
-    private void createBullet(double startX, double startY) {
+    protected void createBullet(double startX, double startY) {
         Bullet newBullet = bullet.clone();
         if (newBullet.getTarget() != null) {
             newBullet.activate();
@@ -99,20 +99,8 @@ public abstract class Tower extends AbstractTile {
         }
     }
 
-    public Bullet getBullet() {
-        return bullet;
-    }
-
-    public double getFireRate() {
-        return fireRate;
-    }
-
     public void setFireRate(double fireRate) {
-        this.fireRate = (int) fireRate;
-    }
-
-    public int getFireRange() {
-        return fireRange;
+        this.fireRate = fireRate;
     }
 
     public void setFireRange(int fireRange) {
