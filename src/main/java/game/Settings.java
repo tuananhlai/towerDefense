@@ -50,7 +50,7 @@ public class Settings {
     public static final int TANKER_VELOCITY = 1;
     public static final int TANKER_ENEMY_DEFENSE = 1;
     public static final int TANKER_ENEMY_DROP = 5;
-    public static final Image TANKER_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile268.png");
+    public static final Image TANKER_ENEMY_IMAGE = loadImage("assets/enemies/tanker_enemy.png");
 
 
     public static final int SMALLER_HP = 2;

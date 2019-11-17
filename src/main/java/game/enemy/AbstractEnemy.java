@@ -16,14 +16,6 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
     protected int dropReward;
     protected double v_max; //max(velocityX, velocityY)
 
-    public AbstractEnemy(double x, double y, String imageURL) {
-        this(x, y, imageURL, 0, 0, 0);
-    }
-    public AbstractEnemy(double x, double y, String url, int maxHP, double velocityX, double velocityY) {
-        super(x, y, url);
-        this.hp = maxHP;
-        velocity = new Vector2D(velocityX, velocityY);
-    }
     public AbstractEnemy(double x, double y, Image img) {
         super(x, y, img, true);
         velocity = new Vector2D();
