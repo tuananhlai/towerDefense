@@ -5,6 +5,7 @@ import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -42,17 +43,14 @@ public class PlayScreen extends Screen {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GameField gameField = new GameField();
 
-        new Spawner();
-
-        new SpreadTower();
-
         Text fpsTxt = new Text(Double.toString(fps));
         fpsTxt.setX(10);
         fpsTxt.setY(20);
         fpsTxt.setFill(Color.RED);
+
         //AI
-//        StudentRobot.findPositionsAdvantage();
-//        StudentRobot.readTranningResult("data/trainning_result.txt");
+        StudentRobot.findPositionsAdvantage();
+        StudentRobot.readTranningResult("data/trainning_result.txt");
         // Run program
         timer = new AnimationTimer() {
             long lastTime = 0;
@@ -65,7 +63,7 @@ public class PlayScreen extends Screen {
                 fpsTxt.setText(Integer.toString((int)fps));
                 lastTime = l;
                 //AI
-//                StudentRobot.putTowerGenius(12, money);
+                StudentRobot.putTowerGenius(12, money);
             }
         };
         timer.start();

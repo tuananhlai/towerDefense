@@ -63,9 +63,9 @@ public class Settings {
     // TOWER
     public static final Image NORMAL_TOWER_IMAGE = loadImage("assets/towers/item_1.png");
     public static final String NORMAL_TOWER_ITEM = "0";
-    public static final double NORMAL_TOWER_DAMAGE = 2;
+    public static final double NORMAL_TOWER_DAMAGE = 2.5;
     public static final int NORMAL_TOWER_RANGE = (int) 2.5 * TILE_WIDTH;
-    public static final int NORMAL_TOWER_PRICE = 20;
+    public static final int NORMAL_TOWER_PRICE = 15;
     public static final double NORMAL_TOWER_FIRE_RATE = 3;
     public static final Image NORMAL_BASE = loadImage("assets/towers/towerDefense_tile180.png");
     public static final Image NORMAL_GUN = loadImage("assets/towers/towerDefense_tile250.png");
