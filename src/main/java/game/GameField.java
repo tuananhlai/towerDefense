@@ -10,6 +10,7 @@ import java.util.*;
  * Manage all GameEntity objects on play field
  */
 public class GameField {
+    public static int numberOfEnemy = 0;
     public static List<AbstractEntity> gameEntities = new ArrayList<>();
     public static Set<Vector2D> unusablePositions = new HashSet<>();
     public static List<Vector2D> listPoint = new ArrayList<>(); //danh cho phan AI

@@ -54,12 +54,14 @@ public class Spawner extends AbstractTile {
                         new NormalEnemy();
                         betweenSpawnCount = 0;
                         enemyList.setNumber(enemyList.getNumber() - 1);
+                        GameField.numberOfEnemy++;
                         return;
                     }
                     else if(enemyList.getName().contains("TankerEnemy") && enemyList.getNumber() > 0 && betweenSpawnCount > 60/spawnRate){
                         new TankerEnemy();
                         betweenSpawnCount = 0;
                         enemyList.setNumber(enemyList.getNumber() - 1);
+                        GameField.numberOfEnemy++;
                         return;
                     }
                 }

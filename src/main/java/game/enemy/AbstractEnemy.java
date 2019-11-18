@@ -164,6 +164,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
     public void deactivate() {
         active = false;
         GameField.gameEntities.remove(this);
+        GameField.numberOfEnemy--;
     }
 
     @Override
