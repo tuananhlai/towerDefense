@@ -49,8 +49,8 @@ public class PlayScreen extends Screen {
         fpsTxt.setFill(Color.RED);
 
         //AI
-        StudentRobot.findPositionsAdvantage();
-        StudentRobot.readTranningResult("data/trainning_result.txt");
+//        StudentRobot.findPositionsAdvantage();
+//        StudentRobot.readTranningResult("data/trainning_result.txt");
         // Run program
         timer = new AnimationTimer() {
             long lastTime = 0;
@@ -63,7 +63,7 @@ public class PlayScreen extends Screen {
                 fpsTxt.setText(Integer.toString((int)fps));
                 lastTime = l;
                 //AI
-                StudentRobot.putTowerGenius(12, money);
+//                StudentRobot.putTowerGenius(12, money);
             }
         };
         timer.start();

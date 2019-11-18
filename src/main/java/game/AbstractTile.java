@@ -21,10 +21,6 @@ public abstract class AbstractTile extends AbstractEntity {
         this.tileType = tileType;
     }
 
-    public AbstractTile(int tileType, Vector2D position, String url) {
-        this(tileType, position.x, position.y, url);
-    }
-
     @Override
     public void render(GraphicsContext gc) {
         gc.drawImage(image, position.x, position.y, Settings.TILE_WIDTH, Settings.TILE_HEIGHT);

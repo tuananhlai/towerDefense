@@ -6,7 +6,10 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 public abstract class Tower extends AbstractTile {
     protected double fireRate = 0;
@@ -64,10 +67,12 @@ public abstract class Tower extends AbstractTile {
     }
 
     private int fireRateCount = 0;
+    private MediaPlayer gunShot;
     public void fire() {
         fireRateCount++;
         if (bullet.getTarget() != null && fireRateCount * fireRate > 60) {
             createBullet(this.position.x, this.position.y);
+            playMedia();
             fireRateCount = 0;
         }
     }
@@ -109,5 +114,15 @@ public abstract class Tower extends AbstractTile {
 
     public boolean isOutOfRange(AbstractEnemy target) {
         return this.position.distanceTo(bullet.getTarget().getPosition()) > fireRange;
+    }
+
+    public void setMedia(Media media) {
+        gunShot = new MediaPlayer(media);
+    }
+
+    private void playMedia() {
+        gunShot.seek(Duration.ZERO);
+        gunShot.setVolume(0.3);
+        gunShot.play();
     }
 }

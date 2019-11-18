@@ -1,9 +1,6 @@
 package game.tower;
 
-import game.Bullet;
-import game.GameField;
-import game.Settings;
-import game.Vector2D;
+import game.*;
 
 public class SpreadTower extends Tower {
     public SpreadTower() {
@@ -15,6 +12,7 @@ public class SpreadTower extends Tower {
         this.setFireRate(Settings.SPREAD_TOWER_FIRE_RATE);
         this.setFireRange(Settings.SPREAD_TOWER_RANGE);
         this.bullet = new Bullet(Settings.SPREAD_TOWER_DAMAGE, this.fireRange, Settings.SPREAD_BULLET_IMAGE, 10, 0);
+        this.setMedia(MediaManager.NORMAL_GUN_SHOT_FX);
     }
 
     @Override

@@ -73,7 +73,7 @@ public class Settings {
 
     public static final Image SNIPER_TOWER_IMAGE = loadImage("assets/towers/item_2.png");
     public static final String SNIPER_TOWER_ITEM = "1";
-    public static final double SNIPER_TOWER_DAMAGE = 5;
+    public static final double SNIPER_TOWER_DAMAGE = 4;
     public static final int SNIPER_TOWER_RANGE = 4 * TILE_WIDTH;;
     public static final int SNIPER_TOWER_PRICE = 30;
     public static final double SNIPER_TOWER_FIRE_RATE = 1.5;
@@ -93,7 +93,7 @@ public class Settings {
 
     public static final Image SPREAD_TOWER_IMAGE = loadImage("assets/towers/item_4.png");
     public static final String SPREAD_TOWER_ITEM = "3";
-    public static final double SPREAD_TOWER_DAMAGE = 1;
+    public static final double SPREAD_TOWER_DAMAGE = 1.5;
     public static final int SPREAD_TOWER_RANGE = (int) 2.5 * TILE_WIDTH;
     public static final int SPREAD_TOWER_PRICE = 25;
     public static final double SPREAD_TOWER_FIRE_RATE = 2.5;
