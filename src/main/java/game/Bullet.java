@@ -21,9 +21,9 @@ public class Bullet extends AbstractEntity implements Collider, Cloneable {
         this.velocity = new Vector2D(velocityX, velocityY);
     }
 
-    SnapshotParameters params = new SnapshotParameters();
-    ImageView bulletView = new ImageView();
-    boolean isOnce = true;
+    private SnapshotParameters params = new SnapshotParameters();
+    private ImageView bulletView = new ImageView();
+    private boolean isOnce = true;
     @Override
     public void render(GraphicsContext gc) {
         params.setFill(Color.TRANSPARENT);

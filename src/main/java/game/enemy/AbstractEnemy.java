@@ -43,6 +43,9 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
             gc.setFill(Color.LIMEGREEN);
         }
         gc.fillRect(this.position.x, this.position.y, 40 * percentHealth, 5);
+        // render hitbox
+        gc.setStroke(Color.MAGENTA);
+        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
     }
 
     /**
@@ -169,13 +172,13 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
 
     @Override
     public void run() {
-        if (hp <= 0) {
+        if (isKilled()) {
             this.deactivate();
             PlayScreen.rewardPlayer(dropReward);
             return;
         }
         findPath();
-        if(velocity.x == 0 && velocity.y == 0){
+        if(reachTarget()){
             deactivate();
             PlayScreen.playerTakeDamage();
         }
@@ -234,6 +237,14 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
 
     public void setDropReward(int dropReward) {
         this.dropReward = dropReward;
+    }
+
+    public boolean isKilled() {
+        return hp <= 0;
+    }
+
+    public boolean reachTarget() {
+        return velocity.x == 0 && velocity.y == 0;
     }
 
     @Override
