@@ -1,7 +1,9 @@
 package game;
 
+import game.screen.PlayScreen;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -120,5 +122,13 @@ public class Settings {
             e.printStackTrace();
         }
         return loadedImage;
+    }
+    public static void drawRange(GraphicsContext gc, double range, Color color){
+        gc.setFill(color);
+        gc.setGlobalAlpha(0.3);
+        gc.fillOval(PlayScreen.mouse.getX() - range,
+                PlayScreen.mouse.getY() - range,
+                range*2, range*2);
+        gc.setGlobalAlpha(1);
     }
 }

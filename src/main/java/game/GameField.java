@@ -1,6 +1,7 @@
 package game;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,6 +11,7 @@ import java.util.*;
  * Manage all GameEntity objects on play field
  */
 public class GameField {
+    public static boolean loadOderGame = false;
     public static int numberOfEnemy = 0;
     public static List<AbstractEntity> gameEntities = new ArrayList<>();
     public static Set<Vector2D> unusablePositions = new HashSet<>();
@@ -21,7 +23,7 @@ public class GameField {
 
     public GameField() {
         readMap("assets/tiles/mapdata.txt");
-        spawner = new Spawner();
+//        spawner = new Spawner(loadOderGame);
     }
 
     /**
@@ -69,6 +71,9 @@ public class GameField {
             if (entity.isActive()) {
                 entity.render(gc);
             }
+        }
+        if(TowerStore.isDrag){
+            Settings.drawRange(gc, 200, Color.RED);
         }
     }
 

@@ -16,9 +16,12 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import static game.screen.PlayScreen.graphicsContextPro;
+
 public class TowerStore{
     private List<TowerStoreItem> storeItems = new ArrayList<>();
     private HBox store = new HBox();
+    public static boolean isDrag = false;
 
     public TowerStore() {
         store.setLayoutX(150);
@@ -73,6 +76,9 @@ public class TowerStore{
             public void handle(DragEvent dragEvent) {
                 if (dragEvent.getGestureSource() != gameField && dragEvent.getDragboard().hasString() && dragEvent.getDragboard().hasImage() && !PlayScreen.isPause) {
                     dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+//                    isDrag = true;
+                }else{
+//                    isDrag = false;
                 }
                 dragEvent.consume();
             }
@@ -88,6 +94,7 @@ public class TowerStore{
                 }
                 dragEvent.setDropCompleted(isSuccess);
                 dragEvent.consume();
+//                isDrag = false;
             }
         });
     }

@@ -27,6 +27,8 @@ import java.util.concurrent.TimeUnit;
  * Contain UI elements, including Game Field. Responsible for handling user input.
  */
 public class PlayScreen extends Screen {
+    public static MouseEvent mouse;
+    public static GraphicsContext graphicsContextPro; //la 1 bien static de dung trong cai khac
     public static int money = Settings.PLAYER_START_MONEY;
     public static int health = Settings.PLAYER_START_HP;
     public static Group group;
@@ -42,19 +44,21 @@ public class PlayScreen extends Screen {
 
         group = new Group(canvas);
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        graphicsContextPro = canvas.getGraphicsContext2D();
         GameField gameField = new GameField();
         if(WelcomeScreen.isLoadData){
+            GameField.loadOderGame = true; //nếu load game cũ thì cho bằng true
             GameField.gameEntities.clear();
             new GameManager().loadData();
             WelcomeScreen.isLoadData = false;
         }
-//        new Spawner();
+        GameField.spawner = new Spawner(GameField.loadOderGame);
+        GameField.loadOderGame = false; //sau khi new spawner thì cho bằng false để cho lần load sau
 
         Text fpsTxt = new Text(Double.toString(fps));
         fpsTxt.setX(10);
         fpsTxt.setY(20);
         fpsTxt.setFill(Color.RED);
-
         //AI
 //        StudentRobot.findPositionsAdvantage();
 //        StudentRobot.readTranningResult("data/trainning_result.txt");
@@ -81,6 +85,11 @@ public class PlayScreen extends Screen {
         group.getChildren().add(bottomPanel);
         group.getChildren().add(new TowerInfoPanel());
         this.scene = new Scene(group, Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
+        //get mouse position
+        scene.setOnMouseMoved(t->{
+            mouse = t;
+        });
+
     }
 
     private void addAllElements() {

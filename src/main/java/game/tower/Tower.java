@@ -22,6 +22,7 @@ public abstract class Tower extends AbstractTile {
     protected Bullet bullet = null;
     protected Image gunImg = null; // super.image is base image.
     private Rectangle clickArea;
+    private boolean isHover = false;
 
     public Tower(double x, double y, Image baseImg, Image gunImg) {
         super(Settings.TOWER, x, y, baseImg);
@@ -50,12 +51,24 @@ public abstract class Tower extends AbstractTile {
     public void run() {
         pickTarget();
         fire();
+        checkHover(PlayScreen.mouse);
     }
 
     private SnapshotParameters params = new SnapshotParameters();
     private ImageView gunView = new ImageView();
     @Override
     public void render(GraphicsContext gc) {
+        //when hovering
+        if(isHover){
+            gc.setFill(Color.BLUEVIOLET);
+            gc.setGlobalAlpha(0.3);
+            gc.fillOval((int) ((position.x) / Settings.TILE_WIDTH)*Settings.TILE_WIDTH + Settings.TILE_WIDTH/2 - fireRange,
+                    (int) ((position.y) / Settings.TILE_HEIGHT)*Settings.TILE_HEIGHT + Settings.TILE_HEIGHT/2 - fireRange,
+                    fireRange*2, fireRange*2);
+            gc.setGlobalAlpha(1);
+            //Settings.drawRange(gc, fireRange, Color.RED);
+        }
+
         params.setFill(Color.TRANSPARENT);
         // Rotate gun barrel to nearest enemy location
         gunView.setImage(gunImg);
@@ -156,6 +169,18 @@ public abstract class Tower extends AbstractTile {
         PlayScreen.group.getChildren().add(clickArea);
     }
 
+    public void checkHover(MouseEvent button){
+//        System.err.println(PlayScreen.mouse.getX() + " " + PlayScreen.mouse.getY());
+        Rectangle rect = new Rectangle(position.x, position.y, Settings.TILE_WIDTH, Settings.TILE_HEIGHT);
+        if(rect.contains(button.getX(), button.getY())){
+            isHover = true;
+//            System.err.println("is hovering");
+        }
+        else{
+            isHover = false;
+        }
+
+    }
     @Override
     public String toString() {
         return this.getClass().getName() + " " + position.x + " " + position.y;

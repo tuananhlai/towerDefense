@@ -37,6 +37,7 @@ public class TowerInfoPanel extends VBox{
         addAllTexts();
         addPauseBtn();
         addMenuButton();
+        addSaveButton();
     }
 
     private void addAllTexts() {
@@ -93,6 +94,19 @@ public class TowerInfoPanel extends VBox{
             }
         });
         this.getChildren().add(menuBtn);
+    }
+
+    private void addSaveButton(){
+        Button saveButton = new Button("Save");
+        saveButton.setPrefSize(50, 50);
+        saveButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                new GameManager().saveData();
+                GameField.spawner.saveCurrentWaveTurn();
+            }
+        });
+        this.getChildren().add(saveButton);
     }
 
     public static void showTowerInfo(int price, double damage, int range, double fireRate) {

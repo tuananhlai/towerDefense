@@ -36,8 +36,13 @@ public class Spawner extends AbstractTile {
     List<List<List2D>> listWaveTurn = new ArrayList<>(); //list chua so turn enemy ra, Map chua so luong cac enemy trong 1 turn
     List<Integer> timeWait = new ArrayList<>();
     private int betweenSpawnCount = 0;
-    public Spawner(){
-        readWaveData();
+
+    /**
+     * xem có load game cũ k
+     * @param loadOlderGame
+     */
+    public Spawner(boolean loadOlderGame){
+        readWaveData(loadOlderGame);
     }
     @Override
     public void run() {
@@ -78,9 +83,14 @@ public class Spawner extends AbstractTile {
 
     }
     //read file wave.txt in /data
-    public void readWaveData(){
+    public void readWaveData(boolean loadOderGame){
         try{
-            Scanner sc = new Scanner(new BufferedReader(new FileReader("data/wave.txt")));
+            Scanner sc = null;
+            if(loadOderGame){
+                sc = new Scanner(new BufferedReader(new FileReader("data/currentWave.txt")));
+            }else{
+                sc = new Scanner(new BufferedReader(new FileReader("data/wave.txt")));
+            }
             while(sc.hasNextLine()) {
                 //map nay chua thong tin tung turn, sau do add vao list
                 String[] line = sc.nextLine().trim().split(" ");
@@ -100,27 +110,8 @@ public class Spawner extends AbstractTile {
     }
     //save current wave turn
     public void saveCurrentWaveTurn(){
-//        try {
-//            //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-//            FileOutputStream fos = new FileOutputStream("data/wave.txt");
-//            fos.write(32);
-//            DataOutputStream dos = new DataOutputStream(fos);
-//            //Bước 2: Ghi dữ liệu
-//            for(List<List2D> waveTurn : listWaveTurn){
-//                dos.writeUTF(String.valueOf(waveTurn.size()));
-//                for(List2D wave : waveTurn){
-//                    dos.writeUTF(wave.getName() + " " + wave.getNumber());
-//                }
-//            }
-//            //Bước 3: Đóng luồng
-//            fos.close();
-//            dos.close();
-//            System.out.println("Done!");
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
         try {
-            FileWriter fw = new FileWriter("data/wave.txt");
+            FileWriter fw = new FileWriter("data/currentWave.txt");
             for(List<List2D> waveTurn : listWaveTurn){
                 fw.write(String.valueOf(waveTurn.size()) + "\n");
                 for(List2D wave : waveTurn){
