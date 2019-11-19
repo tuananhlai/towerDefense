@@ -10,16 +10,18 @@ import java.util.*;
  * Manage all GameEntity objects on play field
  */
 public class GameField {
+    public static int numberOfEnemy = 0;
     public static List<AbstractEntity> gameEntities = new ArrayList<>();
     public static Set<Vector2D> unusablePositions = new HashSet<>();
     public static List<Vector2D> listPoint = new ArrayList<>(); //danh cho phan AI
     public static int[][] trainning_result = new int[80][12];
+    public static Spawner spawner = null;
 
     public static int[][] map = new int[Settings.MAP_HEIGHT_IN_TILES][Settings.MAP_WIDTH_IN_TILES];
 
     public GameField() {
         readMap("assets/tiles/mapdata.txt");
-        new Spawner();
+//        spawner = new Spawner();
     }
 
     /**

@@ -155,4 +155,9 @@ public abstract class Tower extends AbstractTile {
         });
         PlayScreen.group.getChildren().add(clickArea);
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName() + " " + position.x + " " + position.y;
+    }
 }

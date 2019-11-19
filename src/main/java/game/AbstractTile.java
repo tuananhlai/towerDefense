@@ -43,4 +43,9 @@ public abstract class AbstractTile extends AbstractEntity {
     public double getCenterY() {
         return position.y + Settings.TILE_HEIGHT * 0.5;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName() + " " + position.x + " " + position.y;
+    }
 }

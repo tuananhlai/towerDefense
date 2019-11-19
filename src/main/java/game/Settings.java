@@ -12,8 +12,8 @@ import java.io.IOException;
  */
 public class Settings {
 
-    public static final int PLAYER_START_MONEY = 30;
-    public static final int PLAYER_START_HP = 10;
+    public static final int PLAYER_START_MONEY = 50;
+    public static final int PLAYER_START_HP = 1;
     // WINDOW CONFIGURATION
     public static final int CANVAS_WIDTH = 800;
     public static final int CANVAS_HEIGHT = 480;

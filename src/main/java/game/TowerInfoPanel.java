@@ -75,6 +75,8 @@ public class TowerInfoPanel extends VBox{
                     PlayScreen.isPause = true;
                     PlayScreen.timer.stop();
                     pauseBtn.setText("Resume");
+                    new GameManager().saveData();
+                    GameField.spawner.saveCurrentWaveTurn();
                 }
             }
         });

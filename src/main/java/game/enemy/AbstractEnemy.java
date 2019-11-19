@@ -113,9 +113,11 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
             }
             else{
                 velocity.set(0, 0);
+//                System.err.println("set velocity to zero");
             }
         }
         else if(velocity.x == -v_max){
+//            System.err.println("Cuong Pro");
             if(a == me){
                 velocity.set(-v_max, 0);
             }
@@ -127,6 +129,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
             }
             else{
                 velocity.set(0, 0);
+//                System.err.println("set velocity to zero");
             }
         }
         else if(velocity.y == v_max){
@@ -141,6 +144,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
             }
             else{
                 velocity.set(0, 0);
+//                System.err.println("set velocity to zero");
             }
         }
         else if(velocity.y == -v_max){
@@ -155,18 +159,22 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
             }
             else{
                 velocity.set(0, 0);
+//                System.err.println("set velocity to zero");
             }
         }
         else{
             velocity.set(0, 0);
+//            System.err.println("set velocity to zero");
         }
         ///
     }
 
     @Override
     public void deactivate() {
+//        System.err.println("deactivate enemy");
         active = false;
         GameField.gameEntities.remove(this);
+        GameField.numberOfEnemy--;
     }
 
     @Override
@@ -193,7 +201,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public void setHp(double hp) {
         this.hp = hp;
     }
 
@@ -210,7 +218,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
     }
 
     public void setVelocity(double velocityX, double velocityY) {
-        v_max = Math.max(velocityX, velocityY);
+        v_max = Math.max(Math.abs(velocityX), Math.abs(velocityY));
         velocity.set(velocityX, velocityY);
     }
 
@@ -254,5 +262,10 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
     @Override
     public double getCenterY() {
         return position.y + Settings.ENEMY_HEIGHT * 0.5;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName() + " " + position.x + " " + position.y + " " + velocity.x + " " + velocity.y + " " + hp;
     }
 }
