@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Settings {
 
     public static final int PLAYER_START_MONEY = 30;
-    public static final int PLAYER_START_HP = 1;
+    public static final int PLAYER_START_HP = 10;
     // WINDOW CONFIGURATION
     public static final int CANVAS_WIDTH = 800;
     public static final int CANVAS_HEIGHT = 480;
@@ -100,6 +100,9 @@ public class Settings {
     public static final Image SPREAD_BASE = loadImage("assets/towers/towerDefense_tile182.png");
     public static final Image SPREAD_GUN = loadImage("assets/towers/spread_gun.png");
     public static final Image SPREAD_BULLET_IMAGE = loadImage("assets/towers/towerDefense_tile295.png", 15, 0.0D, true, false);
+
+    public static final Image COIN_STACK_IMG = Settings.loadImage("assets/Retina/coin_stack.png", 25, 0.0D, true, false);
+    public static final Image HEART_IMG = Settings.loadImage("assets/Retina/heart.png", 25, 0.0D, true, false);
 
     public static Image loadImage(String url) {
         return Settings.loadImage(url, 0.0D, 0.0D, false, false);

@@ -15,24 +15,6 @@ public class GameField {
     public static List<Vector2D> listPoint = new ArrayList<>(); //danh cho phan AI
     public static int[][] trainning_result = new int[80][12];
 
-    // TODO: Use algorithm.
-    public static Vector2D[] wayPoints = new Vector2D[] {
-            new Vector2D(0 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT),
-            new Vector2D(4 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT),
-            new Vector2D(4 * Settings.TILE_WIDTH, 4 * Settings.TILE_HEIGHT),
-            new Vector2D(6 * Settings.TILE_WIDTH, 4 * Settings.TILE_HEIGHT),
-            new Vector2D(6 * Settings.TILE_WIDTH, 0 * Settings.TILE_HEIGHT),
-            new Vector2D(8 * Settings.TILE_WIDTH, 0 * Settings.TILE_HEIGHT),
-            new Vector2D(8 * Settings.TILE_WIDTH, 5 * Settings.TILE_HEIGHT),
-            new Vector2D(13 * Settings.TILE_WIDTH, 5 * Settings.TILE_HEIGHT),
-            new Vector2D(13 * Settings.TILE_WIDTH, 8 * Settings.TILE_HEIGHT),
-            new Vector2D(16 * Settings.TILE_WIDTH, 8 * Settings.TILE_HEIGHT),
-            new Vector2D(16 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT),
-            new Vector2D(14 * Settings.TILE_WIDTH, 2 * Settings.TILE_HEIGHT),
-            new Vector2D(14 * Settings.TILE_WIDTH, 0 * Settings.TILE_HEIGHT),
-            new Vector2D(20 * Settings.TILE_WIDTH, 0 * Settings.TILE_HEIGHT),
-    };
-
     public static int[][] map = new int[Settings.MAP_HEIGHT_IN_TILES][Settings.MAP_WIDTH_IN_TILES];
 
     public GameField() {

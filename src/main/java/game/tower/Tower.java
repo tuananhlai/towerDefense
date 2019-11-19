@@ -2,13 +2,18 @@ package game.tower;
 
 import game.*;
 import game.enemy.AbstractEnemy;
+import game.screen.PlayScreen;
+import javafx.event.EventHandler;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public abstract class Tower extends AbstractTile {
@@ -16,6 +21,7 @@ public abstract class Tower extends AbstractTile {
     protected int fireRange = 0;
     protected Bullet bullet = null;
     protected Image gunImg = null; // super.image is base image.
+    private Rectangle clickArea;
 
     public Tower(double x, double y, Image baseImg, Image gunImg) {
         super(Settings.TOWER, x, y, baseImg);
@@ -124,5 +130,29 @@ public abstract class Tower extends AbstractTile {
         gunShot.seek(Duration.ZERO);
         gunShot.setVolume(0.3);
         gunShot.play();
+    }
+
+    @Override
+    public void deactivate() {
+        super.deactivate();
+        GameField.unusablePositions.remove(getPosition());
+        PlayScreen.group.getChildren().remove(clickArea);
+        GameField.gameEntities.remove(this);
+    }
+
+    public void addClickArea(double x, double y, int price) {
+        clickArea = new Rectangle(x, y, Settings.TILE_WIDTH, Settings.TILE_HEIGHT);
+        clickArea.setFill(Color.TRANSPARENT);
+        clickArea.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                    System.out.println("My Tower: " + position.x + " " + position.y);
+                    deactivate();
+                    PlayScreen.rewardPlayer(price / 2);
+                }
+            }
+        });
+        PlayScreen.group.getChildren().add(clickArea);
     }
 }

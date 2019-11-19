@@ -29,7 +29,7 @@ public class TowerInfoPanel extends VBox{
         this.setPrefSize(200, 600);
         this.setPadding(new Insets(10, 12, 10,30));
         this.setSpacing(15);
-        this.setStyle("-fx-background-color: #99e2fc");
+        this.setStyle("-fx-background-color: #545954");
         addAllElements();
     }
 
@@ -42,12 +42,16 @@ public class TowerInfoPanel extends VBox{
     private void addAllTexts() {
         towerPrice = new Text("0");
         towerPrice.setFont(brushUp);
+        towerPrice.setFill(Color.WHITE);
         Text damageTxt = new Text("damage");
         damageTxt.setFont(brushUp);
+        damageTxt.setFill(Color.WHITE);
         Text fireRangeTxt = new Text("fire range");
         fireRangeTxt.setFont(brushUp);
+        fireRangeTxt.setFill(Color.WHITE);
         Text fireRateTxt = new Text("fire rate");
         fireRateTxt.setFont(brushUp);
+        fireRateTxt.setFill(Color.WHITE);
 
         damageBar = new AttributeBar(0, 10);
         fireRangeBar = new AttributeBar(0, 300);
