@@ -1,6 +1,7 @@
 package game.tower;
 
 import game.Bullet;
+import game.MediaManager;
 import game.Settings;
 import game.screen.PlayScreen;
 import javafx.event.EventHandler;
@@ -18,6 +19,7 @@ public class SniperTower extends Tower{
         this.setFireRate(Settings.SNIPER_TOWER_FIRE_RATE);
         this.setFireRange(Settings.SNIPER_TOWER_RANGE);
         this.bullet = new Bullet(Settings.SNIPER_TOWER_DAMAGE, this.fireRange, Settings.SNIPER_BULLET_IMAGE, 25, 0);
+        this.setMedia(MediaManager.SNIPER_GUN_SHOT_FX);
     }
 
     public void showFireRange() {

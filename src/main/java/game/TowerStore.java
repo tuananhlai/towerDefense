@@ -4,15 +4,14 @@ package game;
  */
 
 import game.screen.PlayScreen;
-import game.tower.MachineGunTower;
-import game.tower.NormalTower;
-import game.tower.SniperTower;
-import game.tower.SpreadTower;
+import game.tower.*;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +24,16 @@ public class TowerStore{
         store.setLayoutX(150);
         store.setLayoutY(480);
         store.setPrefSize(650, 120);
-        store.setPadding(new Insets(10, 12, 10,30));
+        store.setPadding(new Insets(20, 12, 10,30));
         store.setSpacing(30);
-        store.setStyle("-fx-background-color: #336699");
+        store.setStyle("-fx-background-color: #efefef");
         this.addAllItems();
     }
 
     /**
      * Add more tower options here.
      */
-    public void addAllItems() {
+    private void addAllItems() {
         this.addItem(new TowerStoreItem(Settings.NORMAL_TOWER_IMAGE,
                 Settings.NORMAL_TOWER_PRICE,
                 Settings.NORMAL_TOWER_DAMAGE,
@@ -57,7 +56,7 @@ public class TowerStore{
                 Settings.SPREAD_TOWER_FIRE_RATE));
     }
 
-    public void addItem(TowerStoreItem newItem) {
+    private void addItem(TowerStoreItem newItem) {
         int towerCode = storeItems.size();
         storeItems.add(newItem);
         newItem.setHandleEvents(towerCode);
@@ -72,7 +71,7 @@ public class TowerStore{
         gameField.setOnDragOver(new EventHandler<DragEvent>() {
             @Override
             public void handle(DragEvent dragEvent) {
-                if (dragEvent.getGestureSource() != gameField && dragEvent.getDragboard().hasString() && dragEvent.getDragboard().hasImage()) {
+                if (dragEvent.getGestureSource() != gameField && dragEvent.getDragboard().hasString() && dragEvent.getDragboard().hasImage() && !PlayScreen.isPause) {
                     dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                 }
                 dragEvent.consume();
@@ -100,30 +99,35 @@ public class TowerStore{
         if (GameField.unusablePositions.contains(plantPos)) {
             return;
         }
+        int price = 0;
+        Tower tower = null;
         switch (towerCode) {
             case Settings.NORMAL_TOWER_ITEM: {
-                new NormalTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
-                PlayScreen.spendMoney(Settings.NORMAL_TOWER_PRICE);
+                tower = new NormalTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
+                price = Settings.NORMAL_TOWER_PRICE;
                 break;
             }
             case Settings.SNIPER_TOWER_ITEM: {
-                new SniperTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
-                PlayScreen.spendMoney(Settings.SNIPER_TOWER_PRICE);
+                tower = new SniperTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
+                price = Settings.SNIPER_TOWER_PRICE;
                 break;
             }
             case Settings.MACHINE_GUN_TOWER_ITEM: {
-                new MachineGunTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
-                PlayScreen.spendMoney(Settings.MACHINE_GUN_TOWER_PRICE);
+                tower = new MachineGunTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
+                price = Settings.MACHINE_GUN_TOWER_PRICE;
                 break;
             }
             case Settings.SPREAD_TOWER_ITEM: {
-                new SpreadTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
-                PlayScreen.spendMoney(Settings.SPREAD_TOWER_PRICE);
+                tower = new SpreadTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
+                price = Settings.SPREAD_TOWER_PRICE;
                 break;
             }
         }
-
+        PlayScreen.spendMoney(price);
+        tower.addClickArea(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT, price);
     }
+
+
 
     public HBox getStore() {
         return store;

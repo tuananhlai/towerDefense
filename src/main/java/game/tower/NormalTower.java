@@ -2,6 +2,7 @@ package game.tower;
 
 import game.Bullet;
 import game.GameStage;
+import game.MediaManager;
 import game.Settings;
 import game.screen.PlayScreen;
 import javafx.event.EventHandler;
@@ -19,26 +20,6 @@ public class NormalTower extends Tower{
         this.setFireRate(Settings.NORMAL_TOWER_FIRE_RATE);
         this.setFireRange(Settings.NORMAL_TOWER_RANGE);
         this.bullet = new Bullet(Settings.NORMAL_TOWER_DAMAGE, this.fireRange, Settings.NORMAL_BULLET_IMAGE, 10, 0);
-    }
-
-    public void showFireRange() {
-        Circle circle = new Circle();
-        circle.setCenterX(this.getCenterX());
-        circle.setCenterY(this.getCenterY());
-        circle.setStroke(Color.RED);
-        circle.setRadius(this.fireRange);
-        circle.setFill(Color.TRANSPARENT);
-        circle.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (circle.isVisible()) {
-                    circle.setVisible(false);
-                }
-                else {
-                    circle.setVisible(true);
-                }
-            }
-        });
-        PlayScreen.group.getChildren().add(circle);
+        this.setMedia(MediaManager.NORMAL_GUN_SHOT_FX);
     }
 }

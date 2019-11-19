@@ -12,8 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,7 +24,9 @@ public class WelcomeScreen extends Screen {
     public static boolean isLoadData = false;
     // TODO: Preload assets when in menu
     private Group group;
+    private MediaPlayer mediaPlayer;
     public WelcomeScreen() {
+        setAndPlayMedia();
         group = new Group();
         addAllElements();
         scene = new Scene(group, Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
@@ -126,8 +130,21 @@ public class WelcomeScreen extends Screen {
     }
     @Override
     public void clear() {
+        mediaPlayer.stop();
         group.getChildren().clear();
         scene = null;
         System.gc();
+    }
+
+    private void setAndPlayMedia() {
+        mediaPlayer = new MediaPlayer(MediaManager.BACKGROUND_FX);
+        mediaPlayer.setVolume(0.05);
+        mediaPlayer.play();
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.seek(Duration.ZERO);
+            }
+        });
     }
 }

@@ -14,11 +14,9 @@ import javafx.scene.input.*;
 
 public class TowerStoreItem extends ImageView {
     private int towerPrice;
-    private int towerType;
     private int towerRange;
     private double towerFireRate;
     private double damage;
-    private Rectangle2D boundingBox;
 
     public TowerStoreItem(Image icon, int towerPrice, double damage, int towerRange, double towerFireRate) {
         setPreserveRatio(true);
@@ -37,7 +35,7 @@ public class TowerStoreItem extends ImageView {
                 TowerInfoPanel.showTowerInfo(towerPrice, damage, towerRange, towerFireRate);
 
                 if (PlayScreen.money < towerPrice) {
-                    GameStage.stage.getScene().setCursor(Cursor.CROSSHAIR);
+                    GameStage.stage.getScene().setCursor(Cursor.CLOSED_HAND);
                 }
                 else {
                     GameStage.stage.getScene().setCursor(Cursor.HAND);

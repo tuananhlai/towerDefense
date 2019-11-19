@@ -5,12 +5,14 @@ import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
@@ -33,7 +35,6 @@ public class PlayScreen extends Screen {
     private static double fps = 0;
     private static Text moneyTxt;
     private static Text healthTxt;
-
     private final Font brushUp = Font.loadFont(getClass().getResourceAsStream("/iCielBrushUp.otf"), 20);
 
     public PlayScreen() {
@@ -55,8 +56,8 @@ public class PlayScreen extends Screen {
         fpsTxt.setFill(Color.RED);
 
         //AI
-        StudentRobot.findPositionsAdvantage();
-        StudentRobot.readTranningResult("data/trainning_result.txt");
+//        StudentRobot.findPositionsAdvantage();
+//        StudentRobot.readTranningResult("data/trainning_result.txt");
         // Run program
         timer = new AnimationTimer() {
             long lastTime = 0;
@@ -80,6 +81,10 @@ public class PlayScreen extends Screen {
         group.getChildren().add(bottomPanel);
         group.getChildren().add(new TowerInfoPanel());
         this.scene = new Scene(group, Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
+    }
+
+    private void addAllElements() {
+
     }
 
     @Override
@@ -123,21 +128,27 @@ public class PlayScreen extends Screen {
         return bottomPanel;
     }
 
-    private VBox addPlayerInfos() {
+    private VBox addPlayerInfos() { // TODO: Clean the code if possible, it's hideous
         VBox playerInfo = new VBox();
         playerInfo.setPrefSize(150, 120);
         playerInfo.setPadding(new Insets(20));
-        playerInfo.setStyle("-fx-background-image: url(\"/assets/towers/towerDefense_tile249.png\");");
+        playerInfo.setAlignment(Pos.CENTER);
+        playerInfo.setStyle("-fx-background-color: #abeab4");
         // add money display
         HBox moneyDisplay = new HBox();
+        moneyDisplay.setSpacing(10);
+        ImageView coinImage = new ImageView(Settings.COIN_STACK_IMG);
         moneyTxt = new Text(Integer.toString(PlayScreen.money));
         moneyTxt.setFont(brushUp);
-        moneyDisplay.getChildren().add(moneyTxt);
+        moneyDisplay.getChildren().addAll(coinImage, moneyTxt);
+
         // add player hp display
         HBox playerHpDisplay = new HBox();
+        playerHpDisplay.setSpacing(10);
+        ImageView hpImage = new ImageView(Settings.HEART_IMG);
         healthTxt = new Text(Integer.toString(PlayScreen.health));
         healthTxt.setFont(brushUp);
-        playerHpDisplay.getChildren().add(healthTxt);
+        playerHpDisplay.getChildren().addAll(hpImage, healthTxt);
 
         playerInfo.getChildren().addAll(moneyDisplay, playerHpDisplay);
         return playerInfo;

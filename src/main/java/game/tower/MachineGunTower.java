@@ -2,6 +2,7 @@ package game.tower;
 
 import game.Bullet;
 import game.GameStage;
+import game.MediaManager;
 import game.Settings;
 import game.screen.PlayScreen;
 import javafx.event.EventHandler;
@@ -19,5 +20,6 @@ public class MachineGunTower extends Tower{
         this.setFireRate(Settings.MACHINE_GUN_TOWER_FIRE_RATE);
         this.setFireRange(Settings.MACHINE_GUN_TOWER_RANGE);
         this.bullet = new Bullet(Settings.MACHINE_GUN_TOWER_DAMAGE, this.fireRange, Settings.MACHINE_GUN_BULLET_IMAGE, 12, 0);
+        this.setMedia(MediaManager.MACHINE_GUN_SHOT_FX);
     }
 }
