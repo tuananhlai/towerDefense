@@ -39,7 +39,7 @@ public class GameField {
 
     public GameField() {
         readMap("assets/tiles/mapdata.txt");
-//        spawner = new Spawner();
+        spawner = new Spawner();
     }
 
     /**

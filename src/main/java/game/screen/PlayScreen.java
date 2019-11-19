@@ -47,7 +47,7 @@ public class PlayScreen extends Screen {
             new GameManager().loadData();
             WelcomeScreen.isLoadData = false;
         }
-        new Spawner();
+//        new Spawner();
 
         Text fpsTxt = new Text(Double.toString(fps));
         fpsTxt.setX(10);
