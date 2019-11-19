@@ -1,6 +1,8 @@
 package game.screen;
 
+import game.GameManager;
 import game.GameStage;
+import game.MediaManager;
 import game.Settings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class WelcomeScreen extends Screen {
+    public static boolean isLoadData = false;
     // TODO: Preload assets when in menu
     private Group group;
     public WelcomeScreen() {
@@ -62,8 +65,7 @@ public class WelcomeScreen extends Screen {
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                GameStage.signNewScreen(new PlayScreen());
-            }
+                GameStage.signNewScreen(new PlayScreen()); }
         });
         group.getChildren().add(startButton);
     }
@@ -88,7 +90,9 @@ public class WelcomeScreen extends Screen {
         loadButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
+//                new GameManager().loadData();
+                isLoadData = true;
+                GameStage.signNewScreen(new PlayScreen());
             }
         });
         group.getChildren().add(loadButton);

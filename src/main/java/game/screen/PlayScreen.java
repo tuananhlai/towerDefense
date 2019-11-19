@@ -42,6 +42,12 @@ public class PlayScreen extends Screen {
         group = new Group(canvas);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GameField gameField = new GameField();
+        if(WelcomeScreen.isLoadData){
+            GameField.gameEntities.clear();
+            new GameManager().loadData();
+            WelcomeScreen.isLoadData = false;
+        }
+        new Spawner();
 
         Text fpsTxt = new Text(Double.toString(fps));
         fpsTxt.setX(10);
@@ -63,7 +69,7 @@ public class PlayScreen extends Screen {
                 fpsTxt.setText(Integer.toString((int)fps));
                 lastTime = l;
                 //AI
-                StudentRobot.putTowerGenius(GameField.numberOfEnemy, money);
+//                StudentRobot.putTowerGenius(GameField.numberOfEnemy, money);
             }
         };
         timer.start();
@@ -98,7 +104,7 @@ public class PlayScreen extends Screen {
     public static void playerTakeDamage() {
         health--;
         if (health <= 0) {
-            GameStage.signNewScreen(new GameOverScreen());
+           // GameStage.signNewScreen(new GameOverScreen());
         }
         healthTxt.setText(Integer.toString(health));
     }

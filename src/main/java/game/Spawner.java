@@ -3,8 +3,7 @@ package game;
 import game.enemy.NormalEnemy;
 import game.enemy.TankerEnemy;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.util.*;
 
 class List2D{
@@ -98,5 +97,40 @@ public class Spawner extends AbstractTile {
         }catch (Exception e){
             System.err.println(e.toString());
         }
+    }
+    //save current wave turn
+    public void saveCurrentWaveTurn(){
+//        try {
+//            //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
+//            FileOutputStream fos = new FileOutputStream("data/wave.txt");
+//            fos.write(32);
+//            DataOutputStream dos = new DataOutputStream(fos);
+//            //Bước 2: Ghi dữ liệu
+//            for(List<List2D> waveTurn : listWaveTurn){
+//                dos.writeUTF(String.valueOf(waveTurn.size()));
+//                for(List2D wave : waveTurn){
+//                    dos.writeUTF(wave.getName() + " " + wave.getNumber());
+//                }
+//            }
+//            //Bước 3: Đóng luồng
+//            fos.close();
+//            dos.close();
+//            System.out.println("Done!");
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+        try {
+            FileWriter fw = new FileWriter("data/wave.txt");
+            for(List<List2D> waveTurn : listWaveTurn){
+                fw.write(String.valueOf(waveTurn.size()) + "\n");
+                for(List2D wave : waveTurn){
+                    fw.write(wave.getName() + " " + wave.getNumber() + "\n");
+                }
+            }
+            fw.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
     }
 }

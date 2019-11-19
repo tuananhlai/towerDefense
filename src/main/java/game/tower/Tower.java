@@ -110,4 +110,9 @@ public abstract class Tower extends AbstractTile {
     public boolean isOutOfRange(AbstractEnemy target) {
         return this.position.distanceTo(bullet.getTarget().getPosition()) > fireRange;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName() + " " + position.x + " " + position.y;
+    }
 }

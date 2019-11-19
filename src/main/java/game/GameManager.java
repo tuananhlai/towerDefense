@@ -5,6 +5,7 @@ import game.enemy.TankerEnemy;
 import game.tower.MachineGunTower;
 import game.tower.NormalTower;
 import game.tower.SniperTower;
+import game.tower.SpreadTower;
 
 import java.io.*;
 import java.util.Scanner;
@@ -17,6 +18,7 @@ public class GameManager {
         try {
             //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
             FileOutputStream fos = new FileOutputStream("data/game.txt");
+            fos.write(32);
             DataOutputStream dos = new DataOutputStream(fos);
             //Bước 2: Ghi dữ liệu
             for(AbstractEntity entity : GameField.gameEntities){
@@ -31,6 +33,7 @@ public class GameManager {
         }
     }
     public void loadData(){
+//        System.err.println("CUong pro ");
         try{
             Scanner sc = new Scanner(new BufferedReader(new FileReader("data/game.txt")));
             while(sc.hasNextLine()) {
@@ -50,20 +53,25 @@ public class GameManager {
                 else if(line[0].contains("NormalTower")){
                     double x = Double.parseDouble(line[1]);
                     double y = Double.parseDouble(line[2]);
-                    double level = Double.parseDouble(line[3]);
                     new NormalTower(x, y);
                 }
                 else if(line[0].contains("SniperTower")){
                     double x = Double.parseDouble(line[1]);
                     double y = Double.parseDouble(line[2]);
-                    double level = Double.parseDouble(line[3]);
+//                    double level = Double.parseDouble(line[3]);
                     new SniperTower(x, y);
                 }
                 else if(line[0].contains("MachineGunTower")){
                     double x = Double.parseDouble(line[1]);
                     double y = Double.parseDouble(line[2]);
-                    double level = Double.parseDouble(line[3]);
+//                    double level = Double.parseDouble(line[3]);
                     new MachineGunTower(x, y);
+                }
+                else if(line[0].contains("SpreadTower")){
+                    double x = Double.parseDouble(line[1]);
+                    double y = Double.parseDouble(line[2]);
+//                    double level = Double.parseDouble(line[3]);
+                    new SpreadTower(x, y);
                 }
                 //enemy
                 else if(line[0].contains("NormalEnemy")){
@@ -71,8 +79,10 @@ public class GameManager {
                     double y = Double.parseDouble(line[2]);
                     double vx = Double.parseDouble(line[3]);
                     double vy = Double.parseDouble(line[4]);
+                    double hp = Double.parseDouble(line[5]);
                     NormalEnemy enemy = new NormalEnemy(x, y);
                     enemy.setVelocity(vx, vy);
+                    enemy.setHp(hp);
                 }
                 else if(line[0].contains("TankerEnemy")){
                     double x = Double.parseDouble(line[1]);
@@ -80,7 +90,9 @@ public class GameManager {
                     double vx = Double.parseDouble(line[3]);
                     double vy = Double.parseDouble(line[4]);
                     TankerEnemy enemy = new TankerEnemy(x, y);
+                    double hp = Double.parseDouble(line[5]);
                     enemy.setVelocity(vx, vy);
+                    enemy.setHp(hp);
                 }
                 //Bullet
 //                else if(line[0].contains("Bullet")){

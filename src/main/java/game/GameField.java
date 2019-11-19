@@ -15,6 +15,7 @@ public class GameField {
     public static Set<Vector2D> unusablePositions = new HashSet<>();
     public static List<Vector2D> listPoint = new ArrayList<>(); //danh cho phan AI
     public static int[][] trainning_result = new int[80][12];
+    public static Spawner spawner = null;
 
     // TODO: Use algorithm.
     public static Vector2D[] wayPoints = new Vector2D[] {
@@ -38,7 +39,7 @@ public class GameField {
 
     public GameField() {
         readMap("assets/tiles/mapdata.txt");
-        new Spawner();
+//        spawner = new Spawner();
     }
 
     /**
