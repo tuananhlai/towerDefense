@@ -1,6 +1,8 @@
 package game;
 
+import game.enemy.BossEnemy;
 import game.enemy.NormalEnemy;
+import game.enemy.SmallEnemy;
 import game.enemy.TankerEnemy;
 import game.tower.MachineGunTower;
 import game.tower.NormalTower;
@@ -21,6 +23,8 @@ public class GameManager {
             fos.write(32);
             DataOutputStream dos = new DataOutputStream(fos);
             //Bước 2: Ghi dữ liệu
+            //mapURL:
+            dos.writeUTF(GameField.mapURL + "\n");
             for(AbstractEntity entity : GameField.gameEntities){
                 dos.writeUTF(entity.toString() + "\n");
             }
@@ -32,8 +36,19 @@ public class GameManager {
             ex.printStackTrace();
         }
     }
+    public static String getMapURL(){
+        try{
+            Scanner sc = new Scanner(new BufferedReader(new FileReader("data/game.txt")));
+            String[] line = sc.nextLine().trim().split(" ");
+            if(line[0].contains("assets/tiles/")){
+                return line[0].substring(0);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public void loadData(){
-//        System.err.println("CUong pro ");
         try{
             Scanner sc = new Scanner(new BufferedReader(new FileReader("data/game.txt")));
             while(sc.hasNextLine()) {
@@ -58,19 +73,16 @@ public class GameManager {
                 else if(line[0].contains("SniperTower")){
                     double x = Double.parseDouble(line[1]);
                     double y = Double.parseDouble(line[2]);
-//                    double level = Double.parseDouble(line[3]);
                     new SniperTower(x, y);
                 }
                 else if(line[0].contains("MachineGunTower")){
                     double x = Double.parseDouble(line[1]);
                     double y = Double.parseDouble(line[2]);
-//                    double level = Double.parseDouble(line[3]);
                     new MachineGunTower(x, y);
                 }
                 else if(line[0].contains("SpreadTower")){
                     double x = Double.parseDouble(line[1]);
                     double y = Double.parseDouble(line[2]);
-//                    double level = Double.parseDouble(line[3]);
                     new SpreadTower(x, y);
                 }
                 //enemy
@@ -94,15 +106,26 @@ public class GameManager {
                     enemy.setVelocity(vx, vy);
                     enemy.setHp(hp);
                 }
-                //Bullet
-//                else if(line[0].contains("Bullet")){
-//                    double x = Double.parseDouble(line[1]);
-//                    double y = Double.parseDouble(line[2]);
-//                    double target_x = Double.parseDouble(line[3]);
-//                    double target_y = Double.parseDouble(line[4]);
-//                    Bullet bullet = new Bullet(x, y);
-//                    bullet.setTarget(new Vector2D(target_x, target_y));
-//                }
+                else if(line[0].contains("SmallEnemy")){
+                    double x = Double.parseDouble(line[1]);
+                    double y = Double.parseDouble(line[2]);
+                    double vx = Double.parseDouble(line[3]);
+                    double vy = Double.parseDouble(line[4]);
+                    SmallEnemy enemy = new SmallEnemy(x, y);
+                    double hp = Double.parseDouble(line[5]);
+                    enemy.setVelocity(vx, vy);
+                    enemy.setHp(hp);
+                }
+                else if(line[0].contains("BossEnemy")){
+                    double x = Double.parseDouble(line[1]);
+                    double y = Double.parseDouble(line[2]);
+                    double vx = Double.parseDouble(line[3]);
+                    double vy = Double.parseDouble(line[4]);
+                    BossEnemy enemy = new BossEnemy(x, y);
+                    double hp = Double.parseDouble(line[5]);
+                    enemy.setVelocity(vx, vy);
+                    enemy.setHp(hp);
+                }
                 else{
                     //code here
                 }

@@ -34,7 +34,6 @@ public class PlayScreen extends Screen {
     private Canvas canvas;
     public PlayScreen() {
         canvas = new Canvas(Settings.CANVAS_WIDTH, Settings.CANVAS_HEIGHT);
-
         group = new Group(canvas);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         graphicsContextPro = canvas.getGraphicsContext2D();

@@ -1,5 +1,6 @@
 package game;
 
+import game.screen.WelcomeScreen;
 import game.store.TowerStore;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -12,6 +13,7 @@ import java.util.*;
  * Manage all GameEntity objects on play field
  */
 public class GameField {
+    public static String mapURL = "assets/tiles/map_1.txt";
     public static boolean loadOrderGame = false;
     public static int numberOfEnemy = 0;
     public static List<AbstractEntity> gameEntities = new ArrayList<>();
@@ -23,7 +25,10 @@ public class GameField {
     public static int[][] map = new int[Settings.MAP_HEIGHT_IN_TILES][Settings.MAP_WIDTH_IN_TILES];
 
     public GameField() {
-        readMap("assets/tiles/mapdata.txt");
+        if(WelcomeScreen.isLoadData) {
+            mapURL = GameManager.getMapURL();
+        }
+        readMap(mapURL);
 //        spawner = new Spawner(loadOderGame);
     }
 

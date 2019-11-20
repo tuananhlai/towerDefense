@@ -41,6 +41,7 @@ public class WelcomeScreen extends Screen {
         addStartBtn();
         addLoadButton();
         addQuitButton();
+        addSelectMapButton();
     }
 
     private void addLogo() {
@@ -116,7 +117,7 @@ public class WelcomeScreen extends Screen {
         Button quitButton = new Button("Quit");
         quitButton.setPrefSize(200, 50);
         quitButton.setLayoutX(400);
-        quitButton.setLayoutY(450);
+        quitButton.setLayoutY(500);
         quitButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -137,6 +138,19 @@ public class WelcomeScreen extends Screen {
             }
         });
         group.getChildren().add(quitButton);
+    }
+
+    private void addSelectMapButton(){
+        Button selectMap = new Button("Select Map");
+        selectMap.setPrefSize(200, 50);
+        selectMap.setLayoutX(400);
+        selectMap.setLayoutY(450);
+        selectMap.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                GameStage.signNewScreen(new MapSelectScreen()); }
+        });
+        group.getChildren().add(selectMap);
     }
     @Override
     public void clear() {

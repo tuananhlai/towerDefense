@@ -17,6 +17,10 @@ import java.util.Arrays;
  * Contain static constants.
  */
 public class Settings {
+    //mapURL
+    public static final String map_1 = "assets/tiles/mapdata.txt";
+    public static final String map_2 = "assets/tiles/mapdata.txt";
+    public static final String map_3 = "assets/tiles/mapdata.txt";
 
     public static final int PLAYER_START_MONEY = 50;
     public static final int PLAYER_START_HP = 1;

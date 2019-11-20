@@ -170,11 +170,9 @@ public abstract class Tower extends AbstractTile {
     }
 
     public void checkHover(MouseEvent button){
-//        System.err.println(PlayScreen.mouse.getX() + " " + PlayScreen.mouse.getY());
         Rectangle rect = new Rectangle(position.x, position.y, Settings.TILE_WIDTH, Settings.TILE_HEIGHT);
         if(rect.contains(button.getX(), button.getY())){
             isHover = true;
-//            System.err.println("is hovering");
         }
         else{
             isHover = false;
