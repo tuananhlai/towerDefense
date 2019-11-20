@@ -22,10 +22,10 @@ public class TankerEnemy extends AbstractEnemy {
 
     @Override
     public Rectangle2D getBoundary() {
-        return new Rectangle2D(this.position.x + Settings.TILE_WIDTH / 3.5,
-                this.position.y + Settings.TILE_HEIGHT / 3.5,
-                Settings.TILE_WIDTH - 2 * Settings.TILE_WIDTH / 3.5,
-                Settings.TILE_HEIGHT - 2 * Settings.TILE_HEIGHT / 3.5);
+        return new Rectangle2D(this.position.x + Settings.TILE_WIDTH / 4.0,
+                this.position.y + Settings.TILE_HEIGHT / 4.0,
+                Settings.TILE_WIDTH - 2 * Settings.TILE_WIDTH / 4.0,
+                Settings.TILE_HEIGHT - 2 * Settings.TILE_HEIGHT / 4.0);
     }
 
     @Override

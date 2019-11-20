@@ -46,25 +46,30 @@ public class Settings {
     public static final int ENEMY_HEIGHT = TILE_HEIGHT;
 
     // ENEMY
-    public static final int NORMAL_HP = 10;
-    public static final int NORMAL_VELOCITY = 2;
+    public static final int NORMAL_HP = 12;
+    public static final double NORMAL_VELOCITY = 2;
     public static final int NORMAL_ENEMY_DEFENSE = 0;
     public static final int NORMAL_ENEMY_DROP = 3;
     public static final Image NORMAL_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile245.png");
 
-    public static final int TANKER_HP = 12;
-    public static final int TANKER_VELOCITY = 1;
+    public static final int TANKER_HP = 20;
+    public static final double TANKER_VELOCITY = 1;
     public static final int TANKER_ENEMY_DEFENSE = 1;
     public static final int TANKER_ENEMY_DROP = 5;
     public static final Image TANKER_ENEMY_IMAGE = loadImage("assets/enemies/tanker_enemy.png");
 
 
-    public static final int SMALLER_HP = 2;
-    public static final int SMALLER_VELOCITY = 3;
-    public static final Image SMALLER_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile292.png");
+    public static final int SMALL_HP = 6;
+    public static final double SMALL_VELOCITY = 3;
+    public static final int SMALL_ENEMY_DEFENSE = 0;
+    public static final int SMALL_ENEMY_DROP = 3;
+    public static final Image SMALL_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile248.png");
 
-    public static final int BOSS_HP = 13;
-    public static final int BOSS_VELOCITY = 1;
+    public static final int BOSS_HP = 80;
+    public static final double BOSS_VELOCITY = 0.7;
+    public static final int BOSS_ENEMY_DEFENSE = 1;
+    public static final int BOSS_ENEMY_DROP = 10;
+    public static final Image BOSS_ENEMY_IMAGE = loadImage("assets/enemies/boss_enemy.png");
 
     // TOWER
     public static final Image NORMAL_TOWER_IMAGE = loadImage("assets/towers/item_1.png");

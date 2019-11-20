@@ -1,6 +1,8 @@
 package game;
 
+import game.enemy.BossEnemy;
 import game.enemy.NormalEnemy;
+import game.enemy.SmallEnemy;
 import game.enemy.TankerEnemy;
 
 import java.io.*;
@@ -54,15 +56,29 @@ public class Spawner extends AbstractTile {
                     if(enemyList.getNumber() == 0){
                         waveTurn.remove(enemyList);
                     }
-                    else if(enemyList.getName().contains("NormalEnemy") && enemyList.getNumber() > 0 && betweenSpawnCount > 60/spawnRate){
+                    else if(enemyList.getName().contains("NormalEnemy") && enemyList.getNumber() > 0 && betweenSpawnCount > 40/spawnRate){
                         new NormalEnemy();
                         betweenSpawnCount = 0;
                         enemyList.setNumber(enemyList.getNumber() - 1);
                         GameField.numberOfEnemy++;
                         return;
                     }
-                    else if(enemyList.getName().contains("TankerEnemy") && enemyList.getNumber() > 0 && betweenSpawnCount > 60/spawnRate){
+                    else if(enemyList.getName().contains("TankerEnemy") && enemyList.getNumber() > 0 && betweenSpawnCount > 50/spawnRate){
                         new TankerEnemy();
+                        betweenSpawnCount = 0;
+                        enemyList.setNumber(enemyList.getNumber() - 1);
+                        GameField.numberOfEnemy++;
+                        return;
+                    }
+                    else if(enemyList.getName().contains("SmallEnemy") && enemyList.getNumber() > 0 && betweenSpawnCount > 20/spawnRate){
+                        new SmallEnemy();
+                        betweenSpawnCount = 0;
+                        enemyList.setNumber(enemyList.getNumber() - 1);
+                        GameField.numberOfEnemy++;
+                        return;
+                    }
+                    else if(enemyList.getName().contains("BossEnemy") && enemyList.getNumber() > 0 && betweenSpawnCount > 60/spawnRate){
+                        new BossEnemy();
                         betweenSpawnCount = 0;
                         enemyList.setNumber(enemyList.getNumber() - 1);
                         GameField.numberOfEnemy++;
