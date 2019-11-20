@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -25,6 +26,8 @@ public class WelcomeScreen extends Screen {
     // TODO: Preload assets when in menu
     private Group group;
     private MediaPlayer mediaPlayer;
+    private final Font brushUp = Font.loadFont(getClass().getResourceAsStream("/iCielBrushUp.otf"), 20);
+
     public WelcomeScreen() {
         setAndPlayMedia();
         group = new Group();
@@ -34,17 +37,24 @@ public class WelcomeScreen extends Screen {
 
     private void addAllElements() {
         addBackgroundImg();
+        addLogo();
         addStartBtn();
         addLoadButton();
         addQuitButton();
     }
+
+    private void addLogo() {
+        Image logoImg = null;
+        logoImg = Settings.loadImage("assets/tower_defense_logo.png", 400, 0.0D, true, false);
+        ImageView logo = new ImageView(logoImg);
+        logo.setLayoutX(300);
+        logo.setLayoutY(290 - logoImg.getHeight());
+        group.getChildren().add(logo);
+    }
+
     private void addBackgroundImg() {
         Image backgroundImg = null;
-        try {
-            backgroundImg = new Image(new FileInputStream("assets/Retina/welcome_background_1.png"));
-        } catch (FileNotFoundException e) {
-
-        }
+        backgroundImg = Settings.loadImage("assets/welcome_background.png");
         ImageView background = new ImageView(backgroundImg);
         group.getChildren().add(background);
     }
@@ -53,7 +63,7 @@ public class WelcomeScreen extends Screen {
         Button startButton = new Button("Start Game");
         startButton.setPrefSize(200, 50);
         startButton.setLayoutX(400);
-        startButton.setLayoutY(200);
+        startButton.setLayoutY(350);
         startButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -78,7 +88,7 @@ public class WelcomeScreen extends Screen {
         Button loadButton = new Button("Load Game");
         loadButton.setPrefSize(200, 50);
         loadButton.setLayoutX(400);
-        loadButton.setLayoutY(250);
+        loadButton.setLayoutY(400);
         loadButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -106,7 +116,7 @@ public class WelcomeScreen extends Screen {
         Button quitButton = new Button("Quit");
         quitButton.setPrefSize(200, 50);
         quitButton.setLayoutX(400);
-        quitButton.setLayoutY(300);
+        quitButton.setLayoutY(450);
         quitButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
