@@ -2,6 +2,7 @@ package game.enemy;
 
 import game.*;
 import game.screen.PlayScreen;
+import game.Explosion;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -182,6 +183,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         if (isKilled()) {
             this.deactivate();
             PlayScreen.rewardPlayer(dropReward);
+            new Explosion(this.position.x, this.position.y, Explosion.ENEMY_EXPLOSION);
             return;
         }
         findPath();

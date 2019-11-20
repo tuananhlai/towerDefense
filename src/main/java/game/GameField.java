@@ -1,5 +1,6 @@
 package game;
 
+import game.store.TowerStore;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -11,7 +12,7 @@ import java.util.*;
  * Manage all GameEntity objects on play field
  */
 public class GameField {
-    public static boolean loadOderGame = false;
+    public static boolean loadOrderGame = false;
     public static int numberOfEnemy = 0;
     public static List<AbstractEntity> gameEntities = new ArrayList<>();
     public static Set<Vector2D> unusablePositions = new HashSet<>();

@@ -5,9 +5,13 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Contain static constants.
@@ -85,7 +89,7 @@ public class Settings {
 
     public static final Image MACHINE_GUN_TOWER_IMAGE = loadImage("assets/towers/item_3.png");
     public static final String MACHINE_GUN_TOWER_ITEM = "2";
-    public static final double MACHINE_GUN_TOWER_DAMAGE = 1.3;
+    public static final double MACHINE_GUN_TOWER_DAMAGE = 2;
     public static final int MACHINE_GUN_TOWER_RANGE = (int) (1.5 * TILE_WIDTH);
     public static final int MACHINE_GUN_TOWER_PRICE = 25;
     public static final double MACHINE_GUN_TOWER_FIRE_RATE = 7;
@@ -123,6 +127,29 @@ public class Settings {
         }
         return loadedImage;
     }
+
+    public static ArrayList<Image> loadImages(String url) {
+        return loadImages(url, 0.0D, 0.0D, false, false);
+    }
+
+    public static ArrayList<Image> loadImages(String url, double width, double height, boolean preservedRatio, boolean smooth) {
+        ArrayList<Image> listImages = new ArrayList<>();
+        File assetFolder = new File(url);
+        if (assetFolder.exists() && assetFolder.isDirectory()) {
+            String[] fileNames = assetFolder.list();
+            Arrays.sort(fileNames);
+            for (int i = 0; i < fileNames.length; i++) {
+                String fileName = fileNames[i];
+                if(fileName.toLowerCase().endsWith(".png")) {
+                    Image newImage = loadImage(url + "/" + fileName, width, height, preservedRatio, smooth);
+                    listImages.add(newImage);
+                }
+            }
+            return listImages;
+        }
+        return null;
+    }
+
     public static void drawRange(GraphicsContext gc, double range, Color color){
         gc.setFill(color);
         gc.setGlobalAlpha(0.3);

@@ -1,8 +1,11 @@
-package game;
+package game.store;
 /**
  * Area to buy different types of tower from. Manage all towerItem objects.
  */
 
+import game.GameField;
+import game.Settings;
+import game.Vector2D;
 import game.screen.PlayScreen;
 import game.tower.*;
 import javafx.event.EventHandler;
@@ -10,13 +13,9 @@ import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static game.screen.PlayScreen.graphicsContextPro;
 
 public class TowerStore{
     private List<TowerStoreItem> storeItems = new ArrayList<>();

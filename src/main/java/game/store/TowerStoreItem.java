@@ -1,8 +1,10 @@
 /**
  * Item box to buy towers from.
  */
-package game;
+package game.store;
 
+import game.GameStage;
+import game.TowerInfoPanel;
 import game.screen.PlayScreen;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
