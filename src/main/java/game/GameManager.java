@@ -93,6 +93,7 @@ public class GameManager {
                     double vy = Double.parseDouble(line[4]);
                     double hp = Double.parseDouble(line[5]);
                     NormalEnemy enemy = new NormalEnemy(x, y);
+                    GameField.numberOfEnemy++;
                     enemy.setVelocity(vx, vy);
                     enemy.setHp(hp);
                 }
@@ -103,6 +104,7 @@ public class GameManager {
                     double vy = Double.parseDouble(line[4]);
                     TankerEnemy enemy = new TankerEnemy(x, y);
                     double hp = Double.parseDouble(line[5]);
+                    GameField.numberOfEnemy++;
                     enemy.setVelocity(vx, vy);
                     enemy.setHp(hp);
                 }
@@ -113,6 +115,7 @@ public class GameManager {
                     double vy = Double.parseDouble(line[4]);
                     SmallEnemy enemy = new SmallEnemy(x, y);
                     double hp = Double.parseDouble(line[5]);
+                    GameField.numberOfEnemy++;
                     enemy.setVelocity(vx, vy);
                     enemy.setHp(hp);
                 }
@@ -123,6 +126,7 @@ public class GameManager {
                     double vy = Double.parseDouble(line[4]);
                     BossEnemy enemy = new BossEnemy(x, y);
                     double hp = Double.parseDouble(line[5]);
+                    GameField.numberOfEnemy++;
                     enemy.setVelocity(vx, vy);
                     enemy.setHp(hp);
                 }

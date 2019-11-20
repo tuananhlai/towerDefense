@@ -172,7 +172,6 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
 
     @Override
     public void deactivate() {
-//        System.err.println("deactivate enemy");
         active = false;
         GameField.gameEntities.remove(this);
         GameField.numberOfEnemy--;

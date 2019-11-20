@@ -62,6 +62,7 @@ public class PlayScreen extends Screen {
                 gc.clearRect(0, 0, Settings.CANVAS_WIDTH, Settings.CANVAS_HEIGHT);
                 gameField.renderAll(gc);
                 gameField.runAll();
+                whenWinning();
                 fps = 1000000000.0 / (l - lastTime);
                 fpsTxt.setText(Integer.toString((int)fps));
                 lastTime = l;
@@ -79,6 +80,13 @@ public class PlayScreen extends Screen {
             mouse = t;
         });
 
+    }
+
+    private void whenWinning(){
+        System.err.println(Spawner.getNumOfWavesRemaining() + " " + GameField.numberOfEnemy);
+        if(Spawner.getNumOfWavesRemaining() == 0 && GameField.numberOfEnemy == 0){
+            GameStage.signNewScreen(new GameWinningScreen());
+        }
     }
 
     private void addAllElements() {

@@ -35,10 +35,13 @@ class List2D{
 public class Spawner extends AbstractTile {
     private int timeToLoadNewWave = 600;
     private double spawnRate = 1;
-    List<List<List2D>> listWaveTurn = new ArrayList<>(); //list chua so turn enemy ra, Map chua so luong cac enemy trong 1 turn
+    public static List<List<List2D>> listWaveTurn = new ArrayList<>(); //list chua so turn enemy ra, Map chua so luong cac enemy trong 1 turn
     List<Integer> timeWait = new ArrayList<>();
     private int betweenSpawnCount = 0;
 
+    public static int getNumOfWavesRemaining(){
+        return listWaveTurn.size();
+    }
     /**
      * xem có load game cũ k
      * @param loadOlderGame
