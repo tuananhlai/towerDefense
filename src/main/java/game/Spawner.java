@@ -33,7 +33,7 @@ class List2D{
     }
 }
 public class Spawner extends AbstractTile {
-    private int timeToLoadNewWave = 600;
+    private int timeToLoadNewWave = 1300;
     private double spawnRate = 1;
     public static List<List<List2D>> listWaveTurn = new ArrayList<>(); //list chua so turn enemy ra, Map chua so luong cac enemy trong 1 turn
     List<Integer> timeWait = new ArrayList<>();
@@ -93,7 +93,7 @@ public class Spawner extends AbstractTile {
                 timeToLoadNewWave--;
                 if(timeToLoadNewWave <= 0){
                     listWaveTurn.remove(waveTurn);
-                    timeToLoadNewWave = 400;
+                    timeToLoadNewWave = 1400;
                 }
                 break;
             }

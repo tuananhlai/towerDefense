@@ -19,7 +19,7 @@ public class GameField {
     public static List<AbstractEntity> gameEntities = new ArrayList<>();
     public static Set<Vector2D> unusablePositions = new HashSet<>();
     public static List<Vector2D> listPoint = new ArrayList<>(); //danh cho phan AI
-    public static int[][] trainning_result = new int[80][12];
+    public static int[][] trainning_result = new int[100][22];
     public static Spawner spawner = null;
 
     public static int[][] map = new int[Settings.MAP_HEIGHT_IN_TILES][Settings.MAP_WIDTH_IN_TILES];

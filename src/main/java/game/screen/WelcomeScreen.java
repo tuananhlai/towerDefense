@@ -1,9 +1,6 @@
 package game.screen;
 
-import game.GameManager;
-import game.GameStage;
-import game.MediaManager;
-import game.Settings;
+import game.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -29,6 +26,8 @@ public class WelcomeScreen extends Screen {
     private final Font brushUp = Font.loadFont(getClass().getResourceAsStream("/iCielBrushUp.otf"), 20);
 
     public WelcomeScreen() {
+        Spawner.listWaveTurn.clear();
+        GameField.numberOfEnemy = 0;
         setAndPlayMedia();
         group = new Group();
         addAllElements();

@@ -4,6 +4,7 @@ import game.screen.PlayScreen;
 import game.tower.MachineGunTower;
 import game.tower.NormalTower;
 import game.tower.SniperTower;
+import game.tower.SpreadTower;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,8 +15,8 @@ public class StudentRobot {
      * find all points which are conner
      */
     public static void findPositionsAdvantage(){
-        for(int i = 1; i < 11; i++){
-            for(int j = 1; j < 19; j++){
+        for(int i = 10; i > 0; i--){
+            for(int j = 18; j > 0; j--){
                 int numOfNeighborsRoad = 0;
                 if(GameField.map[i][j+1] == 0){
                     numOfNeighborsRoad++;
@@ -39,9 +40,9 @@ public class StudentRobot {
         try{
             Scanner sc = new Scanner(new BufferedReader(new FileReader(url)));
             while(sc.hasNextLine()) {
-                for (int i=1; i<80; i++) {
+                for (int i=1; i<100; i++) {
                     String[] line = sc.nextLine().trim().split(" ");
-                    for (int j=1; j<12; j++) {
+                    for (int j=1; j<22; j++) {
                         GameField.trainning_result[i][j] = Integer.parseInt(line[j - 1]);
                     }
                 }
@@ -73,10 +74,16 @@ public class StudentRobot {
                 } case 2:{ //thap loai binh thuong
                     Vector2D position = GameField.listPoint.get(0); //vi tri dat thap
                     GameField.listPoint.remove(0);
+                    new SpreadTower(position.y*Settings.TILE_HEIGHT, position.x*Settings.TILE_WIDTH); // xay thap tai do
+                    PlayScreen.spendMoney(Settings.SPREAD_TOWER_PRICE);
+                    break;
+                } case 3:{ //thap dat thu 2
+                    Vector2D position = GameField.listPoint.get(0); //vi tri dat thap
+                    GameField.listPoint.remove(0);
                     new MachineGunTower(position.y*Settings.TILE_HEIGHT, position.x*Settings.TILE_WIDTH); // xay thap tai do
                     PlayScreen.spendMoney(Settings.MACHINE_GUN_TOWER_PRICE);
                     break;
-                } case 3:{ //thap dat nhat
+                } case 4:{ //thap dat nhat
                     Vector2D position = GameField.listPoint.get(0); //vi tri dat thap
                     GameField.listPoint.remove(0);
                     new SniperTower(position.y*Settings.TILE_HEIGHT, position.x*Settings.TILE_WIDTH); // xay thap tai do

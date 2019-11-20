@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
  * Contain UI elements, including Game Field. Responsible for handling user input.
  */
 public class PlayScreen extends Screen {
+    public static boolean isAutoPlay = false;
     public static MouseEvent mouse;
     public static GraphicsContext graphicsContextPro; //la 1 bien static de dung trong cai khac
     public static int money = Settings.PLAYER_START_MONEY;
@@ -52,8 +53,8 @@ public class PlayScreen extends Screen {
         fpsTxt.setY(20);
         fpsTxt.setFill(Color.RED);
         //AI
-//        StudentRobot.findPositionsAdvantage();
-//        StudentRobot.readTranningResult("data/trainning_result.txt");
+        StudentRobot.findPositionsAdvantage();
+        StudentRobot.readTranningResult("data/trainning_result.txt");
         // Run program
         timer = new AnimationTimer() {
             long lastTime = 0;
@@ -67,7 +68,9 @@ public class PlayScreen extends Screen {
                 fpsTxt.setText(Integer.toString((int)fps));
                 lastTime = l;
                 //AI
-//                StudentRobot.putTowerGenius(GameField.numberOfEnemy, money);
+                if(isAutoPlay){
+                    StudentRobot.putTowerGenius(GameField.numberOfEnemy, money);
+                }
             }
         };
         timer.start();

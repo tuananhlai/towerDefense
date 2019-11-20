@@ -38,6 +38,7 @@ public class TowerInfoPanel extends VBox{
         addPauseBtn();
         addMenuButton();
         addSaveButton();
+        addAutoPlayButton();
     }
 
     private void addAllTexts() {
@@ -107,6 +108,18 @@ public class TowerInfoPanel extends VBox{
             }
         });
         this.getChildren().add(saveButton);
+    }
+
+    private void addAutoPlayButton(){
+        Button autoButton = new Button("Auto");
+        autoButton.setPrefSize(50, 50);
+        autoButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                PlayScreen.isAutoPlay =  !PlayScreen.isAutoPlay;
+            }
+        });
+        this.getChildren().add(autoButton);
     }
 
     public static void showTowerInfo(int price, double damage, int range, double fireRate) {
