@@ -6,5 +6,9 @@ NormalEnemy 7
 TankerEnemy 3
 NormalEnemy 5
 SmallEnemy 4
+3
+SmallEnemy 4
+TankerEnemy 6
+BossEnemy 1
 1
 BossEnemy 2

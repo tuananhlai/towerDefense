@@ -50,13 +50,13 @@ public class Settings {
     public static final int ENEMY_HEIGHT = TILE_HEIGHT;
 
     // ENEMY
-    public static final int NORMAL_HP = 12;
+    public static final int NORMAL_HP = 14;
     public static final double NORMAL_VELOCITY = 2;
     public static final int NORMAL_ENEMY_DEFENSE = 0;
     public static final int NORMAL_ENEMY_DROP = 3;
     public static final Image NORMAL_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile245.png");
 
-    public static final int TANKER_HP = 20;
+    public static final int TANKER_HP = 30;
     public static final double TANKER_VELOCITY = 1;
     public static final int TANKER_ENEMY_DEFENSE = 1;
     public static final int TANKER_ENEMY_DROP = 5;
@@ -69,7 +69,7 @@ public class Settings {
     public static final int SMALL_ENEMY_DROP = 3;
     public static final Image SMALL_ENEMY_IMAGE = loadImage("assets/enemies/towerDefense_tile248.png");
 
-    public static final int BOSS_HP = 80;
+    public static final int BOSS_HP = 100;
     public static final double BOSS_VELOCITY = 0.7;
     public static final int BOSS_ENEMY_DEFENSE = 1;
     public static final int BOSS_ENEMY_DROP = 10;

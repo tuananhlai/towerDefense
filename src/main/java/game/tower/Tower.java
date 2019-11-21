@@ -141,7 +141,11 @@ public abstract class Tower extends AbstractTile {
     }
 
     public void setMedia(Media media) {
-        gunShot = new MediaManager(media, 0.3);
+        setMedia(media, 0.3);
+    }
+
+    public void setMedia(Media media, double volume) {
+        gunShot = new MediaManager(media, volume);
     }
 
     @Override

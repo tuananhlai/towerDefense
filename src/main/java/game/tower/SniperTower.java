@@ -19,7 +19,7 @@ public class SniperTower extends Tower{
         this.setFireRate(Settings.SNIPER_TOWER_FIRE_RATE);
         this.setFireRange(Settings.SNIPER_TOWER_RANGE);
         this.bullet = new Bullet(Settings.SNIPER_TOWER_DAMAGE, this.getFireRange(), Settings.SNIPER_BULLET_IMAGE, 25, 0);
-        this.setMedia(MediaManager.SNIPER_GUN_SHOT_FX);
+        this.setMedia(MediaManager.SNIPER_GUN_SHOT_FX, 0.15);
     }
 
     public void showFireRange() {

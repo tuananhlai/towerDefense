@@ -15,6 +15,7 @@ public class StudentRobot {
      * find all points which are conner
      */
     public static void findPositionsAdvantage(){
+        GameField.listPoint.clear();
         for(int i = 10; i > 0; i--){
             for(int j = 18; j > 0; j--){
                 int numOfNeighborsRoad = 0;

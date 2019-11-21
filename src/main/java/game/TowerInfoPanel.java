@@ -91,6 +91,8 @@ public class TowerInfoPanel extends VBox{
         menuBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                PlayScreen.isPause = false;
+                PlayScreen.isAutoPlay = false;
                 GameStage.signNewScreen(new WelcomeScreen());
             }
         });
@@ -116,7 +118,14 @@ public class TowerInfoPanel extends VBox{
         autoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                PlayScreen.isAutoPlay =  !PlayScreen.isAutoPlay;
+                if (PlayScreen.isAutoPlay) {
+                    PlayScreen.isAutoPlay = false;
+                    autoButton.setStyle("-fx-background-color: #babbbc");
+                }
+                else {
+                    PlayScreen.isAutoPlay = true;
+                    autoButton.setStyle("-fx-background-color: #b5d9f2");
+                }
             }
         });
         this.getChildren().add(autoButton);
