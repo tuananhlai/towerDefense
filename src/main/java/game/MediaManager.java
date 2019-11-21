@@ -19,6 +19,7 @@ public class MediaManager {
     }
 
     private void play(boolean repeat) {
+        player.seek(Duration.ZERO);
         player.play();
         if (repeat) {
             player.setOnEndOfMedia(() -> player.seek(Duration.ZERO));
@@ -34,5 +35,9 @@ public class MediaManager {
 
     public void setMedia(Media media) {
         player = new MediaPlayer(media);
+    }
+
+    public void stop() {
+        player.stop();
     }
 }

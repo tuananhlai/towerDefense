@@ -23,6 +23,7 @@ public class WelcomeScreen extends Screen {
     // TODO: Preload assets when in menu
     private Group group;
     private MediaPlayer mediaPlayer;
+    private MediaManager backgroundMusic;
     private final Font brushUp = Font.loadFont(getClass().getResourceAsStream("/iCielBrushUp.otf"), 20);
 
     public WelcomeScreen() {
@@ -153,21 +154,14 @@ public class WelcomeScreen extends Screen {
     }
     @Override
     public void clear() {
-        mediaPlayer.stop();
+        backgroundMusic.stop();
         group.getChildren().clear();
         scene = null;
         System.gc();
     }
 
     private void setAndPlayMedia() {
-        mediaPlayer = new MediaPlayer(MediaManager.BACKGROUND_FX);
-        mediaPlayer.setVolume(0.05);
-        mediaPlayer.play();
-        mediaPlayer.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                mediaPlayer.seek(Duration.ZERO);
-            }
-        });
+        backgroundMusic = new MediaManager(MediaManager.BACKGROUND_FX, 0.05);
+        backgroundMusic.playOnRepeat();
     }
 }

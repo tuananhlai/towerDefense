@@ -23,6 +23,7 @@ public abstract class Tower extends AbstractTile {
     protected Image gunImg = null; // super.image is base image.
     private Rectangle clickArea;
     private boolean isHover = false;
+    private MediaManager gunShot;
 
     public Tower(double x, double y, Image baseImg, Image gunImg) {
         super(Settings.TOWER, x, y, baseImg);
@@ -87,12 +88,11 @@ public abstract class Tower extends AbstractTile {
     }
 
     private int fireRateCount = 0;
-    private MediaPlayer gunShot;
     public void fire() {
         fireRateCount++;
         if (bullet.getTarget() != null && fireRateCount * fireRate > 60) {
             createBullet(this.position.x, this.position.y);
-            playMedia();
+            gunShot.playOnce();
             fireRateCount = 0;
         }
     }
@@ -137,13 +137,7 @@ public abstract class Tower extends AbstractTile {
     }
 
     public void setMedia(Media media) {
-        gunShot = new MediaPlayer(media);
-    }
-
-    private void playMedia() {
-        gunShot.seek(Duration.ZERO);
-        gunShot.setVolume(0.3);
-        gunShot.play();
+        gunShot = new MediaManager(media, 0.3);
     }
 
     @Override
