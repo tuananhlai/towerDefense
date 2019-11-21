@@ -97,7 +97,7 @@ public abstract class Tower extends AbstractTile {
         }
     }
 
-    protected void pickTarget() {
+    public void pickTarget() {
         if (bullet.getTarget() == null) {
             bullet.setTarget(getNearestEnemy());
         } else if (isOutOfRange(bullet.getTarget())){
@@ -132,7 +132,7 @@ public abstract class Tower extends AbstractTile {
         this.fireRange = fireRange;
     }
 
-    public boolean isOutOfRange(AbstractEnemy target) {
+    private boolean isOutOfRange(AbstractEnemy target) {
         return this.position.distanceTo(bullet.getTarget().getPosition()) > fireRange;
     }
 
@@ -154,7 +154,7 @@ public abstract class Tower extends AbstractTile {
         GameField.gameEntities.remove(this);
     }
 
-    public void addClickArea(double x, double y) {
+    private void addClickArea(double x, double y) {
         clickArea = new Rectangle(x, y, Settings.TILE_WIDTH, Settings.TILE_HEIGHT);
         clickArea.setFill(Color.TRANSPARENT);
         clickArea.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -185,15 +185,12 @@ public abstract class Tower extends AbstractTile {
         return price;
     }
 
-    public void checkHover(MouseEvent button){
+    private void checkHover(MouseEvent button){
         Rectangle rect = new Rectangle(position.x, position.y, Settings.TILE_WIDTH, Settings.TILE_HEIGHT);
-        if(rect.contains(button.getX(), button.getY())){
-            isHover = true;
+        if (button == null) {
+            return;
         }
-        else{
-            isHover = false;
-        }
-
+        isHover = rect.contains(button.getX(), button.getY());
     }
     @Override
     public String toString() {
