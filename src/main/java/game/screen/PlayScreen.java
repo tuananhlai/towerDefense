@@ -45,7 +45,13 @@ public class PlayScreen extends Screen {
             new GameManager().loadData();
             WelcomeScreen.isLoadData = false;
         }
-        GameField.spawner = new Spawner(GameField.loadOrderGame);
+        if(GameField.mapURL.contains("map_1")){
+            GameField.spawner = new Spawner(GameField.loadOrderGame, 0, 3);
+        }else if(GameField.mapURL.contains("map_2")) {
+            GameField.spawner = new Spawner(GameField.loadOrderGame, 9, 5);
+        }else{
+            GameField.spawner = new Spawner(GameField.loadOrderGame, 0, 3);
+        }
         GameField.loadOrderGame = false; //sau khi new spawner thì cho bằng false để cho lần load sau
 
         Text fpsTxt = new Text(Double.toString(fps));
@@ -86,7 +92,6 @@ public class PlayScreen extends Screen {
     }
 
     private void whenWinning(){
-        System.err.println(Spawner.getNumOfWavesRemaining() + " " + GameField.numberOfEnemy);
         if(Spawner.getNumOfWavesRemaining() == 0 && GameField.numberOfEnemy == 0){
             GameStage.signNewScreen(new GameWinningScreen());
         }

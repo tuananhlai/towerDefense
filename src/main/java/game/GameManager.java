@@ -68,22 +68,22 @@ public class GameManager {
                 else if(line[0].contains("NormalTower")){
                     double x = Double.parseDouble(line[1]);
                     double y = Double.parseDouble(line[2]);
-                    new NormalTower(x, y);
+                    new NormalTower(x, y).addClickArea(x, y, Settings.NORMAL_TOWER_PRICE);
                 }
                 else if(line[0].contains("SniperTower")){
                     double x = Double.parseDouble(line[1]);
                     double y = Double.parseDouble(line[2]);
-                    new SniperTower(x, y);
+                    new SniperTower(x, y).addClickArea(x, y, Settings.SNIPER_TOWER_PRICE);
                 }
                 else if(line[0].contains("MachineGunTower")){
                     double x = Double.parseDouble(line[1]);
                     double y = Double.parseDouble(line[2]);
-                    new MachineGunTower(x, y);
+                    new MachineGunTower(x, y).addClickArea(x, y, Settings.MACHINE_GUN_TOWER_PRICE);
                 }
                 else if(line[0].contains("SpreadTower")){
                     double x = Double.parseDouble(line[1]);
                     double y = Double.parseDouble(line[2]);
-                    new SpreadTower(x, y);
+                    new SpreadTower(x, y).addClickArea(x, y, Settings.SPREAD_TOWER_PRICE);
                 }
                 //enemy
                 else if(line[0].contains("NormalEnemy")){

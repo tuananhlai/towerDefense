@@ -33,6 +33,8 @@ class List2D{
     }
 }
 public class Spawner extends AbstractTile {
+    private int xPos;
+    private int yPos;
     private int timeToLoadNewWave = 1300;
     private double spawnRate = 1;
     public static List<List<List2D>> listWaveTurn = new ArrayList<>(); //list chua so turn enemy ra, Map chua so luong cac enemy trong 1 turn
@@ -46,8 +48,10 @@ public class Spawner extends AbstractTile {
      * xem có load game cũ k
      * @param loadOlderGame
      */
-    public Spawner(boolean loadOlderGame){
+    public Spawner(boolean loadOlderGame, int x_pos, int y_pos){
         readWaveData(loadOlderGame);
+        this.xPos = x_pos;
+        this.yPos = y_pos;
     }
     @Override
     public void run() {
@@ -60,28 +64,28 @@ public class Spawner extends AbstractTile {
                         waveTurn.remove(enemyList);
                     }
                     else if(enemyList.getName().contains("NormalEnemy") && enemyList.getNumber() > 0 && betweenSpawnCount > 40/spawnRate){
-                        new NormalEnemy();
+                        new NormalEnemy(xPos*Settings.TILE_WIDTH, yPos*Settings.TILE_HEIGHT);
                         betweenSpawnCount = 0;
                         enemyList.setNumber(enemyList.getNumber() - 1);
                         GameField.numberOfEnemy++;
                         return;
                     }
                     else if(enemyList.getName().contains("TankerEnemy") && enemyList.getNumber() > 0 && betweenSpawnCount > 50/spawnRate){
-                        new TankerEnemy();
+                        new TankerEnemy(xPos*Settings.TILE_WIDTH, yPos*Settings.TILE_HEIGHT);
                         betweenSpawnCount = 0;
                         enemyList.setNumber(enemyList.getNumber() - 1);
                         GameField.numberOfEnemy++;
                         return;
                     }
                     else if(enemyList.getName().contains("SmallEnemy") && enemyList.getNumber() > 0 && betweenSpawnCount > 20/spawnRate){
-                        new SmallEnemy();
+                        new SmallEnemy(xPos*Settings.TILE_WIDTH, yPos*Settings.TILE_HEIGHT);
                         betweenSpawnCount = 0;
                         enemyList.setNumber(enemyList.getNumber() - 1);
                         GameField.numberOfEnemy++;
                         return;
                     }
                     else if(enemyList.getName().contains("BossEnemy") && enemyList.getNumber() > 0 && betweenSpawnCount > 60/spawnRate){
-                        new BossEnemy();
+                        new BossEnemy(xPos*Settings.TILE_WIDTH, yPos*Settings.TILE_HEIGHT);
                         betweenSpawnCount = 0;
                         enemyList.setNumber(enemyList.getNumber() - 1);
                         GameField.numberOfEnemy++;
@@ -141,6 +145,5 @@ public class Spawner extends AbstractTile {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
-
     }
 }
