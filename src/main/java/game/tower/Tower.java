@@ -28,6 +28,7 @@ public abstract class Tower extends AbstractTile {
         super(Settings.TOWER, x, y, baseImg);
         this.gunImg = gunImg;
         GameField.unusablePositions.add(new Vector2D(x, y));
+        addClickArea(x, y);
     }
 
     protected AbstractEnemy getNearestEnemy() {
@@ -153,7 +154,7 @@ public abstract class Tower extends AbstractTile {
         GameField.gameEntities.remove(this);
     }
 
-    public void addClickArea(double x, double y, int price) {
+    public void addClickArea(double x, double y) {
         clickArea = new Rectangle(x, y, Settings.TILE_WIDTH, Settings.TILE_HEIGHT);
         clickArea.setFill(Color.TRANSPARENT);
         clickArea.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -162,11 +163,26 @@ public abstract class Tower extends AbstractTile {
                 if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                     System.out.println("My Tower: " + position.x + " " + position.y);
                     deactivate();
-                    PlayScreen.rewardPlayer(price / 2);
+                    int towerPrice = calculatePrice();
+                    PlayScreen.rewardPlayer(towerPrice / 2);
                 }
             }
         });
         PlayScreen.group.getChildren().add(clickArea);
+    }
+
+    private int calculatePrice() {
+        int price = 0;
+        if (this instanceof NormalTower) {
+            price = Settings.NORMAL_TOWER_PRICE;
+        } else if (this instanceof SniperTower) {
+            price = Settings.SNIPER_TOWER_PRICE;
+        } else if (this instanceof MachineGunTower) {
+            price = Settings.MACHINE_GUN_TOWER_PRICE;
+        } else if (this instanceof SpreadTower) {
+            price = Settings.SPREAD_TOWER_PRICE;
+        }
+        return price;
     }
 
     public void checkHover(MouseEvent button){
