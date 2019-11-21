@@ -1,5 +1,5 @@
 2
-TankerEnemy 4
+TankerEnemy 2
 NormalEnemy 7
 3
 TankerEnemy 3

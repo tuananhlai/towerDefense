@@ -1,5 +1,6 @@
 package game;
 
+import game.screen.PlayScreen;
 import game.screen.WelcomeScreen;
 import game.store.TowerStore;
 import javafx.scene.canvas.GraphicsContext;
@@ -25,6 +26,8 @@ public class GameField {
     public static int[][] map = new int[Settings.MAP_HEIGHT_IN_TILES][Settings.MAP_WIDTH_IN_TILES];
 
     public GameField() {
+        GameField.gameEntities.clear();
+        PlayScreen.money = Settings.PLAYER_START_MONEY;
         if(WelcomeScreen.isLoadData) {
             mapURL = GameManager.getMapURL();
         }

@@ -44,7 +44,6 @@ public class PlayScreen extends Screen {
         GameField gameField = new GameField();
         if(WelcomeScreen.isLoadData){
             GameField.loadOrderGame = true; //nếu load game cũ thì cho bằng true
-            GameField.gameEntities.clear();
             new GameManager().loadData();
             WelcomeScreen.isLoadData = false;
         }
