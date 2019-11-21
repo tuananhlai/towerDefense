@@ -157,7 +157,7 @@ public class WelcomeScreen extends Screen {
     }
 
     private void setAndPlayMedia() {
-        backgroundMusic = new MediaManager(MediaManager.BACKGROUND_FX, 0.05);
+        backgroundMusic = new MediaManager(MediaManager.BACKGROUND_FX, 0.3);
         backgroundMusic.playOnRepeat();
     }
 }

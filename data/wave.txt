@@ -10,5 +10,8 @@ SmallEnemy 4
 SmallEnemy 4
 TankerEnemy 6
 BossEnemy 1
+2
+TankerEnemy 4
+SmallEnemy 5
 1
 BossEnemy 2

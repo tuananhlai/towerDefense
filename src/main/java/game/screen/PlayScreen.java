@@ -25,8 +25,8 @@ public class PlayScreen extends Screen {
     public static boolean isAutoPlay = false;
     public static MouseEvent mouse;
     private static GraphicsContext graphicsContextPro; //la 1 bien static de dung trong cai khac
-    private static int money = Settings.PLAYER_START_MONEY;
-    private static int health = Settings.PLAYER_START_HP;
+    public static int money = Settings.PLAYER_START_MONEY;
+    public static int health = Settings.PLAYER_START_HP;
     public static Group group;
     public static AnimationTimer timer;
     public static boolean isPause = false;
@@ -44,6 +44,7 @@ public class PlayScreen extends Screen {
         GameField gameField = new GameField();
         if(WelcomeScreen.isLoadData){
             GameField.loadOrderGame = true; //nếu load game cũ thì cho bằng true
+            GameField.gameEntities.clear();
             new GameManager().loadData();
             WelcomeScreen.isLoadData = false;
         }
@@ -106,6 +107,7 @@ public class PlayScreen extends Screen {
 
     @Override
     public void clear() {
+        mediaPlayer.stop();
         timer.stop();
         GameField.clear();
         group.getChildren().clear();
@@ -181,9 +183,10 @@ public class PlayScreen extends Screen {
         playerInfo.getChildren().addAll(moneyDisplay, playerHpDisplay);
         return playerInfo;
     }
+    private MediaPlayer mediaPlayer;
     private void setAndPlayMedia() {
-        MediaPlayer mediaPlayer = new MediaPlayer(MediaManager.PLAYSCREEN_FX);
-        mediaPlayer.setVolume(0.5);
+        mediaPlayer = new MediaPlayer(MediaManager.PLAYSCREEN_FX);
+        mediaPlayer.setVolume(0.1);
         mediaPlayer.play();
         mediaPlayer.setOnEndOfMedia(new Runnable() {
             @Override

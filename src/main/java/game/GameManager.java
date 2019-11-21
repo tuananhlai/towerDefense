@@ -4,6 +4,7 @@ import game.enemy.BossEnemy;
 import game.enemy.NormalEnemy;
 import game.enemy.SmallEnemy;
 import game.enemy.TankerEnemy;
+import game.screen.PlayScreen;
 import game.tower.MachineGunTower;
 import game.tower.NormalTower;
 import game.tower.SniperTower;
@@ -24,7 +25,7 @@ public class GameManager {
             DataOutputStream dos = new DataOutputStream(fos);
             //Bước 2: Ghi dữ liệu
             //mapURL:
-            dos.writeUTF(GameField.mapURL + "\n");
+            dos.writeUTF(GameField.mapURL + " " + PlayScreen.money + " " + PlayScreen.health + "\n");
             for(AbstractEntity entity : GameField.gameEntities){
                 dos.writeUTF(entity.toString() + "\n");
             }
@@ -48,6 +49,29 @@ public class GameManager {
         }
         return null;
     }
+
+    public static int getMoney() {
+        try{
+            Scanner sc = new Scanner(new BufferedReader(new FileReader("data/game.txt")));
+            String[] line = sc.nextLine().trim().split(" ");
+            return Integer.parseInt(line[1]);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public static int getHealth() {
+        try{
+            Scanner sc = new Scanner(new BufferedReader(new FileReader("data/game.txt")));
+            String[] line = sc.nextLine().trim().split(" ");
+            return Integer.parseInt(line[2]);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
     public void loadData(){
         try{
             Scanner sc = new Scanner(new BufferedReader(new FileReader("data/game.txt")));

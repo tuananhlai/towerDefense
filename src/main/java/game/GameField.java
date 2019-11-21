@@ -26,10 +26,10 @@ public class GameField {
     public static int[][] map = new int[Settings.MAP_HEIGHT_IN_TILES][Settings.MAP_WIDTH_IN_TILES];
 
     public GameField() {
-        GameField.gameEntities.clear();
-        PlayScreen.money = Settings.PLAYER_START_MONEY;
         if(WelcomeScreen.isLoadData) {
             mapURL = GameManager.getMapURL();
+            PlayScreen.money = GameManager.getMoney();
+            PlayScreen.health = GameManager.getHealth();
         }
         readMap(mapURL);
 //        spawner = new Spawner(loadOderGame);
