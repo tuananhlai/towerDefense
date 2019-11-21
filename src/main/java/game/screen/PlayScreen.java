@@ -12,9 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 /**
  * Contain UI elements, including Game Field. Responsible for handling user input.
@@ -34,6 +36,7 @@ public class PlayScreen extends Screen {
     private final Font brushUp = Font.loadFont(getClass().getResourceAsStream("/iCielBrushUp.otf"), 20);
     private Canvas canvas;
     public PlayScreen() {
+        setAndPlayMedia();
         canvas = new Canvas(Settings.CANVAS_WIDTH, Settings.CANVAS_HEIGHT);
         group = new Group(canvas);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -174,5 +177,16 @@ public class PlayScreen extends Screen {
 
         playerInfo.getChildren().addAll(moneyDisplay, playerHpDisplay);
         return playerInfo;
+    }
+    private void setAndPlayMedia() {
+        MediaPlayer mediaPlayer = new MediaPlayer(MediaManager.PLAYSCREEN_FX);
+        mediaPlayer.setVolume(0.5);
+        mediaPlayer.play();
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.seek(Duration.ZERO);
+            }
+        });
     }
 }
