@@ -11,6 +11,7 @@ public class MediaManager {
     public static final Media NORMAL_GUN_SHOT_FX = new Media(MediaManager.class.getResource("/explosive_sound.mp3").toString());
     public static final Media MACHINE_GUN_SHOT_FX = new Media(MediaManager.class.getResource("/gatling_gun_loop.mp3").toString());
     public static final Media BACKGROUND_FX = new Media(MediaManager.class.getResource("/Epic-battle-music-grzegorz-majcherczyk-heroica.mp3").toString());
+    public static final Media PLAYSCREEN_FX = new Media(MediaManager.class.getResource("/playscreen_fx.mp3").toString());
     public static final Media FOOTSTEP_FX = new Media(MediaManager.class.getResource("/zapsplat_foley_footsteps_dirt_road_walking_23331.mp3").toString());
     private MediaPlayer player;
     public MediaManager(Media media, double volume) {
