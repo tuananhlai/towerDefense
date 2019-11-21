@@ -75,9 +75,6 @@ public class TowerStore{
             public void handle(DragEvent dragEvent) {
                 if (dragEvent.getGestureSource() != gameField && dragEvent.getDragboard().hasString() && dragEvent.getDragboard().hasImage() && !PlayScreen.isPause) {
                     dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-//                    isDrag = true;
-                }else{
-//                    isDrag = false;
                 }
                 dragEvent.consume();
             }
@@ -93,7 +90,6 @@ public class TowerStore{
                 }
                 dragEvent.setDropCompleted(isSuccess);
                 dragEvent.consume();
-//                isDrag = false;
             }
         });
     }
@@ -106,25 +102,24 @@ public class TowerStore{
             return;
         }
         int price = 0;
-        Tower tower = null;
         switch (towerCode) {
             case Settings.NORMAL_TOWER_ITEM: {
-                tower = new NormalTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
+                new NormalTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
                 price = Settings.NORMAL_TOWER_PRICE;
                 break;
             }
             case Settings.SNIPER_TOWER_ITEM: {
-                tower = new SniperTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
+                new SniperTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
                 price = Settings.SNIPER_TOWER_PRICE;
                 break;
             }
             case Settings.MACHINE_GUN_TOWER_ITEM: {
-                tower = new MachineGunTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
+                new MachineGunTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
                 price = Settings.MACHINE_GUN_TOWER_PRICE;
                 break;
             }
             case Settings.SPREAD_TOWER_ITEM: {
-                tower = new SpreadTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
+                new SpreadTower(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT);
                 price = Settings.SPREAD_TOWER_PRICE;
                 break;
             }

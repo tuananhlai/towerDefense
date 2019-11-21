@@ -19,7 +19,7 @@ public class MachineGunTower extends Tower{
         super(x, y, Settings.MACHINE_GUN_BASE, Settings.MACHINE_GUN_GUN);
         this.setFireRate(Settings.MACHINE_GUN_TOWER_FIRE_RATE);
         this.setFireRange(Settings.MACHINE_GUN_TOWER_RANGE);
-        this.bullet = new Bullet(Settings.MACHINE_GUN_TOWER_DAMAGE, this.fireRange, Settings.MACHINE_GUN_BULLET_IMAGE, 12, 0);
+        this.bullet = new Bullet(Settings.MACHINE_GUN_TOWER_DAMAGE, this.getFireRange(), Settings.MACHINE_GUN_BULLET_IMAGE, 12, 0);
         this.setMedia(MediaManager.MACHINE_GUN_SHOT_FX);
     }
 }

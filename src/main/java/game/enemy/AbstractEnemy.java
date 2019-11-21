@@ -10,12 +10,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 public abstract class AbstractEnemy extends AbstractEntity implements Collider {
-    protected double hp;
-    protected double maxHP;
-    protected double defense = 0;
-    protected Vector2D velocity;
-    protected int dropReward;
-    protected double v_max; //max(velocityX, velocityY)
+    private double hp;
+    private double maxHP;
+    private double defense = 0;
+    private Vector2D velocity;
+    private int dropReward;
+    private double v_max; //max(velocityX, velocityY)
 
     public AbstractEnemy(double x, double y, Image img) {
         super(x, y, img, true);
@@ -45,8 +45,8 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         }
         gc.fillRect(this.position.x, this.position.y, 40 * percentHealth, 5);
         // render hitbox
-        gc.setStroke(Color.MAGENTA);
-        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
+//        gc.setStroke(Color.MAGENTA);
+//        gc.strokeRect(getBoundary().getMinX(), getBoundary().getMinY(), getBoundary().getWidth(), getBoundary().getHeight());
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
     /**
      * Calulate direction and set velovity
      */
-    public void findPath(){
+    private void findPath(){
         int me = 2, r = 3, l = 4, u = 5, d = 6, a = 7, b = 8;
         int x = (int)(position.x/Settings.TILE_WIDTH);
         int y = (int)(position.y/Settings.TILE_HEIGHT);
@@ -247,11 +247,11 @@ public abstract class AbstractEnemy extends AbstractEntity implements Collider {
         this.dropReward = dropReward;
     }
 
-    public boolean isKilled() {
+    private boolean isKilled() {
         return hp <= 0;
     }
 
-    public boolean reachTarget() {
+    private boolean reachTarget() {
         return velocity.x == 0 && velocity.y == 0;
     }
 

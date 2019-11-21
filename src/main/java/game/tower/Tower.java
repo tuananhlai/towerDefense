@@ -17,10 +17,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public abstract class Tower extends AbstractTile {
-    protected double fireRate = 0;
-    protected int fireRange = 0;
+    private double fireRate = 0;
+    private int fireRange = 0;
     protected Bullet bullet = null;
-    protected Image gunImg = null; // super.image is base image.
+    private Image gunImg = null; // super.image is base image.
     private Rectangle clickArea;
     private boolean isHover = false;
     private MediaManager gunShot;
@@ -130,6 +130,10 @@ public abstract class Tower extends AbstractTile {
 
     public void setFireRange(int fireRange) {
         this.fireRange = fireRange;
+    }
+
+    public int getFireRange() {
+        return fireRange;
     }
 
     private boolean isOutOfRange(AbstractEnemy target) {

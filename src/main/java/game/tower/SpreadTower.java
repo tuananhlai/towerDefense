@@ -11,7 +11,7 @@ public class SpreadTower extends Tower {
         super(x, y, Settings.SPREAD_BASE, Settings.SPREAD_GUN);
         this.setFireRate(Settings.SPREAD_TOWER_FIRE_RATE);
         this.setFireRange(Settings.SPREAD_TOWER_RANGE);
-        this.bullet = new Bullet(Settings.SPREAD_TOWER_DAMAGE, this.fireRange, Settings.SPREAD_BULLET_IMAGE, 10, 0);
+        this.bullet = new Bullet(Settings.SPREAD_TOWER_DAMAGE, this.getFireRange(), Settings.SPREAD_BULLET_IMAGE, 10, 0);
         this.setMedia(MediaManager.NORMAL_GUN_SHOT_FX);
     }
 

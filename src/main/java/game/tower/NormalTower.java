@@ -19,7 +19,7 @@ public class NormalTower extends Tower{
         super(x, y, Settings.NORMAL_BASE, Settings.NORMAL_GUN);
         this.setFireRate(Settings.NORMAL_TOWER_FIRE_RATE);
         this.setFireRange(Settings.NORMAL_TOWER_RANGE);
-        this.bullet = new Bullet(Settings.NORMAL_TOWER_DAMAGE, this.fireRange, Settings.NORMAL_BULLET_IMAGE, 10, 0);
+        this.bullet = new Bullet(Settings.NORMAL_TOWER_DAMAGE, this.getFireRange(), Settings.NORMAL_BULLET_IMAGE, 10, 0);
         this.setMedia(MediaManager.NORMAL_GUN_SHOT_FX);
     }
 }

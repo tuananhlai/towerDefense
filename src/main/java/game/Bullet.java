@@ -75,7 +75,7 @@ public class Bullet extends AbstractEntity implements Collider, Cloneable {
         return clone;
     }
 
-    public AbstractEnemy checkEnemies() {
+    private AbstractEnemy checkEnemies() {
         for (AbstractEntity entity : GameField.gameEntities) {
             if (entity instanceof AbstractEnemy) {
                 if ((this.intersects((AbstractEnemy) entity))) {

@@ -36,7 +36,7 @@ public class TowerStoreItem extends ImageView {
             public void handle(MouseEvent mouseEvent) {
                 TowerInfoPanel.showTowerInfo(towerPrice, damage, towerRange, towerFireRate);
 
-                if (PlayScreen.money < towerPrice) {
+                if (PlayScreen.getMoney() < towerPrice) {
                     GameStage.stage.getScene().setCursor(Cursor.CLOSED_HAND);
                 }
                 else {
@@ -53,7 +53,7 @@ public class TowerStoreItem extends ImageView {
         setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (PlayScreen.money < towerPrice) {
+                if (PlayScreen.getMoney() < towerPrice) {
                     return;
                 }
                 Dragboard db = startDragAndDrop(TransferMode.ANY);

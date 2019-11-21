@@ -13,10 +13,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class WelcomeScreen extends Screen {
     public static boolean isLoadData = false;

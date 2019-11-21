@@ -22,9 +22,9 @@ import javafx.scene.text.Text;
 public class PlayScreen extends Screen {
     public static boolean isAutoPlay = false;
     public static MouseEvent mouse;
-    public static GraphicsContext graphicsContextPro; //la 1 bien static de dung trong cai khac
-    public static int money = Settings.PLAYER_START_MONEY;
-    public static int health = Settings.PLAYER_START_HP;
+    private static GraphicsContext graphicsContextPro; //la 1 bien static de dung trong cai khac
+    private static int money = Settings.PLAYER_START_MONEY;
+    private static int health = Settings.PLAYER_START_HP;
     public static Group group;
     public static AnimationTimer timer;
     public static boolean isPause = false;
@@ -132,6 +132,10 @@ public class PlayScreen extends Screen {
     public static void rewardPlayer(int dropReward) {
         money += dropReward;
         moneyTxt.setText(Integer.toString(money));
+    }
+
+    public static int getMoney() {
+        return PlayScreen.money;
     }
 
     private void addBottomPanel() {
