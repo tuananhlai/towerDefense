@@ -130,7 +130,6 @@ public class TowerStore{
             }
         }
         PlayScreen.spendMoney(price);
-        tower.addClickArea(colIndex * Settings.TILE_WIDTH, rowIndex * Settings.TILE_HEIGHT, price);
     }
 
 
